@@ -17,7 +17,7 @@ document.querySelector("#app").innerHTML = `
   <main class="max-w-6xl mx-auto px-4 py-16">
     <section class="text-center">
       <h2 class="text-4xl font-bold mb-4">Hi, I'm Jeff 👋</h2>
-      <p class="text-lg text-blue-600">I'm a designer turned frontend developer building cool stuff with Tailwind CSS.</p>
+      <p class="text-lg text-yellow-600">I'm a designer turned frontend developer building cool stuff with Tailwind CSS.</p>
     </section>
 
     <section id="projects" class="mt-24">
