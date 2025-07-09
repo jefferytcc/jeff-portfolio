@@ -25,7 +25,7 @@ document.querySelector("#app").innerHTML = `
       <div class="grid md:grid-cols-2 gap-6">
         <div class="p-4 border bg-white rounded-lg shadow hover:shadow-md transition">
           <h4 class="font-semibold text-lg">Project One</h4>
-          <p class="text-sm text-gray-500">Short description of the project goes here.</p>
+          <p class="text-sm text-blue-500">Short description of the project goes here.</p>
         </div>
         <div class="p-4 border bg-white rounded-lg shadow hover:shadow-md transition">
           <h4 class="font-semibold text-lg">Project Two</h4>
