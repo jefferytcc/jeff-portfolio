@@ -49,3 +49,56 @@ window.addEventListener("DOMContentLoaded", () => {
     paragraph.classList.add("opacity-100", "translate-y-4");
   }, 1200);
 });
+
+const burger = document.getElementById("burger");
+const mobileNav = document.getElementById("mobile-nav");
+const mobileLinks = document.querySelectorAll("#mobile-nav a");
+
+const line1 = burger.querySelector(".line1");
+const line2 = burger.querySelector(".line2");
+const line3 = burger.querySelector(".line3");
+
+let isOpen = false;
+
+burger.addEventListener("click", () => {
+  isOpen = !isOpen;
+
+  if (isOpen) {
+    // Show mobile nav
+    mobileNav.classList.remove("hidden");
+
+    // Animate nav links
+    mobileLinks.forEach((link, i) => {
+      setTimeout(() => {
+        link.classList.remove("opacity-0");
+        link.classList.add("opacity-100");
+      }, i * 200);
+    });
+
+    // Animate burger to "X"
+    line1.classList.remove("bg-black");
+    line1.classList.add("rotate-45", "translate-y-[6px]", "bg-white");
+
+    line2.classList.add("opacity-0");
+
+    line3.classList.remove("bg-black");
+    line3.classList.add("-rotate-45", "-translate-y-[6px]", "bg-white");
+  } else {
+    // Hide mobile nav
+    mobileNav.classList.add("hidden");
+
+    mobileLinks.forEach((link) => {
+      link.classList.remove("opacity-100");
+      link.classList.add("opacity-0");
+    });
+
+    // Revert to burger icon
+    line1.classList.remove("rotate-45", "translate-y-[7px]", "bg-white");
+    line1.classList.add("bg-black");
+
+    line2.classList.remove("opacity-0");
+
+    line3.classList.remove("-rotate-45", "-translate-y-[7px]", "bg-white");
+    line3.classList.add("bg-black");
+  }
+});

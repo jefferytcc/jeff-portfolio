@@ -10,9 +10,14 @@ module.exports = {
           dark: "hsl(210, 100%, 40%)",
         },
         cloud: {
-          DEFAULT: "hsl(214, 18%, %)",
+          DEFAULT: "hsl(214, 18%, 38%)",
           light: "hsl(210, 100%, 70%)",
           dark: "hsl(210, 100%, 40%)",
+        },
+        ink: {
+          DEFAULT: "hsl(214, 18%, 38%)",
+          light: "hsl(213, 18%, 48%)",
+          dark: "hsl(215, 14%, 17%)",
         },
         success: "hsl(142, 70%, 45%)",
         danger: "hsl(0, 84%, 60%)",
