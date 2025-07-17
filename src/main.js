@@ -93,12 +93,12 @@ burger.addEventListener("click", () => {
     });
 
     // Revert to burger icon
-    line1.classList.remove("rotate-45", "translate-y-[7px]", "bg-white");
+    line1.classList.remove("rotate-45", "translate-y-[6px]", "bg-white");
     line1.classList.add("bg-black");
 
     line2.classList.remove("opacity-0");
 
-    line3.classList.remove("-rotate-45", "-translate-y-[7px]", "bg-white");
+    line3.classList.remove("-rotate-45", "-translate-y-[6px]", "bg-white");
     line3.classList.add("bg-black");
   }
 });
