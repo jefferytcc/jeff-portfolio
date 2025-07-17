@@ -4,5 +4,5 @@
 
 /* Optional base styling */
 body {
-  @apply bg-cloud text-gray-800 font-sans antialiased;
+  @apply bg-white text-gray-800 font-sans antialiased;
 }

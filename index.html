@@ -14,7 +14,43 @@
     />
   </head>
   <body class="min-h-screen flex flex-col">
-    <main class="flex-grow" id="app"></main>
+    <main>
+      <section id="projects">
+        <div class="grid md:grid-cols-2 gap-6 items-center relative">
+          <div class="p-4">
+            <h4 class="font-semibold text-lg">
+              UI/UX Designer | PM | Front End Development
+            </h4>
+            <p class="text-sm text-cloud">
+              I design, build, and ship thoughtful digital experiences with
+              strong visual systems, clean code, and clear product thinking
+            </p>
+          </div>
+          <div>
+            <nav
+              class="absolute top-6 right-100 px-6 gap-4 z-10 flex flex-col text-white text-xl font-medium"
+            >
+              <a href="#about" class="hover:underline">About Me</a>
+              <a href="#projects" class="hover:underline">View My Works</a>
+              <a href="#contact" class="hover:underline">Contact Me</a>
+            </nav>
+            <img
+              src="/src/img/bg-profile.png"
+              alt="User Profile Redesign"
+              class="w-full h-screen object-cover"
+            />
+          </div>
+          <div>
+            <img
+              src="/src/img/jeff-text.svg"
+              alt="jeff-text"
+              id="signature"
+              class="absolute left-1/2 -translate-x-1/2 bottom-0 opacity-0 translate-y-8"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
 
     <footer class="bg-gray-100 py-8 text-center text-sm text-gray-500">
       <p>

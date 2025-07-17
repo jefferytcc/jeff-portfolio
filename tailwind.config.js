@@ -10,7 +10,7 @@ module.exports = {
           dark: "hsl(210, 100%, 40%)",
         },
         cloud: {
-          DEFAULT: "hsl(207, 24%, 93%)",
+          DEFAULT: "hsl(214, 18%, %)",
           light: "hsl(210, 100%, 70%)",
           dark: "hsl(210, 100%, 40%)",
         },
@@ -24,5 +24,6 @@ module.exports = {
       },
     },
   },
+  safelist: ["scale-100", "opacity-100"],
   plugins: [],
 };
