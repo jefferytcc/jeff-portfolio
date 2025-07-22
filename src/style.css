@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Optional base styling */
 body {
   @apply bg-cloud text-gray-800 font-sans antialiased;
 }

@@ -15,10 +15,13 @@
   </head>
   <body class="min-h-screen flex flex-col">
     <main>
-      <div class="flex px-4">
+      <div
+        id="burger-wrapper"
+        class="w-full flex absolute bg-white shadow-md opacity-0 transition-all duration-500 ease-in-out"
+      >
         <button
           id="burger"
-          class="md:hidden p-4 ml-auto z-50 focus:outline-none group"
+          class="p-4 ml-auto z-50 focus:outline-none group opacity-100 transition-opacity duration-300 flex flex-col"
         >
           <div
             class="line1 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
@@ -74,7 +77,7 @@
 
             <nav
               id="mobile-nav"
-              class="fixed inset-0 bg-black bg-opacity-90 hidden flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300 md:hidden"
+              class="fixed inset-0 bg-black bg-opacity-90 hidden flex flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300"
             >
               <a href="#about" class="opacity-0 transition-all duration-500"
                 >About Me</a
@@ -104,7 +107,7 @@
           </div>
         </div>
       </section>
-      <section id="container" class="flex flex-col p-10 gap-8 m-2">
+      <section id="container" class="flex flex-col p-10 gap-8 mt-8 mb-8">
         <div class="flex flex-col items-center justify-center p-4">
           <h1 class="font-bold text-4xl text-center">Design. Product. Code.</h1>
           <p class="text-ink-light text-center">
@@ -141,6 +144,82 @@
         </div>
       </section>
 
+      <section id="container" class="flex flex-col p-10 gap-8 m-2">
+        <div class="flex flex-row justify-between gap-4">
+          <h4 class="font-bold">Featured Project</h4>
+          <a href="#myworks" class="text-brand"> See all </a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 items-center relative">
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-profile.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign User Profile Page</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-payroll.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign Payroll</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-landing.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign User Profile Page</p>
+          </div>
+        </div>
+      </section>
+      <section id="container" class="flex flex-col p-10 gap-8 m-2">
+        <div class="flex flex-row justify-between gap-4">
+          <h4 class="font-bold">Featured Project</h4>
+          <a href="#myworks" class="text-brand"> See all </a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 items-center relative">
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-profile.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign User Profile Page</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-payroll.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign Payroll</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-landing.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign User Profile Page</p>
+          </div>
+        </div>
+      </section>
       <section id="container" class="flex flex-col p-10 gap-8 m-2">
         <div class="flex flex-row justify-between gap-4">
           <h4 class="font-bold">Featured Project</h4>

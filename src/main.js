@@ -76,13 +76,11 @@ burger.addEventListener("click", () => {
     });
 
     // Animate burger to "X"
-    line1.classList.remove("bg-black");
-    line1.classList.add("rotate-45", "translate-y-[6px]", "bg-white");
+    line1.classList.add("rotate-45", "translate-y-[6px]");
 
     line2.classList.add("opacity-0");
 
-    line3.classList.remove("bg-black");
-    line3.classList.add("-rotate-45", "-translate-y-[6px]", "bg-white");
+    line3.classList.add("-rotate-45", "-translate-y-[6px]");
   } else {
     // Hide mobile nav
     mobileNav.classList.add("hidden");
@@ -93,12 +91,57 @@ burger.addEventListener("click", () => {
     });
 
     // Revert to burger icon
-    line1.classList.remove("rotate-45", "translate-y-[6px]", "bg-white");
-    line1.classList.add("bg-black");
+    line1.classList.remove("rotate-45", "translate-y-[6px]");
 
     line2.classList.remove("opacity-0");
 
-    line3.classList.remove("-rotate-45", "-translate-y-[6px]", "bg-white");
-    line3.classList.add("bg-black");
+    line3.classList.remove("-rotate-45", "-translate-y-[6px]");
   }
 });
+
+function toggleBurgerVisibility() {
+  const wrapper = document.getElementById("burger-wrapper");
+  if (!wrapper) return;
+
+  const isDesktop = window.innerWidth >= 768;
+  const scrolled = window.scrollY > 624;
+  console.log(window.scrollY);
+  if (isDesktop) {
+    if (scrolled) {
+      wrapper.classList.remove("opacity-0", "top-[-100px]", "absolute");
+      wrapper.classList.add("opacity-100", "fixed", "top-0", "left-0", "z-50");
+    } else {
+      wrapper.classList.add("opacity-0", "top-[-100px]");
+      wrapper.classList.remove("opacity-100");
+
+      // Delay the fixed → absolute switch until animation completes
+      setTimeout(() => {
+        wrapper.classList.remove("fixed", "top-0", "left-0", "z-50");
+        wrapper.classList.add("absolute");
+      }, 300); // match Tailwind duration
+    }
+  } else {
+    // Mobile: always fixed and visible
+    wrapper.classList.remove("opacity-0");
+    wrapper.classList.add("opacity-100", "fixed", "top-0", "left-0", "z-50");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", toggleBurgerVisibility);
+window.addEventListener("scroll", toggleBurgerVisibility);
+window.addEventListener("resize", toggleBurgerVisibility);
+
+import Lenis from "@studio-freight/lenis";
+
+const lenis = new Lenis({
+  duration: 1.0, // or 1.0 for tighter feel
+  easing: (t) => 1 - Math.pow(1 - t, 4),
+  smooth: true,
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
