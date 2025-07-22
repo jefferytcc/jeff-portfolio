@@ -145,3 +145,5 @@ function raf(time) {
 }
 
 requestAnimationFrame(raf);
+
+document.getElementById("year").textContent = new Date().getFullYear();
