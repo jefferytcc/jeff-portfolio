@@ -163,7 +163,7 @@ document
 
     try {
       const res = await fetch(
-        "https://contact-form-server.onrender.com/contact",
+        "https://contact-form-server-el4v.onrender.com/contact",
         {
           method: "POST",
           headers: {
