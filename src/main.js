@@ -147,3 +147,36 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+document
+  .getElementById("contact-form")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault(); // 🔒 Prevent browser from redirecting
+
+    const form = e.target;
+    const data = {
+      name: form.name.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      message: form.message.value,
+    };
+
+    try {
+      const res = await fetch(
+        "https://contact-form-server.onrender.com/contact",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const result = await res.json();
+      alert(result.message || "Message sent!");
+      form.reset();
+    } catch (err) {
+      alert("Something went wrong. Please try again.");
+    }
+  });
