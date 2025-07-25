@@ -246,26 +246,21 @@ if (contactForm) {
     }
   });
 }
-
+// ✅ After partials are loaded
 document.addEventListener("DOMContentLoaded", async () => {
   const includes = document.querySelectorAll("[data-include]");
   let loadedCount = 0;
 
   includes.forEach(async (el) => {
     const file = el.getAttribute("data-include");
-    try {
-      const res = await fetch(file);
-      const html = await res.text();
+    const res = await fetch(file);
+    const html = await res.text();
+    el.innerHTML = html;
 
-      console.log("Fetched content from", file, "===>", html); // ✅ log content
-      el.innerHTML = html;
-
-      loadedCount++;
-      if (loadedCount === includes.length) {
-        initTopNavBurger();
-      }
-    } catch (err) {
-      console.error(`Failed to load ${file}`, err);
+    loadedCount++;
+    if (loadedCount === includes.length) {
+      console.log("All partials loaded");
+      initTopNavBurger(); // ✅ Only run after burger-nav is available
     }
   });
 });
