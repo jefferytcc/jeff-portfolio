@@ -5,7 +5,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: "index.html",
-        about: "aboutme.html",
+        about: "about.html",
         // add more pages here if needed
       },
     },

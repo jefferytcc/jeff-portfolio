@@ -179,17 +179,26 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute("href");
-    const target = document.querySelector(targetId);
-    if (target) {
-      lenis.scrollTo(target, {
-        duration: 2.0,
-        easing: (t) => 1 - Math.pow(1 - t, 3),
-      });
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      const targetId = this.getAttribute("href");
+      const target = document.querySelector(targetId);
+
+      if (target) {
+        if (window.lenis) {
+          window.lenis.scrollTo(target, {
+            duration: 2.0,
+            easing: (t) => 1 - Math.pow(1 - t, 3),
+          });
+        } else {
+          // fallback to native scroll
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    });
   });
 });
 
@@ -244,13 +253,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   includes.forEach(async (el) => {
     const file = el.getAttribute("data-include");
-    const res = await fetch(file);
-    const html = await res.text();
-    el.innerHTML = html;
+    try {
+      const res = await fetch(file);
+      const html = await res.text();
 
-    loadedCount++;
-    if (loadedCount === includes.length) {
-      initTopNavBurger(); // only run AFTER burger-nav is injected
+      console.log("Fetched content from", file, "===>", html); // ✅ log content
+      el.innerHTML = html;
+
+      loadedCount++;
+      if (loadedCount === includes.length) {
+        initTopNavBurger();
+      }
+    } catch (err) {
+      console.error(`Failed to load ${file}`, err);
     }
   });
 });
