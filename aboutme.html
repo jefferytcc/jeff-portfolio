@@ -14,7 +14,351 @@
     />
   </head>
   <body class="min-h-screen flex flex-col">
-    <main id="aboutme"></main>
-    <script type="module" src="/src/main.js"></script>
+    <nav data-include="/src/partials/burger-nav.html"></nav>
+    <main id="aboutme" class="mt-10">
+      <div>
+        <section class="bg-brand w-full h-48 relative">
+          <img
+            src="/src/img/user-profile.png"
+            alt="Jeff-profile"
+            class="rounded-full w-40 h-auto absolute left-[40px] bottom-[-40px] border-white border-4"
+          />
+        </section>
+      </div>
+      <section
+        class="xl:flex xl:flex-row mt-10 p-10 items-center relative gap-10 md:items-start justify-evenly"
+      >
+        <div class="max-w-full md:max-w-7xl flex flex-col gap-4">
+          <h1>About me</h1>
+          <h1 class="font-bold text-2xl">
+            Hi, I am Jeffery, you can call me Jeff
+          </h1>
+          <p>
+            I’m a multidisciplinary digital builder who brings together UI/UX
+            design, product strategy, and front-end development to turn ideas
+            into real, usable experiences. Over the past three years, I’ve taken
+            on multiple roles. I’ve designed clean and intuitive interfaces,
+            managed product scopes and stakeholder expectations, and built
+            responsive web components using modern tools like Tailwind CSS.
+          </p>
+          <button class="flex text-brand underline" id="read-more">
+            Read more
+          </button>
+          <p class="hidden" id="extra-text">
+            I believe that great products go beyond looking good. They are
+            purposeful, inclusive, and built with clarity. Whether I’m refining
+            a user flow, writing clear feature specs, or delivering a
+            pixel-perfect interface, my goal is always to solve real problems
+            for real people. When I work with teams, I often serve as the
+            connection between design, business, and engineering. I enjoy being
+            involved in every part of the process, from early wireframes and
+            prototypes to Git commits and deployment. Outside of work, I spend
+            time exploring new tools, studying product thinking, and improving
+            side projects to test new ideas or interactions. If you’re looking
+            to build something meaningful, I’d love to be part of it.
+          </p>
+          <button
+            class="flex-col items-start hidden text-brand underline"
+            id="read-less"
+          >
+            Read Less
+          </button>
+
+          <a
+            href="/downloads/vite.svg"
+            download="vite.svg"
+            class="btn flex flex-row gap-2"
+            >My Resume<svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.3816 3.61549C10.3816 2.72328 11.1049 2 11.9971 2C12.8893 2 13.6126 2.72328 13.6126 3.61549V11.1689C13.6126 11.284 13.7059 11.3772 13.8209 11.3772H16.0363C16.3528 11.3773 16.6401 11.5622 16.7713 11.8502C16.9026 12.1382 16.8537 12.4763 16.6461 12.7153L12.607 17.361C12.4536 17.5377 12.2311 17.6393 11.9971 17.6393C11.7631 17.6393 11.5406 17.5377 11.3872 17.361L7.34812 12.7153C7.14061 12.4763 7.09168 12.1382 7.22295 11.8502C7.35421 11.5622 7.6415 11.3773 7.958 11.3772H10.1733C10.2884 11.3772 10.3816 11.284 10.3816 11.1689V3.61549Z"
+                fill="white"
+              />
+              <path
+                d="M19.8747 17.1218C19.8747 16.5642 20.3268 16.1121 20.8845 16.1121C21.1531 16.1109 21.411 16.2168 21.6012 16.4063C21.7915 16.5958 21.8985 16.8533 21.8985 17.1218V18.6674C21.8985 20.5079 20.4064 22 18.5658 22H5.42857C3.58963 21.9977 2.1001 20.5063 2.1001 18.6674V17.1218C2.1001 16.5642 2.5522 16.1121 3.10989 16.1121C3.66758 16.1121 4.11968 16.5642 4.11968 17.1218V18.6674C4.1206 19.3897 4.70621 19.975 5.42857 19.9754H18.5658C19.2882 19.975 19.8738 19.3897 19.8747 18.6674V17.1218Z"
+                fill="white"
+              />
+            </svg>
+          </a>
+          <div class="flex flex-col max-w-full items-start gap-4">
+            <div class="flex flex-row gap-2">
+              <div class="relative group w-fit">
+                <a href="#"
+                  ><div
+                    class="relative z-10 rounded-full p-4 text-black transition-colors duration-300 ease-in-out group-hover:text-white"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M8 5.67C6.71 5.67 5.67 6.72 5.67 8S6.72 10.33 8 10.33S10.33 9.28 10.33 8S9.28 5.67 8 5.67M15 8c0-.97 0-1.92-.05-2.89c-.05-1.12-.31-2.12-1.13-2.93c-.82-.82-1.81-1.08-2.93-1.13C9.92 1 8.97 1 8 1s-1.92 0-2.89.05c-1.12.05-2.12.31-2.93 1.13C1.36 3 1.1 3.99 1.05 5.11C1 6.08 1 7.03 1 8s0 1.92.05 2.89c.05 1.12.31 2.12 1.13 2.93c.82.82 1.81 1.08 2.93 1.13C6.08 15 7.03 15 8 15s1.92 0 2.89-.05c1.12-.05 2.12-.31 2.93-1.13c.82-.82 1.08-1.81 1.13-2.93c.06-.96.05-1.92.05-2.89m-7 3.59c-1.99 0-3.59-1.6-3.59-3.59S6.01 4.41 8 4.41s3.59 1.6 3.59 3.59s-1.6 3.59-3.59 3.59m3.74-6.49c-.46 0-.84-.37-.84-.84s.37-.84.84-.84s.84.37.84.84a.8.8 0 0 1-.24.59a.8.8 0 0 1-.59.24Z"
+                      />
+                    </svg>
+                  </div>
+                </a>
+
+                <!-- Background: gray circle base -->
+                <span
+                  class="absolute inset-0 z-0 rounded-full bg-gray-200"
+                ></span>
+
+                <!-- Expanding black circle -->
+                <span
+                  class="absolute inset-0 z-0 rounded-full bg-black scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"
+                ></span>
+              </div>
+              <div class="relative group w-fit">
+                <a href="#"
+                  ><div
+                    class="relative z-10 rounded-full p-4 text-black transition-colors duration-300 ease-in-out group-hover:text-white"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      class="w-4 h-4"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M20.47 2H3.53a1.45 1.45 0 0 0-1.47 1.43v17.14A1.45 1.45 0 0 0 3.53 22h16.94a1.45 1.45 0 0 0 1.47-1.43V3.43A1.45 1.45 0 0 0 20.47 2M8.09 18.74h-3v-9h3ZM6.59 8.48a1.56 1.56 0 1 1 0-3.12a1.57 1.57 0 1 1 0 3.12m12.32 10.26h-3v-4.83c0-1.21-.43-2-1.52-2A1.65 1.65 0 0 0 12.85 13a2 2 0 0 0-.1.73v5h-3v-9h3V11a3 3 0 0 1 2.71-1.5c2 0 3.45 1.29 3.45 4.06Z"
+                      />
+                    </svg>
+                  </div>
+                </a>
+
+                <!-- Background: gray circle base -->
+                <span
+                  class="absolute inset-0 z-0 rounded-full bg-gray-200"
+                ></span>
+
+                <!-- Expanding black circle -->
+                <span
+                  class="absolute inset-0 z-0 rounded-full bg-black scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"
+                ></span>
+              </div>
+            </div>
+            <div class="flex flex-col items-start">
+              <h4 class="font-semibold text-ink-light">(Inquiries)</h4>
+              <a class="underline" href="mailto:jefferytan.design@gmail.com">
+                jefferytan.design@gmail.com
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <div class="font-bold flex flex-col gap-2">
+            <h2>Tools i use;</h2>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16 7.66675C16.6137 7.66675 17.1112 7.16928 17.1112 6.55563V3.77785C17.1112 3.1642 16.6137 2.66675 16 2.66675C15.3864 2.66675 14.8889 3.1642 14.8889 3.77785V6.55563C14.8889 7.16928 15.3864 7.66675 16 7.66675Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M18.0855 26.5557H13.9166C13.7241 26.5557 13.5451 26.6554 13.4439 26.8193C13.3427 26.9833 13.3337 27.1878 13.4199 27.3601L13.7922 28.1045C14.1662 28.8587 14.9359 29.3351 15.7778 29.3334H16.2222C17.0649 29.3359 17.8357 28.8594 18.2099 28.1045L18.5822 27.3601C18.6685 27.1878 18.6594 26.9833 18.5582 26.8193C18.457 26.6554 18.2782 26.5557 18.0855 26.5557Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M24.6424 6.89783C25.0762 6.46407 25.7796 6.46407 26.2134 6.89783C26.6472 7.33172 26.6472 8.03506 26.2134 8.46894L24.249 10.4323C23.9701 10.7211 23.5569 10.8369 23.1685 10.7353C22.78 10.6336 22.4766 10.3302 22.3749 9.94172C22.2732 9.55324 22.389 9.14014 22.6778 8.86116L24.6424 6.89783Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M29.3333 17.1111C29.3333 16.4975 28.8358 16 28.2222 16H26C25.3864 16 24.8889 16.4975 24.8889 17.1111C24.8889 17.7248 25.3864 18.2223 26 18.2223H28.2222C28.8358 18.2223 29.3333 17.7248 29.3333 17.1111Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M7.35787 6.89784L9.32231 8.86117C9.74339 9.29715 9.73737 9.99016 9.30878 10.4187C8.88018 10.8473 8.18718 10.8534 7.75121 10.4323L5.78675 8.46894C5.36567 8.03297 5.3717 7.33996 5.80029 6.91137C6.22889 6.48278 6.92189 6.47676 7.35787 6.89784Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M6.00008 16H3.77787C3.16421 16 2.66675 16.4975 2.66675 17.1111C2.66675 17.7248 3.16421 18.2223 3.77787 18.2223H6.00008C6.61373 18.2223 7.1112 17.7248 7.1112 17.1111C7.1112 16.4975 6.61373 16 6.00008 16Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M16 9.33326C11.9895 9.33754 8.73932 12.5872 8.73443 16.5977C8.72547 18.8498 9.78288 20.9733 11.5855 22.3233C11.7254 22.4282 11.8078 22.5929 11.8078 22.7677V23.261C11.8075 23.6929 11.9789 24.107 12.2842 24.4123C12.5895 24.7177 13.0037 24.8891 13.4356 24.8889H18.5645C19.4536 24.8877 20.1768 24.1723 20.1878 23.2833V23.2489L20.1678 22.8522C20.159 22.6679 20.2424 22.4914 20.39 22.381C22.8773 20.4974 23.883 17.2353 22.8881 14.2781C21.8932 11.3209 19.1201 9.33016 16 9.33326ZM18.8822 20.7289C18.3088 21.1285 17.9669 21.7831 17.9666 22.4822C17.9666 22.5318 17.9466 22.5794 17.911 22.6142C17.8756 22.6489 17.8274 22.6678 17.7778 22.6666H14.2222C14.1734 22.6666 14.1266 22.6471 14.0922 22.6125C14.0578 22.5779 14.0386 22.531 14.0389 22.4822C14.0385 21.783 13.6961 21.1282 13.1222 20.7289C11.314 19.4695 10.5327 17.1821 11.1926 15.0798C11.8525 12.9774 13.8009 11.5469 16.0045 11.5469C18.208 11.5469 20.1564 12.9774 20.8162 15.0798C21.4762 17.1821 20.6949 19.4695 18.8866 20.7289H18.8822Z"
+                fill="#4F5E71"
+              />
+            </svg>
+
+            <p>Design & Prototyping</p>
+            <div class="flex flex-col font-normal gap-2">
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Figma</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Google Fonts</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">
+                Adobe Photoshop
+              </p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">
+                Adobe Illustrator
+              </p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">
+                Adobe After Effects
+              </p>
+            </div>
+          </div>
+          <hr class="my-8 border-t border-gray-300" />
+          <div class="font-bold flex flex-col gap-2">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.33265 13.4426L10.8879 11.554C11.2212 11.2207 11.6656 11.2207 11.9989 11.3318C12.3321 11.6651 12.4432 12.2206 12.11 12.5538L9.88811 15.3312C9.77701 15.5533 9.55484 15.6645 9.33265 15.6645C9.11047 15.6645 8.88828 15.5533 8.77719 15.4422L7.1108 13.7758C6.77752 13.5537 6.77752 12.9982 7.1108 12.6649C7.44408 12.3316 7.88845 12.3316 8.22172 12.6649L9.11047 13.4426C9.22156 13.5537 9.33265 13.5537 9.33265 13.4426Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M9.33266 19.5527L10.888 17.6641C11.2212 17.3308 11.6656 17.3308 11.9989 17.442C12.3322 17.7752 12.4432 18.3307 12.11 18.664L9.88812 21.4413C9.77702 21.6635 9.55485 21.7745 9.33266 21.7745C9.11048 21.7745 8.88829 21.6635 8.7772 21.5524L6.99972 19.9971C6.66644 19.6637 6.66644 19.1083 6.99972 18.7751C7.333 18.4417 7.88846 18.4417 8.22173 18.7751L9.11048 19.5527C9.22157 19.6637 9.33266 19.6637 9.33266 19.5527Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M18.22 13.4426H14.3318C13.8874 13.4426 13.4431 13.7758 13.4431 14.3313C13.4431 14.8868 13.7763 15.2201 14.3318 15.2201H18.22C18.6644 15.2201 19.1087 14.8868 19.1087 14.3313C19.1087 13.7758 18.6644 13.4426 18.22 13.4426Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M14.3318 19.5527H18.22C18.6644 19.5527 19.1087 19.8861 19.1087 20.4415C19.1087 20.997 18.6644 21.3302 18.22 21.3302H14.3318C13.7763 21.3302 13.4431 20.8859 13.4431 20.4415C13.4431 19.8861 13.8874 19.5527 14.3318 19.5527Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M17.4426 3.00001L23.4415 8.99901C23.6637 9.22119 23.7749 9.44337 23.7749 9.77665V27.107C23.7749 28.329 22.775 29.3289 21.553 29.3289H4.88909C3.66706 29.3289 2.66724 28.329 2.66724 27.107V4.88859C2.66724 3.66657 3.66706 2.66675 4.88909 2.66675H16.6649C16.9982 2.66675 17.2203 2.77784 17.4426 3.00001ZM20.9975 27.107C21.3307 27.107 21.553 26.8849 21.553 26.5515V10.6654C21.553 10.5543 21.4418 10.4432 21.3307 10.4432H18.2202C16.9982 10.4432 15.9983 9.44337 15.9983 8.22136V5.11077C15.9983 4.99968 15.8872 4.88859 15.665 4.88859H5.44454C5.11126 4.88859 4.88909 5.11077 4.88909 5.44406V26.5515C4.88909 26.8849 5.11126 27.107 5.44454 27.107H20.9975Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M29.3292 22.1079C29.3292 22.4411 29.1071 22.6633 28.7738 22.6633H25.441C25.1078 22.6633 24.8855 22.4411 24.8855 22.1079V7.66581C24.8855 7.44363 25.1078 7.11035 25.441 7.11035H28.7738C29.1071 7.11035 29.3292 7.44363 29.3292 7.66581V22.1079Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M26.5519 28.9955C26.6631 29.3287 26.9963 29.4398 27.3296 29.2177C27.372 29.1753 27.4144 29.149 27.4507 29.1266C27.5093 29.0903 27.5517 29.0642 27.5517 28.9955L29.2181 24.5518C29.3292 24.2185 29.2181 23.9963 28.8848 23.8853H25.3299C24.9967 23.8853 24.7744 24.1074 24.7744 24.4407V24.6629L26.5519 28.9955Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M28.7738 5.99951H25.441C25.1078 5.99951 24.8855 5.77733 24.8855 5.44406V4.88859C24.8855 3.66657 25.8854 2.66675 27.1074 2.66675C28.3294 2.66675 29.3292 3.66657 29.3292 4.88859V5.44406C29.3292 5.77733 29.1071 5.99951 28.7738 5.99951Z"
+                fill="#4F5E71"
+              />
+            </svg>
+
+            <p>Product & Workflow</p>
+            <div class="flex flex-col font-normal gap-2">
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Clickup</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Notion</p>
+            </div>
+          </div>
+          <hr class="my-8 border-t border-gray-300" />
+          <div class="font-bold flex flex-col gap-2">
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.3555 9.13579C16.4891 8.53562 17.0839 8.15738 17.6842 8.29101C18.2843 8.42462 18.6626 9.01947 18.529 9.61966L15.5799 22.8664C15.4463 23.4665 14.8514 23.8448 14.2513 23.7112C13.6511 23.5776 13.2729 22.9826 13.4065 22.3825L16.3555 9.13579Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M22.9262 9.71227L28.3165 15.2194C28.7398 15.6519 28.7401 16.3437 28.3169 16.7765L22.9268 22.2894C22.4969 22.729 21.792 22.737 21.3524 22.3071C20.9126 21.8773 20.9048 21.1723 21.3346 20.7327L25.6898 16.2783C25.8418 16.1229 25.8418 15.8743 25.6897 15.7189L21.335 11.2698C20.9049 10.8303 20.9125 10.1255 21.3518 9.69537C21.7913 9.26528 22.4962 9.27284 22.9262 9.71227Z"
+                fill="#4F5E71"
+              />
+              <path
+                d="M10.7574 11.1547C11.0848 10.7148 11.0449 10.0896 10.6421 9.69537C10.2027 9.26528 9.49782 9.27284 9.06773 9.71227L3.67755 15.2194L3.57257 15.3434C3.25759 15.7757 3.29242 16.383 3.67714 16.7765L9.06731 22.2894L9.18019 22.3903C9.61281 22.7274 10.2387 22.7011 10.6417 22.3071C11.0814 21.8773 11.0893 21.1723 10.6594 20.7327L6.30422 16.2783L6.24837 16.2066C6.15529 16.0537 6.17397 15.8521 6.30437 15.7189L10.659 11.2698L10.7574 11.1547Z"
+                fill="#4F5E71"
+              />
+            </svg>
+
+            <p>Front End Dev Tools</p>
+            <div class="flex flex-col font-normal gap-2">
+              <p class="rounded-full bg-cloud-light p-2 w-fit">TailwindCSS</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Cloudflare</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">VS Code</p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">
+                🍦 Html,CSS, Javascript
+              </p>
+              <p class="rounded-full bg-cloud-light p-2 w-fit">Github</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="flex flex-col p-8 gap-8" id="projects">
+        <div class="flex flex-row justify-between gap-4">
+          <h4 class="font-bold">Work Experience</h4>
+        </div>
+        <div class="grid md:grid-cols-3 gap-2 items-center relative">
+          <div class="flex flex-col gap-2">
+            <h1 class="font-bold">Kakitangan.com</h1>
+            <p>Ui/Ux Designer + PM</p>
+            <p class="italic">2021 - Present</p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h1 class="font-bold">The One Academy</h1>
+            <p>Digital Media Designer</p>
+            <p class="italic">2019 - 2021</p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h1 class="font-bold">Vase.ai</h1>
+            <p>Ui/Ux Designer</p>
+            <p class="ittalic">2017 - 2018</p>
+          </div>
+        </div>
+      </section>
+      <section class="flex flex-col p-8 gap-8" id="projects">
+        <div class="flex flex-row justify-between gap-4">
+          <h4 class="font-bold">Featured Project</h4>
+          <a href="#myworks" class="text-brand"> See all </a>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 items-center relative">
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-profile.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign User Profile Page</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-payroll.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign Payroll</p>
+          </div>
+          <div class="flex flex-col items-center justify-center gap-4">
+            <a href="#myworks">
+              <img
+                src="/src/img/rd-landing.png"
+                class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
+                alt="DTC logo"
+              />
+            </a>
+            <p class="text-ink-light">Redesign Landing Page</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts}"],
+  content: [
+    "./*.html",
+    "./src/**/*.{js,ts,jsx,tsx,html}",
+    "./src/**/*.html",
+    "./src/partials/**/*.html", // wherever your components are
+  ],
   theme: {
     extend: {
       colors: {
@@ -11,7 +16,7 @@ module.exports = {
         },
         cloud: {
           DEFAULT: "hsl(210, 20%, 98%)",
-          light: "hsl(210, 100%, 70%)",
+          light: "hsl(207, 24%, 93%)",
           dark: "hsl(210, 100%, 40%)",
         },
         ink: {
