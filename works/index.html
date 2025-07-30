@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Works</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Alata&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <main id="myworks">
+      <div
+        id="nav-wrapper"
+        class="w-full flex fixed z-50 bg-white shadow-md opacity-100 transition-all duration-500 ease-in-out items-center"
+      >
+        <a href="/">
+          <img
+            src="/src/img/jeff-logo.svg"
+            alt="Jeff Logo"
+            class="w-16 h-auto pl-4"
+        /></a>
+        <button
+          id="burger"
+          class="p-4 ml-auto z-50 focus:outline-none group opacity-100 transition-opacity duration-300 flex flex-col"
+        >
+          <div
+            class="line1 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
+          ></div>
+          <div
+            class="line2 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
+          ></div>
+          <div
+            class="line3 w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
+          ></div>
+        </button>
+
+        <nav
+          id="mobile-nav"
+          class="fixed inset-0 bg-black bg-opacity-90 hidden flex flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300"
+        >
+          <a href="/" class="opacity-0 transition-all duration-500">Home</a>
+          <a href="#projects" class="opacity-0 transition-all duration-500"
+            >View My Works</a
+          >
+          <a href="/contact" class="opacity-0 transition-all duration-500"
+            >Contact Me</a
+          >
+        </nav>
+      </div>
+
+      <div>
+        <section
+          class="bg-brand w-full h-48 top-8 relative text-white flex flex-col justify-center"
+        >
+          <div class="font-bold flex flex-col justify-center items-center">
+            <p class="text-2xl">All case studies</p>
+            <p class="font-normal">Explore my works</p>
+          </div>
+        </section>
+        <section></section>
+      </div>
+    </main>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>
