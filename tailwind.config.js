@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./*.html",
     "./src/**/*.{js,ts,jsx,tsx,html}",
+    "./works/**/*.html",
     "./src/**/*.html",
     "./src/partials/**/*.html", // wherever your components are
   ],
