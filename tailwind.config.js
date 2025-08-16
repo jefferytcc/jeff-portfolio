@@ -12,7 +12,7 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: "hsl(210, 100%, 56%)",
+          DEFAULT: "hsl(240, 1%, 13%)",
           light: "hsl(210, 100%, 70%)",
           dark: "hsl(210, 100%, 40%)",
         },
