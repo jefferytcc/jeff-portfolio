@@ -251,36 +251,53 @@ if (contactForm) {
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("compareContainer");
   const wrapper = document.getElementById("newImageWrapper");
-  const sliderLine = document.getElementById("sliderLine");
-  const sliderHandle = document.getElementById("sliderHandle");
+  const handle = document.getElementById("sliderHandle");
+  const line = document.getElementById("sliderLine");
 
-  let isDragging = false;
+  if (!container || !wrapper || !handle || !line) return;
 
-  container.addEventListener("mousedown", () => (isDragging = true));
-  window.addEventListener("mouseup", () => (isDragging = false));
-  window.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
+  let dragging = false;
 
+  const setByClientX = (clientX) => {
     const rect = container.getBoundingClientRect();
-    let offsetX = e.clientX - rect.left;
+    let x = clientX - rect.left;
+    if (x < 0) x = 0;
+    if (x > rect.width) x = rect.width;
 
-    // clamp inside container
-    if (offsetX < 0) offsetX = 0;
-    if (offsetX > rect.width) offsetX = rect.width;
+    const percent = (x / rect.width) * 100;
 
-    // move mask, line, and handle
-    wrapper.style.width = `${offsetX}px`;
-    sliderLine.style.left = `${offsetX}px`;
-    sliderHandle.style.left = `${offsetX}px`;
+    // reveal new image by changing mask width; move line + handle
+    wrapper.style.width = `${percent}%`;
+    line.style.left = `${percent}%`;
+    handle.style.left = `${percent}%`;
+  };
+
+  const onPointerMove = (e) => {
+    if (!dragging) return;
+    e.preventDefault(); // stop page scroll while dragging
+    setByClientX(e.clientX);
+  };
+
+  const onPointerDown = (e) => {
+    dragging = true;
+    e.preventDefault();
+    // capture pointer so we keep receiving move events even off the handle
+    if (e.target.setPointerCapture) e.target.setPointerCapture(e.pointerId);
+    setByClientX(e.clientX);
+  };
+
+  const onPointerUp = (e) => {
+    dragging = false;
+    if (e.target.releasePointerCapture)
+      e.target.releasePointerCapture(e.pointerId);
+  };
+
+  // Allow dragging from the handle **and** anywhere in the container
+  [handle, container].forEach((el) => {
+    el.addEventListener("pointerdown", onPointerDown, { passive: false });
   });
 
-  container.addEventListener("touchstart", (e) => {
-    isDragging = true;
-    moveSlider(e.touches[0].clientX);
-  });
-
-  window.addEventListener("touchend", () => (isDragging = false));
-  window.addEventListener("touchmove", (e) => {
-    if (isDragging) moveSlider(e.touches[0].clientX);
-  });
+  window.addEventListener("pointermove", onPointerMove, { passive: false });
+  window.addEventListener("pointerup", onPointerUp);
+  window.addEventListener("pointercancel", onPointerUp);
 });

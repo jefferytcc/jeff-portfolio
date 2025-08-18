@@ -62,16 +62,15 @@
       <div class="mt-24">
         <div
           id="compareContainer"
-          class="relative w-[600px] h-[400px] mx-auto overflow-hidden"
+          class="relative w-full max-w-[600px] h-[64vw] max-h-[400px] mx-auto overflow-hidden select-none"
         >
-          <!-- Old image with BEFORE label -->
+          <!-- Old image with AFTER label (base layer) -->
           <div class="absolute inset-0">
             <img
               src="/src/img/new-website.png"
               alt="Old"
               class="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
-            <!-- BEFORE label stays on left side -->
             <div
               class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
             >
@@ -81,17 +80,17 @@
             </div>
           </div>
 
-          <!-- New image mask with AFTER label -->
+          <!-- New image mask with BEFORE label (clipped layer) -->
           <div
             id="newImageWrapper"
-            class="absolute inset-0 w-1/2 overflow-hidden"
+            class="absolute inset-0 overflow-hidden"
+            style="width: 50%"
           >
             <img
               src="/src/img/old-website.png"
               alt="New"
               class="absolute inset-0 w-full h-full object-cover pointer-events-none"
             />
-            <!-- AFTER label stays on right side -->
             <div
               class="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none"
             >
@@ -104,13 +103,14 @@
           <!-- Divider line -->
           <div
             id="sliderLine"
-            class="absolute top-0 bottom-0 w-0.5 bg-white left-1/2"
+            class="absolute top-0 bottom-0 w-0.5 bg-white"
+            style="left: 50%"
           ></div>
 
           <!-- Handle -->
           <div
             id="sliderHandle"
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white border-2 border-gray-400 shadow cursor-pointer"
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white border-2 border-gray-400 shadow cursor-pointer touch-none"
           ></div>
         </div>
       </div>
