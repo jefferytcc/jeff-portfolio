@@ -1,5 +1,7 @@
 import "../style.css";
 import Lenis from "@studio-freight/lenis";
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 // ----------------------------
 // Animate signature (optional)
@@ -246,19 +248,39 @@ if (contactForm) {
     }
   });
 }
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("compareContainer");
+  const wrapper = document.getElementById("newImageWrapper");
+  const sliderLine = document.getElementById("sliderLine");
+  const sliderHandle = document.getElementById("sliderHandle");
 
-const readmore = document.getElementById("read-more");
-const readless = document.getElementById("read-less");
-const extraText = document.getElementById("extra-text");
+  let isDragging = false;
 
-readmore.addEventListener("click", () => {
-  extraText.classList.remove("hidden");
-  readmore.classList.add("hidden");
-  readless.classList.remove("hidden");
-});
+  container.addEventListener("mousedown", () => (isDragging = true));
+  window.addEventListener("mouseup", () => (isDragging = false));
+  window.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
 
-readless.addEventListener("click", () => {
-  extraText.classList.add("hidden");
-  readmore.classList.remove("hidden");
-  readless.classList.add("hidden");
+    const rect = container.getBoundingClientRect();
+    let offsetX = e.clientX - rect.left;
+
+    // clamp inside container
+    if (offsetX < 0) offsetX = 0;
+    if (offsetX > rect.width) offsetX = rect.width;
+
+    // move mask, line, and handle
+    wrapper.style.width = `${offsetX}px`;
+    sliderLine.style.left = `${offsetX}px`;
+    sliderHandle.style.left = `${offsetX}px`;
+  });
+
+  container.addEventListener("touchstart", (e) => {
+    isDragging = true;
+    moveSlider(e.touches[0].clientX);
+  });
+
+  window.addEventListener("touchend", () => (isDragging = false));
+  window.addEventListener("touchmove", (e) => {
+    if (isDragging) moveSlider(e.touches[0].clientX);
+  });
 });
