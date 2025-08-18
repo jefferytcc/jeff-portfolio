@@ -6,7 +6,7 @@ module.exports = {
     "./works/**/*.{js,ts,jsx,tsx,html}",
     "./works/**/*.html",
     "./src/**/*.html",
-    "./src/partials/**/*.html", // wherever your components are
+    "./src/partials/**/*.html",
   ],
   theme: {
     extend: {
@@ -33,6 +33,16 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         heading: ["Alata", "sans-serif"],
+      },
+      // <-- add here
+      keyframes: {
+        "scroll-right": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0%)" },
+        },
+      },
+      animation: {
+        "scroll-right": "scroll-right 20s linear infinite",
       },
     },
   },
