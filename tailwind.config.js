@@ -42,7 +42,7 @@ module.exports = {
         },
       },
       animation: {
-        "scroll-right": "scroll-right 20s linear infinite",
+        "scroll-right": "scroll-right 30s linear infinite",
       },
     },
   },
