@@ -301,3 +301,24 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("pointerup", onPointerUp);
   window.addEventListener("pointercancel", onPointerUp);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const readMoreBtn = document.getElementById("read-more");
+  const extraText = document.getElementById("extra-text");
+
+  if (readMoreBtn && extraText) {
+    let expanded = false;
+
+    readMoreBtn.addEventListener("click", () => {
+      expanded = !expanded;
+
+      if (expanded) {
+        extraText.classList.remove("hidden");
+        readMoreBtn.textContent = "Read less";
+      } else {
+        extraText.classList.add("hidden");
+        readMoreBtn.textContent = "Read more";
+      }
+    });
+  }
+});
