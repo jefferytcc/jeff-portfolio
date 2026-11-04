@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- @include head.html -->
+    <title>The Kakitangan Design System – Jeffery Tan</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
+          >
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-success"
+                aria-hidden="true"
+              ></span>
+              In use · growing with each module
+            </span>
+          </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            One design system for every Kakitangan screen
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            Kakitangan.com's modules were built at different times, so colours
+            and buttons didn't always mean the same thing from page to page. I
+            shaped the Kakitangan Design System, with principles, tokens,
+            components and writing rules, then brought it into the engineers'
+            shared components so every new page gets it for free.
+          </p>
+
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">UI/UX Designer + PM</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Year</dt>
+              <dd class="font-semibold text-ink-dark">2025 – 2026</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Covers</dt>
+              <dd class="font-semibold text-ink-dark">
+                Foundations, components, writing
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Tools</dt>
+              <dd class="font-semibold text-ink-dark">
+                Storybook, Tailwind, Claude Code
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- At a glance -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-white shadow-sm p-6">
+            <p class="font-heading text-5xl text-ink-dark">40</p>
+            <p class="mt-2 text-ink">
+              components documented in Storybook, with 228 live examples
+            </p>
+          </div>
+          <div class="rounded-2xl bg-white shadow-sm p-6">
+            <p class="font-heading text-5xl text-ink-dark">42</p>
+            <p class="mt-2 text-ink">
+              changes I made to the shared components and their docs
+            </p>
+          </div>
+          <div class="rounded-2xl bg-brand text-white p-6">
+            <p class="font-heading text-5xl">4.5:1</p>
+            <p class="mt-2 text-white/80">
+              minimum text contrast, on every surface, in light and dark
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Principles -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Principles
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Every colour has one job
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            In HR software, colour carries meaning: red on a payroll screen
+            makes people worry. So each colour does one thing, everywhere.
+          </p>
+          <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <li class="rounded-2xl border border-gray-200 p-6">
+              <span
+                class="block w-10 h-10 rounded-xl bg-[#0b7d91]"
+                aria-hidden="true"
+              ></span>
+              <p class="mt-4 font-semibold text-ink-dark">
+                Teal means "do something"
+              </p>
+              <p class="mt-1 text-sm text-ink">
+                Only action buttons and links. Selections use a light tint,
+                never a solid fill.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-gray-200 p-6">
+              <span
+                class="block w-10 h-10 rounded-xl bg-[#d21c1c]"
+                aria-hidden="true"
+              ></span>
+              <p class="mt-4 font-semibold text-ink-dark">
+                Red means "needs you now"
+              </p>
+              <p class="mt-1 text-sm text-ink">
+                Approvals waiting, or something that stopped working. Never
+                decoration.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-gray-200 p-6">
+              <span
+                class="block w-10 h-10 rounded-xl bg-[#b36200]"
+                aria-hidden="true"
+              ></span>
+              <p class="mt-4 font-semibold text-ink-dark">
+                Orange means "heads-up"
+              </p>
+              <p class="mt-1 text-sm text-ink">
+                Pending, low balance, a subscription ending soon.
+              </p>
+            </li>
+            <li class="rounded-2xl border border-gray-200 p-6">
+              <span
+                class="block w-10 h-10 rounded-xl bg-[#048724]"
+                aria-hidden="true"
+              ></span>
+              <p class="mt-4 font-semibold text-ink-dark">Green means "done"</p>
+              <p class="mt-1 text-sm text-ink">Approved, paid, sent.</p>
+            </li>
+          </ul>
+          <div class="mt-8 grid md:grid-cols-2 gap-6 items-center">
+            <figure class="rounded-2xl bg-cloud p-6">
+              <img
+                src="/src/img/design-system/ds-buttons.jpg"
+                alt="Three button kinds: a teal Apply leave button, a grey Download payslip button and a View all claims link"
+                width="700"
+                height="140"
+                loading="lazy"
+                class="w-full max-w-md mx-auto"
+              />
+              <figcaption class="mt-3 text-sm text-ink-light text-center">
+                One main action, one quieter one, and a link.
+              </figcaption>
+            </figure>
+            <figure class="rounded-2xl bg-cloud p-6">
+              <img
+                src="/src/img/design-system/ds-tags.jpg"
+                alt="Status tags: Not sent, Sent, Pending, Rejected and Public holiday, each in its own colour"
+                width="615"
+                height="84"
+                loading="lazy"
+                class="w-full max-w-md mx-auto"
+              />
+              <figcaption class="mt-3 text-sm text-ink-light text-center">
+                Status is always a word, never colour alone.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tokens -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div
+          class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1.3fr] gap-10 items-center"
+        >
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Tokens
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              One pattern for every colour
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              Teal, red, orange, green and blue each have the same nine tokens,
+              from the solid fill to its hover, pressed and subtle tints.
+              Engineers never pick a shade number; they swap the colour name and
+              the rest stays the same.
+            </p>
+            <p class="mt-4 text-lg text-ink">
+              Screens only use meaning-based tokens, so dark mode is already
+              prepared: every token has a dark value, ready for when the product
+              adds it.
+            </p>
+          </div>
+          <img
+            src="/src/img/design-system/ds-colour-keys.jpg"
+            alt="Storybook page listing the nine colour tokens, from the solid fill to text and icon colours, with teal swatches below"
+            width="1920"
+            height="1200"
+            loading="lazy"
+            class="w-full rounded-2xl shadow-xl"
+          />
+        </div>
+      </section>
+
+      <!-- Accessibility: before / after -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div
+          class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-10 items-center"
+        >
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Accessibility
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              The brand teal failed its own buttons
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              White text on the brand teal was hard to read. So the bright teal
+              stays for the logo and illustrations, and a deeper teal is used
+              wherever there's text.
+            </p>
+            <dl class="mt-6 grid grid-cols-2 gap-3">
+              <div class="rounded-2xl bg-cloud p-4">
+                <dt class="text-sm text-ink-light">Before · #45B1C9</dt>
+                <dd class="mt-1 font-heading text-3xl text-danger">2.5:1</dd>
+                <dd class="text-sm text-ink">Fails the 4.5:1 minimum</dd>
+              </div>
+              <div class="rounded-2xl bg-cloud p-4">
+                <dt class="text-sm text-ink-light">After · #0B7D91</dt>
+                <dd class="mt-1 font-heading text-3xl text-[#048724]">4.8:1</dd>
+                <dd class="text-sm text-ink">Passes</dd>
+              </div>
+            </dl>
+            <ul class="mt-6 flex flex-col gap-2 text-ink list-disc pl-5">
+              <li>
+                A visible focus ring on everything you can use by keyboard.
+              </li>
+              <li>
+                Only urgent messages interrupt screen readers; the rest wait.
+              </li>
+              <li>Animations stop for people who turn off motion.</li>
+            </ul>
+          </div>
+
+          <div id="before-after" hidden>
+            <div
+              data-compare
+              class="relative mx-auto max-w-md aspect-[56/58] overflow-hidden rounded-2xl shadow-xl bg-cloud-light select-none touch-pan-y cursor-ew-resize"
+            >
+              <img
+                src="/src/img/design-system/ds-login-after.jpg"
+                alt="After: the login button in the deeper teal, with readable white text"
+                draggable="false"
+                width="560"
+                height="580"
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+              <div
+                data-compare-before
+                class="absolute inset-0"
+                style="clip-path: inset(0 50% 0 0)"
+              >
+                <img
+                  data-before-img
+                  src="/src/img/design-system/ds-login-before.jpg"
+                  alt="Before: the login button in the bright brand teal, with hard-to-read white text"
+                  draggable="false"
+                  width="560"
+                  height="580"
+                  class="absolute inset-0 w-full h-full object-cover"
+                />
+              </div>
+              <span
+                class="absolute left-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+                >Before</span
+              >
+              <span
+                class="absolute right-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+                >After</span
+              >
+              <div
+                data-compare-line
+                class="absolute inset-y-0 left-1/2 w-0.5 -ml-px bg-white shadow pointer-events-none"
+              ></div>
+              <div
+                data-compare-handle
+                role="slider"
+                tabindex="0"
+                aria-label="Compare the old and new login button"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="50"
+                aria-valuetext="Half before, half after"
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-ink-dark touch-none focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/40"
+              >
+                <span aria-hidden="true">⇆</span>
+              </div>
+            </div>
+            <div
+              class="mt-4 mx-auto w-fit flex gap-1 rounded-full bg-cloud-light p-1 text-sm"
+            >
+              <button
+                type="button"
+                data-compare-to="100"
+                aria-pressed="false"
+                class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+              >
+                Before
+              </button>
+              <button
+                type="button"
+                data-compare-to="50"
+                aria-pressed="true"
+                class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+              >
+                Compare
+              </button>
+              <button
+                type="button"
+                data-compare-to="0"
+                aria-pressed="false"
+                class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+              >
+                After
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Built for HR and payroll -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Built for HR and payroll
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Rules a generic design system wouldn't have
+          </h2>
+          <div class="mt-8 grid md:grid-cols-2 gap-6">
+            <figure class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">
+                Money always reads the same
+              </p>
+              <p class="mt-1 text-sm text-ink">
+                "RM 1,250.00": never shortened, always two decimals, digits that
+                line up, and deductions with a real minus sign in red.
+              </p>
+              <img
+                src="/src/img/design-system/ds-amount.jpg"
+                alt="A payslip breakdown: basic salary, allowance and overtime in black, EPF, SOCSO and PCB deductions in red with a minus sign, and net pay in bold"
+                width="620"
+                height="530"
+                loading="lazy"
+                class="mt-4 w-full max-w-sm mx-auto rounded-xl border border-gray-200"
+              />
+            </figure>
+            <figure class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">
+                Alerts that match how serious things are
+              </p>
+              <p class="mt-1 text-sm text-ink">
+                Five tones, each with a clear use. Only "something stopped
+                working" interrupts a screen reader.
+              </p>
+              <img
+                src="/src/img/design-system/ds-alerts.jpg"
+                alt="Five alerts: a red one for an ended subscription with a Renew button, orange for one ending soon, blue for the next public holiday, green for confirmed payroll, and grey for read only"
+                width="920"
+                height="760"
+                loading="lazy"
+                class="mt-4 w-full rounded-xl border border-gray-200"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Writing -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Writing
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Words are part of the system
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            Many users aren't HR experts, so the system includes writing rules
+            as well as visuals.
+          </p>
+          <div class="mt-8 overflow-x-auto">
+            <table class="w-full min-w-[560px] text-left">
+              <thead class="text-sm text-ink-light">
+                <tr class="border-b border-gray-300">
+                  <th class="py-3 pr-4 font-medium">Rule</th>
+                  <th class="py-3 px-4 font-medium">Instead of</th>
+                  <th class="py-3 pl-4 font-medium">Write</th>
+                </tr>
+              </thead>
+              <tbody class="text-ink">
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Sentence case</td>
+                  <td class="py-3 px-4 text-ink-light line-through">
+                    Apply Leave
+                  </td>
+                  <td class="py-3 pl-4 font-medium text-ink-dark">
+                    Apply leave
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Buttons say what happens</td>
+                  <td class="py-3 px-4 text-ink-light line-through">Submit</td>
+                  <td class="py-3 pl-4 font-medium text-ink-dark">
+                    Renew subscription
+                  </td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Counts say the thing</td>
+                  <td class="py-3 px-4 text-ink-light line-through">
+                    Leave: 3
+                  </td>
+                  <td class="py-3 pl-4 font-medium text-ink-dark">
+                    3 people away today
+                  </td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">Empty states reassure</td>
+                  <td class="py-3 px-4 text-ink-light line-through">No data</td>
+                  <td class="py-3 pl-4 font-medium text-ink-dark">
+                    Everyone is in. No leave is booked for this period.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- From docs to code -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              From docs to code
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              A system engineers actually use
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              A design system only works if it's in the code. Working with AI, I
+              restyled the engineers' shared components to match, fixed the
+              accessibility gaps I found, and rewrote their Storybook pages so
+              each one explains when to use it, not just how.
+            </p>
+          </div>
+          <ul class="grid grid-cols-2 gap-3 text-sm">
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-semibold text-ink-dark">Buttons</p>
+              <p class="mt-1 text-ink">
+                Fewer kinds, clear names, icons on either side.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-semibold text-ink-dark">Select and inputs</p>
+              <p class="mt-1 text-ink">
+                Full keyboard use, screen reader names, errors linked to fields.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-semibold text-ink-dark">Tables</p>
+              <p class="mt-1 text-ink">
+                Numbers right-aligned, clear page-size labels, phone layouts.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-semibold text-ink-dark">Calendar</p>
+              <p class="mt-1 text-ink">
+                Readable "today", and weeks that start on Monday.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- In use -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            See it in use
+          </h2>
+          <div class="mt-6 grid sm:grid-cols-2 gap-4">
+            <a
+              href="/works/redesigndashboard.html"
+              class="group rounded-2xl bg-cloud p-6 flex items-center justify-between gap-4 hover:bg-cloud-light"
+            >
+              <span>
+                <span class="block font-semibold text-ink-dark"
+                  >Dashboard redesign</span
+                >
+                <span class="text-sm text-ink"
+                  >The first module on the new system</span
+                >
+              </span>
+              <span
+                class="text-2xl transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+                >→</span
+              >
+            </a>
+            <a
+              href="/works/redesignpayroll.html"
+              class="group rounded-2xl bg-cloud p-6 flex items-center justify-between gap-4 hover:bg-cloud-light"
+            >
+              <span>
+                <span class="block font-semibold text-ink-dark"
+                  >Payroll revamp</span
+                >
+                <span class="text-sm text-ink"
+                  >The system applied to the rebuilt payroll pages</span
+                >
+              </span>
+              <span
+                class="text-2xl transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+                >→</span
+              >
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learnings -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What I learned
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>
+                Rules about meaning ("red means needs you now") hold up better
+                than rules about looks.
+              </li>
+              <li>
+                A design system only counts once it's in the code, so the rules
+                live in Storybook, right next to the components.
+              </li>
+              <li>
+                Brand colours and readable colours aren't always the same, and
+                that's fine if each has its own job.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What's next
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>Move the remaining modules onto the deeper teal.</li>
+              <li>Ship dark mode, since every token is ready for it.</li>
+              <li>Add the logo files and illustration rules.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 pb-16">
+        <a
+          href="/works/redesignlanding.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              Redesigning the Kakitangan.com website
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </section>
+    </main>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
+  </body>
+</html>

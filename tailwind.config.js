@@ -2,11 +2,9 @@
 module.exports = {
   content: [
     "./*.html",
-    "./src/**/*.{js,ts,jsx,tsx,html}",
-    "./works/**/*.{js,ts,jsx,tsx,html}",
     "./works/**/*.html",
-    "./src/**/*.html",
-    "./src/partials/**/*.html",
+    "./prototypes/**/*.html",
+    "./src/**/*.{js,html}",
   ],
   theme: {
     extend: {
@@ -33,16 +31,6 @@ module.exports = {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         heading: ["Alata", "sans-serif"],
-      },
-      // <-- add here
-      keyframes: {
-        "scroll-right": {
-          "0%": { transform: "translateX(-50%)" },
-          "100%": { transform: "translateX(0%)" },
-        },
-      },
-      animation: {
-        "scroll-right": "scroll-right 100s linear infinite",
       },
     },
   },

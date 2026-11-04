@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- @include head.html -->
+    <title>Redesigning the Kakitangan.com Dashboard – Jeffery Tan</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
+          >
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-warning"
+                aria-hidden="true"
+              ></span>
+              In progress · first release in review
+            </span>
+          </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            Redesigning the home dashboard for employees, managers and HR
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            The dashboard is the first page everyone sees after logging in. It
+            has to answer very different questions for each role without
+            becoming cluttered. I led the redesign from research to release
+            planning, and tested it with users twice before the first release.
+          </p>
+
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">Product Designer + PM</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Year</dt>
+              <dd class="font-semibold text-ink-dark">2026</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Users</dt>
+              <dd class="font-semibold text-ink-dark">
+                Employees, managers, HR admins
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Tools</dt>
+              <dd class="font-semibold text-ink-dark">
+                HTML prototypes, Claude Code, React
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Hero image with desktop / phone switch -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex gap-1 w-fit rounded-full bg-cloud-light p-1 text-sm"
+            role="tablist"
+            aria-label="Screen size"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="shot-desktop"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Desktop
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="shot-mobile"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Phone
+            </button>
+          </div>
+          <div class="mt-4 rounded-3xl bg-cloud-light p-3 sm:p-8">
+            <img
+              id="shot-desktop"
+              role="tabpanel"
+              src="/src/img/dashboard/dashboard-desktop.jpg"
+              alt="The redesigned dashboard for an HR admin: greeting, people on leave this week, quick links and payroll shortcuts"
+              width="2160"
+              height="1350"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="shot-mobile"
+              role="tabpanel"
+              hidden
+              src="/src/img/dashboard/dashboard-mobile.jpg"
+              alt="The redesigned dashboard on a phone"
+              width="375"
+              height="812"
+              class="w-full max-w-[320px] mx-auto rounded-[2rem] shadow-xl border-8 border-brand"
+            />
+          </div>
+          <p class="mt-3 text-sm text-ink-light">
+            Clickable prototype with sample data. Names and companies are
+            fictional.
+          </p>
+        </div>
+      </section>
+
+      <!-- Before / after (shown once the "before" screenshot loads) -->
+      <section id="before-after" hidden class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            Before and after
+          </h2>
+          <p class="mt-2 text-ink">
+            Drag the handle to compare the old dashboard with the redesign.
+          </p>
+
+          <div
+            data-compare
+            class="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl shadow-xl bg-cloud-light select-none touch-pan-y cursor-ew-resize"
+          >
+            <img
+              src="/src/img/dashboard/dashboard-desktop.jpg"
+              alt="After: the redesigned dashboard"
+              draggable="false"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div
+              data-compare-before
+              class="absolute inset-0"
+              style="clip-path: inset(0 50% 0 0)"
+            >
+              <img
+                data-before-img
+                src="/src/img/dashboard/dashboard-before.jpg"
+                alt="Before: the old dashboard"
+                draggable="false"
+                class="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+
+            <span
+              class="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >Before</span
+            >
+            <span
+              class="absolute right-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >After</span
+            >
+            <div
+              data-compare-line
+              class="absolute inset-y-0 left-1/2 w-0.5 -ml-px bg-white shadow pointer-events-none"
+            ></div>
+            <div
+              data-compare-handle
+              role="slider"
+              tabindex="0"
+              aria-label="Compare the old and new dashboard"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-valuetext="Half before, half after"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-ink-dark touch-none focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true">⇆</span>
+            </div>
+          </div>
+
+          <div
+            class="mt-4 mx-auto w-fit flex gap-1 rounded-full bg-cloud-light p-1 text-sm"
+          >
+            <button
+              type="button"
+              data-compare-to="100"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Before
+            </button>
+            <button
+              type="button"
+              data-compare-to="50"
+              aria-pressed="true"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Compare
+            </button>
+            <button
+              type="button"
+              data-compare-to="0"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              After
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- At a glance -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-20">
+        <div class="max-w-6xl mx-auto grid sm:grid-cols-3 gap-4">
+          <div class="rounded-2xl bg-cloud p-6">
+            <p class="font-heading text-5xl text-ink-dark">73%</p>
+            <p class="mt-2 text-ink">
+              rated the redesign 4 or 5 out of 5 against the old dashboard
+            </p>
+          </div>
+          <div class="rounded-2xl bg-cloud p-6">
+            <p class="font-heading text-5xl text-ink-dark">2</p>
+            <p class="mt-2 text-ink">
+              rounds of user testing, with 33 and 25 responses
+            </p>
+          </div>
+          <div class="rounded-2xl bg-brand text-white p-6">
+            <p class="font-heading text-5xl">3</p>
+            <p class="mt-2 text-white/80">
+              releases planned, with the most-requested fixes first
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge + role -->
+      <section class="bg-white px-4 sm:px-8 pb-16 md:pb-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              The challenge
+            </h2>
+            <div class="mt-4 flex flex-col gap-4 text-lg text-ink">
+              <p>
+                Kakitangan.com is HR and payroll software for Malaysian
+                businesses. One dashboard serves everyone: employees checking
+                leave and payslips, managers checking who's in today, and HR
+                admins clearing approvals and running payroll.
+              </p>
+              <p>
+                Early feedback was clear: it felt like too much information,
+                admins wanted their approvals first, and payroll items were hard
+                to find.
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What I did
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink">
+              <li class="flex gap-3">
+                <span aria-hidden="true">🔍</span>Planned and ran two rounds of
+                user surveys with task-based tests
+              </li>
+              <li class="flex gap-3">
+                <span aria-hidden="true">🎨</span>Designed the layout, cards and
+                states for each role, on desktop and phone
+              </li>
+              <li class="flex gap-3">
+                <span aria-hidden="true">🧪</span>Built clickable prototypes
+                that switch between people, roles and company setups
+              </li>
+              <li class="flex gap-3">
+                <span aria-hidden="true">📝</span>Wrote the product spec,
+                acceptance criteria and edge cases
+              </li>
+              <li class="flex gap-3">
+                <span aria-hidden="true">🗺️</span>Split the work into three
+                releases and planned the first one
+              </li>
+              <li class="flex gap-3">
+                <span aria-hidden="true">✨</span>Built the first release's
+                changes with AI-assisted coding, then handed off to engineering
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Research
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Testing with users, twice
+          </h2>
+          <div class="mt-6 grid md:grid-cols-2 gap-4 text-ink">
+            <div class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">Round 1 · 33 responses</p>
+              <p class="mt-1">The redesign compared with the old dashboard.</p>
+            </div>
+            <div class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">Round 2 · 25 responses</p>
+              <p class="mt-1">
+                An improved version compared with the first, plus real tasks for
+                each role.
+              </p>
+            </div>
+          </div>
+
+          <!-- Scores -->
+          <h3 class="mt-12 font-semibold text-lg text-ink-dark">
+            How people rated it (share scoring 4 or 5 out of 5)
+          </h3>
+          <div class="mt-4 overflow-x-auto">
+            <table class="w-full min-w-[480px] text-left">
+              <thead class="text-sm text-ink-light">
+                <tr class="border-b border-gray-300">
+                  <th class="py-3 pr-4 font-medium">Question</th>
+                  <th class="py-3 px-4 font-medium">Round 1</th>
+                  <th class="py-3 pl-4 font-medium">Round 2</th>
+                </tr>
+              </thead>
+              <tbody class="text-ink">
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Easy to use the first time</td>
+                  <td class="py-3 px-4">79%</td>
+                  <td class="py-3 pl-4">64%</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Information is easy to understand</td>
+                  <td class="py-3 px-4">88%</td>
+                  <td class="py-3 pl-4">80%</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-3 pr-4">Confident without training</td>
+                  <td class="py-3 px-4">76%</td>
+                  <td class="py-3 pl-4">60%</td>
+                </tr>
+                <tr>
+                  <td class="py-3 pr-4">Helps me get things done faster</td>
+                  <td class="py-3 px-4">79%</td>
+                  <td class="py-3 pl-4">80%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p
+            class="mt-4 rounded-xl bg-cloud-light p-4 text-sm text-ink max-w-3xl"
+          >
+            <strong class="text-ink-dark">Reading the dip:</strong> Round 2
+            asked people to complete real tasks, which usually lowers "easy" and
+            "confident" scores. "Gets things done faster" held steady, and 64%
+            preferred the improved version over the first (20%).
+          </p>
+
+          <!-- Task results -->
+          <h3 class="mt-12 font-semibold text-lg text-ink-dark">
+            Could people find it? (Round 2, "Yes, easily")
+          </h3>
+          <ul class="mt-4 flex flex-col gap-3 max-w-3xl" id="task-results">
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Employee: check medical claim balance</span
+                ><span class="font-semibold">88%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div class="h-2 rounded-full bg-brand" style="width: 88%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>HR: see leave requests waiting</span
+                ><span class="font-semibold">88%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div class="h-2 rounded-full bg-brand" style="width: 88%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Manager: who hasn't clocked in</span
+                ><span class="font-semibold">80%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div class="h-2 rounded-full bg-brand" style="width: 80%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Attendance admin: clocked in but not out</span
+                ><span class="font-semibold">72%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div class="h-2 rounded-full bg-brand" style="width: 72%"></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Claims admin: compare the last two months</span
+                ><span class="font-semibold">60%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div
+                  class="h-2 rounded-full bg-warning"
+                  style="width: 60%"
+                ></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Employee: hide a card</span
+                ><span class="font-semibold">60%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div
+                  class="h-2 rounded-full bg-warning"
+                  style="width: 60%"
+                ></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Employee: find the latest payslip</span
+                ><span class="font-semibold">48%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div
+                  class="h-2 rounded-full bg-danger"
+                  style="width: 48%"
+                ></div>
+              </div>
+            </li>
+            <li>
+              <div class="flex justify-between text-sm text-ink">
+                <span>Payroll admin: staff missing bank details</span
+                ><span class="font-semibold">44%</span>
+              </div>
+              <div class="mt-1 h-2 rounded-full bg-cloud-light">
+                <div
+                  class="h-2 rounded-full bg-danger"
+                  style="width: 44%"
+                ></div>
+              </div>
+            </li>
+          </ul>
+          <p class="mt-4 text-ink max-w-3xl">
+            The weakest results were both about finding payroll things. That
+            changed the plan: payslip access went into the first release, and
+            missing bank details became a to-do item for admins in a later one.
+          </p>
+        </div>
+      </section>
+
+      <!-- Feedback to decisions -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Design decisions
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            What people said, and what changed
+          </h2>
+          <div class="mt-8 grid lg:grid-cols-[1fr_1.1fr] gap-10 items-start">
+            <ol class="flex flex-col gap-4">
+              <li class="rounded-2xl border border-gray-200 p-5">
+                <p class="text-sm text-ink-light">
+                  "Admin approvals should come first" · 5 people
+                </p>
+                <p class="mt-1 font-semibold text-ink-dark">
+                  Team approvals is now the first card for admins.
+                </p>
+              </li>
+              <li class="rounded-2xl border border-gray-200 p-5">
+                <p class="text-sm text-ink-light">
+                  "The attendance numbers are wrong when people work more than
+                  one shift"
+                </p>
+                <p class="mt-1 font-semibold text-ink-dark">
+                  My team now follows each person's shift: who's working now, on
+                  a break, on half-day leave, or still on last night's shift.
+                </p>
+              </li>
+              <li class="rounded-2xl border border-gray-200 p-5">
+                <p class="text-sm text-ink-light">
+                  Only 48% could find their payslip
+                </p>
+                <p class="mt-1 font-semibold text-ink-dark">
+                  Payroll admins get a direct "My payslip" link, and staff
+                  without a payslip see a clear message instead of an empty
+                  button.
+                </p>
+              </li>
+              <li class="rounded-2xl border border-gray-200 p-5">
+                <p class="text-sm text-ink-light">
+                  "Show my leave as 14/20" · "Pending claims show no amount"
+                </p>
+                <p class="mt-1 font-semibold text-ink-dark">
+                  Leave tiles read "14/20 days available", and claims show
+                  amounts in the company's own currency.
+                </p>
+              </li>
+              <li class="rounded-2xl border border-gray-200 p-5">
+                <p class="text-sm text-ink-light">
+                  "I can't find Switch Companies"
+                </p>
+                <p class="mt-1 font-semibold text-ink-dark">
+                  The company name sits in the greeting, with a clear way to
+                  switch or add a company.
+                </p>
+              </li>
+            </ol>
+            <figure class="lg:sticky lg:top-24">
+              <img
+                src="/src/img/dashboard/dashboard-tiles.jpg"
+                alt="My leave and My claims cards: leave balances shown as days available out of the total, and claim limits with amounts left"
+                width="1200"
+                height="956"
+                class="w-full rounded-2xl shadow-xl"
+              />
+              <figcaption class="mt-3 text-sm text-ink-light">
+                My leave and My claims: balances first, recent requests below.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Release plan -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Release plan
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Ship the biggest fixes first
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            Instead of waiting for everything, I split the redesign into three
+            releases so users get the most-requested fixes early.
+          </p>
+          <ol class="mt-8 grid md:grid-cols-3 gap-4">
+            <li class="rounded-2xl bg-brand text-white p-6">
+              <div class="flex items-center justify-between">
+                <p class="font-heading text-2xl">V1</p>
+                <span
+                  class="rounded-full bg-white/15 px-3 py-1 text-xs font-medium"
+                  >In review</span
+                >
+              </div>
+              <p class="mt-3 font-semibold">Fix what users asked for most</p>
+              <p class="mt-2 text-white/80 text-sm">
+                Approvals first, shift-aware team view, payslip access, clearer
+                leave and claim tiles.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <div class="flex items-center justify-between">
+                <p class="font-heading text-2xl text-ink-dark">V2</p>
+                <span
+                  class="rounded-full bg-cloud-light px-3 py-1 text-xs font-medium text-ink"
+                  >Planned</span
+                >
+              </div>
+              <p class="mt-3 font-semibold text-ink-dark">
+                Company announcements
+              </p>
+              <p class="mt-2 text-ink-light text-sm">
+                A place for HR to share news, asked for in both rounds.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <div class="flex items-center justify-between">
+                <p class="font-heading text-2xl text-ink-dark">V3</p>
+                <span
+                  class="rounded-full bg-cloud-light px-3 py-1 text-xs font-medium text-ink"
+                  >Planned</span
+                >
+              </div>
+              <p class="mt-3 font-semibold text-ink-dark">
+                Admin to-dos and reporting
+              </p>
+              <p class="mt-2 text-ink-light text-sm">
+                Things that need fixing (like missing bank details) and trends
+                for admins.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Prototyping with AI -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div
+          class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+        >
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              How I worked
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              Prototypes people could actually use
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              Instead of static screens, I built clickable prototypes with AI.
+              Reviewers could switch between five people and roles, different
+              company setups and tricky states, and try the real flow before any
+              engineering time was spent.
+            </p>
+            <p class="mt-4 text-lg text-ink">
+              I then built the first release's changes with AI-assisted coding,
+              backed by 174 automated tests and handoff notes covering the
+              risks, data changes and how to test.
+            </p>
+          </div>
+          <ul class="grid grid-cols-2 gap-3 text-sm">
+            <li class="rounded-2xl bg-cloud p-5">
+              <p class="font-heading text-3xl text-ink-dark">5</p>
+              <p class="mt-1 text-ink">people and roles to switch between</p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-5">
+              <p class="font-heading text-3xl text-ink-dark">3</p>
+              <p class="mt-1 text-ink">screen sizes: desktop, laptop, phone</p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-5">
+              <p class="font-heading text-3xl text-ink-dark">28</p>
+              <p class="mt-1 text-ink">
+                settings for company setups and states like new joiners, loading
+                and errors
+              </p>
+            </li>
+            <li class="rounded-2xl bg-brand text-white p-5">
+              <p class="font-heading text-3xl">174</p>
+              <p class="mt-1 text-white/80">automated tests passing</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Learnings -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What I learned
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>
+                Ratings alone looked good. Real tasks exposed the payroll gaps
+                that ratings missed.
+              </li>
+              <li>
+                Not every request should be built. Some were kept as they are on
+                purpose, with the reason written down.
+              </li>
+              <li>
+                Clickable prototypes made reviews faster, because people reacted
+                to a real flow instead of imagining one.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What's next
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>
+                Release V1, then re-run the same tasks to measure the change.
+              </li>
+              <li>
+                Test with phone-only users and real attendance data, which
+                neither round covered.
+              </li>
+              <li>Move the payslip higher up the page for everyone.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 pb-16">
+        <a
+          href="/works/redesignpayroll.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              Making payroll clearer, one step at a time
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </section>
+    </main>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
+  </body>
+</html>

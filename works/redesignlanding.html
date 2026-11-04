@@ -1,259 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Works</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Alata&display=swap"
-      rel="stylesheet"
-    />
+    <!-- @include head.html -->
+    <title>Redesigning the Kakitangan.com Website – Jeffery Tan</title>
   </head>
   <body class="min-h-screen flex flex-col">
-    <div
-      id="nav-wrapper"
-      class="w-full flex fixed z-50 bg-white shadow-md opacity-100 transition-all duration-500 ease-in-out items-center"
-    >
-      <a href="/">
-        <img
-          src="/src/img/jeff-logo.svg"
-          alt="Jeff Logo"
-          class="w-16 h-auto pl-4"
-      /></a>
-      <button
-        id="burger"
-        class="p-4 ml-auto z-50 focus:outline-none group opacity-100 transition-opacity duration-300 flex flex-col"
-      >
-        <div
-          class="line1 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-        ></div>
-        <div
-          class="line2 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-        ></div>
-        <div
-          class="line3 w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
-        ></div>
-      </button>
-    </div>
-    <nav
-      id="mobile-nav"
-      class="fixed inset-0 bg-black bg-opacity-90 hidden flex flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300"
-    >
-      <a href="/" class="opacity-0 transition-all duration-500">Home</a>
-      <a href="#projects" class="opacity-0 transition-all duration-500"
-        >View My Works</a
-      >
-      <a href="/contact" class="opacity-0 transition-all duration-500"
-        >Contact Me</a
-      >
-      <a
-        href="https://www.notion.so/Jeffery-Tan-23b961c512fe80978ad6ea17c8b404fa?source=copy_link"
-        target="_blank"
-        class="opacity-0 transition-all duration-500"
-        >CV
-      </a>
-    </nav>
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
 
-    <main>
-      <div class="mt-10">
-        <div class="text-white bg-brand overflow-hidden whitespace-nowrap mb-8">
-          <div class="inline-block animate-scroll-right">
-            <span class="mr-10 font-bold text-[100px]"
-              >Redesign Kakitangan.com Landing Page</span
-            >
-            <span class="mr-10 font-bold text-[100px]"
-              >Redesign Kakitangan.com Landing Page</span
-            >
-          </div>
-        </div>
-        <div
-          id="compareContainer"
-          class="relative w-full max-w-[900px] h-[64vw] max-h-[600px] mx-auto overflow-hidden select-none"
-        >
-          <!-- Old image with AFTER label (base layer) -->
-          <div class="absolute inset-0">
-            <img
-              src="/src/img/new-website.png"
-              alt="Old"
-              class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            />
-            <div
-              class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
-            >
-              <span class="bg-black/60 text-white text-lg px-3 py-1 rounded"
-                >After</span
-              >
-            </div>
-          </div>
-
-          <!-- New image mask with BEFORE label (clipped layer) -->
-          <div
-            id="newImageWrapper"
-            class="absolute inset-0 overflow-hidden"
-            style="width: 50%"
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
           >
-            <img
-              src="/src/img/old-website.png"
-              alt="New"
-              class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-            />
-            <div
-              class="absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none"
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
             >
-              <span class="bg-black/60 text-white text-lg px-3 py-1 rounded"
-                >Before</span
-              >
-            </div>
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-success"
+                aria-hidden="true"
+              ></span>
+              Shipped · 2022
+            </span>
           </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            Redesigning the Kakitangan.com website
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            The old website didn't explain why a business should choose
+            Kakitangan.com. As designer and PM, I worked on its redesign around
+            one question every SME owner asks, "what's in it for me?", with
+            clearer messaging, trust signals and a page for every product.
+          </p>
 
-          <!-- Divider line -->
-          <div
-            id="sliderLine"
-            class="absolute top-0 bottom-0 w-0.5 bg-white"
-            style="left: 50%"
-          ></div>
-
-          <!-- Handle -->
-          <div
-            id="sliderHandle"
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-white border-2 border-brand shadow cursor-pointer touch-none"
-          ></div>
-        </div>
-      </div>
-      <div class="lg:m-8 lg:p-8 p-4">
-        <div class="lg:flex text-brand mt-4">
-          <h1 class="text-ink-light min-w-[400px]">(The Problem)</h1>
-          <div class="lg:flex flex-col">
-            <div class="flex flex-col items-start w-full pb-24 font-semibold">
-              <p>
-                Kakitangan’s previous website did not effectively communicate
-                the brand identity or the full value of its services. The
-                information was scattered and lacked clarity on why businesses
-                should choose Kakitangan. Essential elements such as customer
-                success stories, feature explanations, and clear onboarding
-                flows were missing, which made it difficult for potential users
-                to understand the benefits.
-              </p>
-              
-              <p class="mt-4">
-                As result, the website struggled to build trust and engagement,
-                leading to lower conversion and retention rates. The challenge
-                was to redesign the website into a platform that clearly
-                explained the product, reflected the brand’s credibility, and
-                provided a smooth, intuitive experience for businesses exploring
-                Kakitangan.
-              </p>
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">UI/UX Designer + PM</dd>
             </div>
-            <div class="sm:flex justify-start gap-4 w-full">
-              <div class="border-t-2 min-w-[400px] pt-8 mb-8">
-                <h2>Client</h2>
-                <p class="font-bold text-brand">Kakitangan.com</p>
+            <div>
+              <dt class="text-sm text-ink-light">Year</dt>
+              <dd class="font-semibold text-ink-dark">2022</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Partner</dt>
+              <dd class="font-semibold text-ink-dark">Walk Production</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Live site</dt>
+              <dd>
                 <a
-                  href="https://www.Kakitangan.com"
+                  href="https://www.kakitangan.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="underline text-brand-dark"
+                  class="font-semibold text-brand underline"
+                  >kakitangan.com ↗</a
                 >
-                  Visit Site
-                </a>
-              </div>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
 
-              <div class="border-t-2 min-w-[240px] pt-8">
-                <h2>Services</h2>
-                <p class="font-bold text-brand">Uiux Design | PM</p>
-              </div>
-              <div class="border-t-2 min-w-[240px] pt-8">
-                <h2>Year</h2>
-                <p class="font-bold text-brand">2022</p>
-              </div>
+      <!-- Before / after -->
+      <section id="before-after" hidden class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            Before and after
+          </h2>
+          <p class="mt-2 text-ink">
+            Drag the handle to compare the old homepage with the redesign.
+          </p>
+
+          <div
+            data-compare
+            class="relative mt-6 aspect-[3/2] overflow-hidden rounded-2xl shadow-xl bg-cloud-light select-none touch-pan-y cursor-ew-resize"
+          >
+            <img
+              src="/src/img/new-website.png"
+              alt="After: the redesigned homepage, with a clear promise, two calls to action, three trust points and a row of products"
+              draggable="false"
+              width="1200"
+              height="800"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div
+              data-compare-before
+              class="absolute inset-0"
+              style="clip-path: inset(0 50% 0 0)"
+            >
+              <img
+                data-before-img
+                src="/src/img/old-website.png"
+                alt="Before: the old homepage, with a stock photo and a general message"
+                draggable="false"
+                width="1200"
+                height="800"
+                class="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+
+            <span
+              class="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >Before</span
+            >
+            <span
+              class="absolute right-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >After</span
+            >
+            <div
+              data-compare-line
+              class="absolute inset-y-0 left-1/2 w-0.5 -ml-px bg-white shadow pointer-events-none"
+            ></div>
+            <div
+              data-compare-handle
+              role="slider"
+              tabindex="0"
+              aria-label="Compare the old and new homepage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-valuetext="Half before, half after"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-ink-dark touch-none focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true">⇆</span>
             </div>
           </div>
-        </div>
 
-        <div class="shadow-xl lg:p-8 m-4">
-          <div class="lg:grid grid-cols-4 gap-8">
-            <img
-              src="/src/img/epayroll.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            />
-            <img
-              src="/src/img/eleave.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            />
-            <img
-              src="/src/img/eclaim.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            />
-            <img
-              src="/src/img/eattendance.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            />
-          </div>
-          <div class="lg:grid grid-cols-2 gap-8 lg:m-8">
-            <img
-              src="/src/img/ktcareer.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            /><img
-              src="/src/img/ktpricing.png"
-              alt="epayroll"
-              class="w-full h-full object-cover"
-            />
+          <div
+            class="mt-4 mx-auto w-fit flex gap-1 rounded-full bg-cloud-light p-1 text-sm"
+          >
+            <button
+              type="button"
+              data-compare-to="100"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Before
+            </button>
+            <button
+              type="button"
+              data-compare-to="50"
+              aria-pressed="true"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Compare
+            </button>
+            <button
+              type="button"
+              data-compare-to="0"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              After
+            </button>
           </div>
         </div>
-        <div class="lg:flex text-brand mt-16">
-          <h1 class="text-ink-light min-w-[400px]">(Details)</h1>
-            <div class="flex flex-col items-start w-full pb-8 font-semibold">
+      </section>
+
+      <!-- Problem + goals -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              The problem
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              A website that didn't build trust
+            </h2>
+            <div class="mt-4 flex flex-col gap-4 text-lg text-ink">
               <p>
-                We partnered with Walk Production to redesign Kakitangan’s
-                landing page with a focus on clarity, trust, and conversion.
-                Through research into SME needs and competitor positioning, we
-                refined the messaging to highlight Kakitangan’s unique selling
-                points.
+                The old website didn't communicate the brand or the full value
+                of the product. Information was scattered, and it never made
+                clear why a business should choose Kakitangan.com.
               </p>
-              
-              <p class="mt-4">The redesign emphasizes:</p>
-              <ul class="list-disc list-inside space-y-2 mt-4">
-                <li>Clear USP & CTAs to drive signups and demos</li>
-                <li>
-                  Mobile-friendly, responsive design for SME owners on-the-go
-                </li>
-                <li>
-                  Trust signals (testimonials, partners, compliance) to build
-                  credibility
-                </li>
-                <li>Optimized SEO & performance for stronger visibility</li>
-              </ul>
-         
-              <p class="mt-4">
-                The result: a modern, conversion-driven landing page that
-                strengthens Kakitangan’s brand presence and business growth.
+              <p>
+                Customer success stories, feature explanations and a clear way
+                to get started were missing. Visitors struggled to see the
+                benefits, which hurt sign-ups and trust.
               </p>
             </div>
           </div>
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              The approach
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              Clarity, trust and conversion
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              Together with Walk Production, we researched what SME owners need
+              and how competitors position themselves, then rewrote the
+              messaging around Kakitangan.com's strengths. The redesign focused
+              on four things:
+            </p>
+            <ul class="mt-6 grid grid-cols-2 gap-3">
+              <li class="rounded-2xl bg-cloud p-4">
+                <p class="font-semibold text-ink-dark">Clear message</p>
+                <p class="mt-1 text-sm text-ink">
+                  One promise and obvious calls to action for sign-ups and
+                  demos.
+                </p>
+              </li>
+              <li class="rounded-2xl bg-cloud p-4">
+                <p class="font-semibold text-ink-dark">Trust signals</p>
+                <p class="mt-1 text-sm text-ink">
+                  Testimonials, partners and compliance, up front.
+                </p>
+              </li>
+              <li class="rounded-2xl bg-cloud p-4">
+                <p class="font-semibold text-ink-dark">Mobile-friendly</p>
+                <p class="mt-1 text-sm text-ink">
+                  For business owners checking on the go.
+                </p>
+              </li>
+              <li class="rounded-2xl bg-brand text-white p-4">
+                <p class="font-semibold">Found and fast</p>
+                <p class="mt-1 text-sm text-white/80">
+                  Better SEO and faster pages for stronger visibility.
+                </p>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div class="flex justify-center mt-8 mb-8">
-          <iframe
-            src="https://embed.figma.com/design/PbSRLatN1BVWJgCkD4WjrR/Redesign-Kakitangan.com-Landing-Page?node-id=0-1&embed-host=share"
-            width="800"
-            height="600"
-            allowfullscreen
-            style="border: 1px solid #ccc"
-          ></iframe>
+      </section>
+
+      <!-- What changed -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Design decisions
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            What changed
+          </h2>
+          <ol class="mt-8 grid sm:grid-cols-2 gap-4">
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="text-sm text-ink-light">01 · Hero</p>
+              <p class="mt-2 font-semibold text-ink-dark">
+                A promise instead of a stock photo
+              </p>
+              <p class="mt-2 text-ink">
+                "Manage your people, all in one place" over a stock photo became
+                a clear promise, two calls to action (Try for free, Get a
+                quotation) and three reasons to trust it: secure and compliant,
+                fully automated, and on-call support.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="text-sm text-ink-light">02 · Navigation</p>
+              <p class="mt-2 font-semibold text-ink-dark">
+                Simpler menu, pricing up front
+              </p>
+              <p class="mt-2 text-ink">
+                Seven mixed links became four clear groups: Solutions, Pricing,
+                Resources and Company, with one "Request demo" button. Pricing
+                now sits in the main menu.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="text-sm text-ink-light">03 · Products</p>
+              <p class="mt-2 font-semibold text-ink-dark">
+                Every product at a glance
+              </p>
+              <p class="mt-2 text-ink">
+                A single row shows every product, each with its own colour, so
+                visitors can jump to what they came for: Payroll, Leave, Claims,
+                Attendance and more.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="text-sm text-ink-light">04 · Product pages</p>
+              <p class="mt-2 font-semibold text-ink-dark">
+                One template for every product
+              </p>
+              <p class="mt-2 text-ink">
+                Each product page follows the same pattern: a plain-language
+                promise, the same two calls to action, then the main benefits.
+                Easy to scan, and easy for the team to add new products.
+              </p>
+            </li>
+          </ol>
         </div>
-      </div>
+      </section>
+
+      <!-- Gallery -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            More pages
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Product, pricing and careers pages
+          </h2>
+          <div class="mt-6 overflow-x-auto">
+            <div
+              class="flex gap-1 w-fit rounded-full bg-cloud-light p-1 text-sm whitespace-nowrap"
+              role="tablist"
+              aria-label="Website pages"
+            >
+              <button
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="page-payroll"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Payroll
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="page-leave"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Leave
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="page-claim"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Claims
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="page-attendance"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Attendance
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="page-pricing"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Pricing
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="page-careers"
+                data-tab
+                class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+              >
+                Careers
+              </button>
+            </div>
+          </div>
+          <div class="mt-4 rounded-3xl bg-cloud-light p-3 sm:p-8">
+            <img
+              id="page-payroll"
+              role="tabpanel"
+              src="/src/img/epayroll.png"
+              alt="E Payroll product page: Effortless payroll for everyone"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="page-leave"
+              role="tabpanel"
+              hidden
+              src="/src/img/eleave.png"
+              alt="E Leave product page"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="page-claim"
+              role="tabpanel"
+              hidden
+              src="/src/img/eclaim.png"
+              alt="E Claim product page"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="page-attendance"
+              role="tabpanel"
+              hidden
+              src="/src/img/eattendance.png"
+              alt="E Attendance product page"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="page-pricing"
+              role="tabpanel"
+              hidden
+              src="/src/img/ktpricing.png"
+              alt="Pricing page"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="page-careers"
+              role="tabpanel"
+              hidden
+              src="/src/img/ktcareer.png"
+              alt="Careers page"
+              width="1200"
+              height="800"
+              loading="lazy"
+              class="w-full rounded-xl shadow-xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Figma file (loads only when asked, it's heavy) -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+          >
+            <div>
+              <p
+                class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+              >
+                Design file
+              </p>
+              <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+                Explore the full design in Figma
+              </h2>
+            </div>
+            <a
+              href="https://www.figma.com/design/PbSRLatN1BVWJgCkD4WjrR/Redesign-Kakitangan.com-Landing-Page?node-id=0-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-brand underline text-sm"
+              >Open in Figma ↗</a
+            >
+          </div>
+          <div
+            data-embed
+            data-src="https://embed.figma.com/design/PbSRLatN1BVWJgCkD4WjrR/Redesign-Kakitangan.com-Landing-Page?node-id=0-1&embed-host=share"
+            data-title="Figma file: Redesign Kakitangan.com Landing Page"
+            class="mt-6 aspect-[4/3] sm:aspect-[16/10] rounded-2xl border border-gray-300 bg-cloud-light flex items-center justify-center overflow-hidden"
+          >
+            <button type="button" class="btn">Load the Figma file</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Result -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div
+          class="max-w-6xl mx-auto rounded-3xl bg-white shadow-sm p-8 sm:p-12 grid md:grid-cols-[auto_1fr] gap-6 items-center"
+        >
+          <p class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            The result
+          </p>
+          <p class="text-lg text-ink">
+            A modern website that explains the product in plain language, earns
+            trust early, and gives every visitor a clear next step to sign up or
+            book a demo.
+          </p>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 pb-16">
+        <a
+          href="/works/redesignuserprofile.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              Everything about an employee, on one page
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </section>
     </main>
-    <footer class="bg-black py-2 text-center text-sm text-gray-500">
-      <p>&copy; <span id="year"></span> Jeffery Tan</p>
-    </footer>
-    <script type="module" src="../src/js/main.js"></script>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
   </body>
 </html>

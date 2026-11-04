@@ -1,64 +1,1033 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Works</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Alata&display=swap"
-      rel="stylesheet"
-    />
+    <!-- @include head.html -->
+    <title>Redesigning the Employee Profile – Jeffery Tan</title>
   </head>
   <body class="min-h-screen flex flex-col">
-    <main id="myworks">
-      <div
-        id="nav-wrapper"
-        class="w-full flex fixed z-50 bg-white shadow-md opacity-100 transition-all duration-500 ease-in-out items-center"
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
+          >
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-success"
+                aria-hidden="true"
+              ></span>
+              Built · 2023
+            </span>
+          </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            Everything about an employee, on one page
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            HR admins open an employee's profile many times a day. In the old
+            page, related information sat in different places: employment
+            history on its own page, next of kin under General, every leave type
+            listed separately. The redesign brings it together into one profile
+            with clear sections.
+          </p>
+
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">UI/UX Designer</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Year</dt>
+              <dd class="font-semibold text-ink-dark">2023</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Users</dt>
+              <dd class="font-semibold text-ink-dark">
+                HR admins, managers, employees
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Tools</dt>
+              <dd class="font-semibold text-ink-dark">Figma</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Interactive recreation -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex flex-col lg:flex-row lg:items-end justify-between gap-4"
+          >
+            <div>
+              <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+                Try the design
+              </h2>
+              <p class="mt-1 text-ink">
+                Click the tabs, copy the email, open the activity log, and
+                switch views to see what changes.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm">
+              <fieldset>
+                <legend class="text-ink-light mb-1">
+                  Viewer can see payroll
+                </legend>
+                <div class="flex gap-1 rounded-full bg-cloud-light p-1 w-fit">
+                  <button
+                    type="button"
+                    data-view="payroll"
+                    data-value="yes"
+                    aria-pressed="true"
+                    class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+                  >
+                    Yes
+                  </button>
+                  <button
+                    type="button"
+                    data-view="payroll"
+                    data-value="no"
+                    aria-pressed="false"
+                    class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+                  >
+                    No
+                  </button>
+                </div>
+              </fieldset>
+              <fieldset>
+                <legend class="text-ink-light mb-1">Employee's account</legend>
+                <div class="flex gap-1 rounded-full bg-cloud-light p-1 w-fit">
+                  <button
+                    type="button"
+                    data-view="account"
+                    data-value="active"
+                    aria-pressed="true"
+                    class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+                  >
+                    Activated
+                  </button>
+                  <button
+                    type="button"
+                    data-view="account"
+                    data-value="invited"
+                    aria-pressed="false"
+                    class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+                  >
+                    Not activated
+                  </button>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <!-- The profile -->
+          <div
+            id="profile-demo"
+            data-payroll="yes"
+            data-account="active"
+            class="mt-6 rounded-3xl bg-cloud-light p-3 sm:p-6"
+          >
+            <div
+              class="rounded-2xl bg-[#f6f8fa] border border-gray-200 overflow-hidden shadow-xl"
+            >
+              <!-- Fake product bar -->
+              <div
+                class="flex items-center justify-between bg-white border-b border-gray-200 px-4 py-3"
+              >
+                <p class="text-sm">
+                  <span class="text-ink-light">Manage team ›</span>
+                  <span class="font-semibold text-ink-dark">Nurul Aisyah</span>
+                </p>
+                <span class="text-xs text-ink-light">Sample data</span>
+              </div>
+
+              <div class="grid md:grid-cols-[260px_1fr] gap-4 p-3 sm:p-4">
+                <!-- Side card -->
+                <aside
+                  class="flex flex-col gap-3 md:sticky md:top-28 self-start"
+                >
+                  <div class="rounded-xl bg-white border border-gray-200 p-4">
+                    <div
+                      class="w-16 h-16 rounded-full bg-[#e3f5f8] text-[#0b7d91] font-bold text-xl flex items-center justify-center"
+                      aria-hidden="true"
+                    >
+                      NA
+                    </div>
+                    <p class="mt-3 font-semibold text-ink-dark">
+                      Nurul Aisyah binti Rahman
+                    </p>
+                    <p class="text-sm text-ink">Senior Accountant</p>
+                    <p class="text-sm text-ink">Kuala Lumpur</p>
+                    <span
+                      data-show-account="active"
+                      class="mt-2 inline-block rounded-full bg-[#e7f5ea] text-[#048724] text-xs font-medium px-2 py-0.5"
+                      >Activated</span
+                    >
+                    <span
+                      data-show-account="invited"
+                      hidden
+                      class="mt-2 inline-block rounded-full bg-[#fdf0e1] text-[#b36200] text-xs font-medium px-2 py-0.5"
+                      >Invite sent, not activated</span
+                    >
+                    <p class="mt-2 text-sm text-ink">
+                      Employee for 4 years 1 month
+                    </p>
+
+                    <ul
+                      class="mt-3 border-y border-gray-200 py-3 flex flex-col gap-2 text-sm"
+                    >
+                      <li class="flex items-center justify-between gap-2">
+                        <a
+                          href="mailto:aisyah@example.com"
+                          class="text-[#0b7d91] underline truncate"
+                          >aisyah@example.com</a
+                        >
+                        <button
+                          type="button"
+                          data-copy="aisyah@example.com"
+                          class="shrink-0 rounded-md px-2 py-1 text-xs text-ink hover:bg-cloud-light"
+                        >
+                          <span data-label>Copy</span>
+                        </button>
+                      </li>
+                      <li class="flex items-center justify-between gap-2">
+                        <a
+                          href="tel:+60123456789"
+                          class="text-[#0b7d91] underline"
+                          >012-345 6789</a
+                        >
+                        <button
+                          type="button"
+                          data-copy="012-345 6789"
+                          class="shrink-0 rounded-md px-2 py-1 text-xs text-ink hover:bg-cloud-light"
+                        >
+                          <span data-label>Copy</span>
+                        </button>
+                      </li>
+                    </ul>
+
+                    <div class="relative mt-3">
+                      <button
+                        type="button"
+                        id="actions-button"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        aria-controls="actions-menu"
+                        class="w-full rounded-lg bg-[#0b7d91] text-white text-sm font-medium px-3 py-2 flex items-center justify-between"
+                      >
+                        Actions <span aria-hidden="true">▾</span>
+                      </button>
+                      <ul
+                        id="actions-menu"
+                        hidden
+                        class="absolute z-10 mt-1 w-full rounded-lg bg-white border border-gray-200 shadow-lg py-1 text-sm"
+                      >
+                        <li data-show-account="invited" hidden>
+                          <button
+                            type="button"
+                            data-action="Invite email sent again."
+                            class="w-full text-left px-3 py-2 hover:bg-cloud-light"
+                          >
+                            Resend invite email
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            type="button"
+                            data-action="Opens the termination form."
+                            class="w-full text-left px-3 py-2 hover:bg-cloud-light"
+                          >
+                            Terminate employee
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                    <p
+                      id="action-status"
+                      role="status"
+                      class="mt-2 text-xs text-ink"
+                    ></p>
+
+                    <dl class="mt-3 text-sm flex flex-col gap-2">
+                      <div>
+                        <dt
+                          class="text-xs uppercase tracking-wide text-ink-light"
+                        >
+                          Department
+                        </dt>
+                        <dd class="text-ink-dark">Finance</dd>
+                      </div>
+                      <div>
+                        <dt
+                          class="text-xs uppercase tracking-wide text-ink-light"
+                        >
+                          Reporting to
+                        </dt>
+                        <dd class="text-ink-dark">Lim Wei Jie</dd>
+                      </div>
+                    </dl>
+                  </div>
+
+                  <div
+                    class="rounded-xl bg-white border border-gray-200 p-3 flex items-center justify-between"
+                  >
+                    <p class="font-semibold text-sm text-ink-dark">
+                      Activity log
+                    </p>
+                    <button
+                      type="button"
+                      data-open="dialog-log"
+                      class="rounded-md border border-[#0b7d91] text-[#0b7d91] text-sm px-3 py-1"
+                    >
+                      View
+                    </button>
+                  </div>
+                  <div
+                    class="rounded-xl bg-white border border-gray-200 p-3 flex items-center justify-between"
+                  >
+                    <p class="font-semibold text-sm text-ink-dark">Notes</p>
+                    <button
+                      type="button"
+                      data-open="dialog-notes"
+                      class="rounded-md border border-[#0b7d91] text-[#0b7d91] text-sm px-3 py-1"
+                    >
+                      View
+                    </button>
+                  </div>
+                </aside>
+
+                <!-- Tabs + content -->
+                <div class="min-w-0">
+                  <div
+                    class="rounded-xl bg-white border border-gray-200 overflow-x-auto"
+                  >
+                    <div
+                      role="tablist"
+                      aria-label="Profile sections"
+                      class="flex whitespace-nowrap text-sm"
+                    >
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="true"
+                        aria-controls="p-general"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        General
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="false"
+                        aria-controls="p-employment"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Employment
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        data-needs-payroll
+                        aria-selected="false"
+                        aria-controls="p-compensation"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Compensation
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="false"
+                        aria-controls="p-leaves"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Leaves
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="false"
+                        aria-controls="p-family"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Family
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="false"
+                        aria-controls="p-documents"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Documents
+                      </button>
+                      <button
+                        type="button"
+                        role="tab"
+                        data-tab
+                        aria-selected="false"
+                        aria-controls="p-offday"
+                        class="px-4 py-3 border-b-2 border-transparent text-ink aria-selected:border-[#0b7d91] aria-selected:text-[#0b7d91] aria-selected:font-semibold"
+                      >
+                        Off days
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- General -->
+                  <div
+                    id="p-general"
+                    role="tabpanel"
+                    class="mt-3 flex flex-col gap-3"
+                  >
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-ink-dark">
+                          Personal info
+                        </h3>
+                        <button
+                          type="button"
+                          data-open="dialog-edit"
+                          class="rounded-md border border-[#0b7d91] text-[#0b7d91] text-sm px-3 py-1"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <dl
+                        class="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"
+                      >
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Official full name
+                          </dt>
+                          <dd class="text-ink-dark">
+                            Nurul Aisyah binti Rahman
+                          </dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Preferred name
+                          </dt>
+                          <dd class="text-ink-dark">Aisyah</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">Gender</dt>
+                          <dd class="text-ink-dark">Female</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Date of birth
+                          </dt>
+                          <dd class="text-ink-dark">4 Aug 1990</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Nationality
+                          </dt>
+                          <dd class="text-ink-dark">Malaysian</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Marital status
+                          </dt>
+                          <dd class="text-ink-dark">Married</dd>
+                        </div>
+                      </dl>
+                    </div>
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-ink-dark">Address</h3>
+                        <button
+                          type="button"
+                          data-open="dialog-edit"
+                          class="rounded-md border border-[#0b7d91] text-[#0b7d91] text-sm px-3 py-1"
+                        >
+                          Edit
+                        </button>
+                      </div>
+                      <dl
+                        class="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"
+                      >
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Street address
+                          </dt>
+                          <dd class="text-ink-dark">12 Jalan Contoh 3</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">City</dt>
+                          <dd class="text-ink-dark">Petaling Jaya</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">State</dt>
+                          <dd class="text-ink-dark">Selangor</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">Postcode</dt>
+                          <dd class="text-ink-dark">46000</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  <!-- Employment -->
+                  <div
+                    id="p-employment"
+                    role="tabpanel"
+                    hidden
+                    class="mt-3 flex flex-col gap-3"
+                  >
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">Employment</h3>
+                      <dl
+                        class="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"
+                      >
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Job title
+                          </dt>
+                          <dd class="text-ink-dark">Senior Accountant</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Employment type
+                          </dt>
+                          <dd class="text-ink-dark">Permanent</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Date joined
+                          </dt>
+                          <dd class="text-ink-dark">3 Oct 2022</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">Branch</dt>
+                          <dd class="text-ink-dark">Kuala Lumpur</dd>
+                        </div>
+                      </dl>
+                    </div>
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">
+                        Employment history
+                      </h3>
+                      <p class="text-xs text-ink-light">
+                        Used to be a separate page, now part of Employment.
+                      </p>
+                      <ol
+                        class="mt-3 flex flex-col gap-3 text-sm border-l-2 border-gray-200 pl-4"
+                      >
+                        <li>
+                          <p class="text-ink-light">1 Jan 2025</p>
+                          <p class="text-ink-dark">
+                            Promoted to Senior Accountant
+                          </p>
+                        </li>
+                        <li>
+                          <p class="text-ink-light">3 Oct 2022</p>
+                          <p class="text-ink-dark">
+                            Joined as Accountant, Finance
+                          </p>
+                        </li>
+                      </ol>
+                    </div>
+                  </div>
+
+                  <!-- Compensation -->
+                  <div id="p-compensation" role="tabpanel" hidden class="mt-3">
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">Compensation</h3>
+                      <dl
+                        class="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"
+                      >
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Basic salary
+                          </dt>
+                          <dd class="text-ink-dark tabular-nums">
+                            RM 6,500.00
+                          </dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Salary type
+                          </dt>
+                          <dd class="text-ink-dark">Monthly</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Payment method
+                          </dt>
+                          <dd class="text-ink-dark">Bank transfer</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Bank account
+                          </dt>
+                          <dd class="text-ink-dark">•••• 1234</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </div>
+
+                  <!-- Leaves -->
+                  <div id="p-leaves" role="tabpanel" hidden class="mt-3">
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">
+                        Leave balances
+                      </h3>
+                      <p class="text-xs text-ink-light">
+                        Every leave type in one view, including a company's
+                        custom ones.
+                      </p>
+                      <ul
+                        class="mt-3 grid grid-cols-2 lg:grid-cols-3 gap-3 text-sm"
+                      >
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Annual</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">8</strong> / 14 days
+                          </p>
+                        </li>
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Medical</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">12</strong> / 14 days
+                          </p>
+                        </li>
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Hospitalisation</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">60</strong> / 60 days
+                          </p>
+                        </li>
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Replacement</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">1</strong> day
+                          </p>
+                        </li>
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Compassionate</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">3</strong> / 3 days
+                          </p>
+                        </li>
+                        <li class="rounded-lg bg-[#f6f8fa] p-3">
+                          <p class="text-ink-light">Study (custom)</p>
+                          <p class="text-ink-dark">
+                            <strong class="text-lg">5</strong> / 5 days
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Family -->
+                  <div
+                    id="p-family"
+                    role="tabpanel"
+                    hidden
+                    class="mt-3 flex flex-col gap-3"
+                  >
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">Next of kin</h3>
+                      <p class="text-xs text-ink-light">
+                        Moved here from General.
+                      </p>
+                      <dl
+                        class="mt-3 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm"
+                      >
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Full name
+                          </dt>
+                          <dd class="text-ink-dark">Ahmad Faiz bin Hassan</dd>
+                        </div>
+                        <div class="flex gap-3">
+                          <dt class="w-36 shrink-0 text-ink-light">
+                            Relationship
+                          </dt>
+                          <dd class="text-ink-dark">Spouse</dd>
+                        </div>
+                      </dl>
+                    </div>
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">Children</h3>
+                      <ul class="mt-3 flex flex-col gap-2 text-sm">
+                        <li class="flex justify-between">
+                          <span class="text-ink-dark">Hana</span
+                          ><span class="text-ink-light">Born 2019</span>
+                        </li>
+                        <li class="flex justify-between">
+                          <span class="text-ink-dark">Adam</span
+                          ><span class="text-ink-light">Born 2022</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Documents -->
+                  <div id="p-documents" role="tabpanel" hidden class="mt-3">
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <h3 class="font-semibold text-ink-dark">Documents</h3>
+                      <ul
+                        class="mt-3 flex flex-col divide-y divide-gray-200 text-sm"
+                      >
+                        <li class="flex justify-between gap-3 py-2">
+                          <span class="text-ink-dark">Offer letter.pdf</span
+                          ><span class="text-ink-light">3 Oct 2022</span>
+                        </li>
+                        <li class="flex justify-between gap-3 py-2">
+                          <span class="text-ink-dark">Promotion letter.pdf</span
+                          ><span class="text-ink-light">1 Jan 2025</span>
+                        </li>
+                        <li class="flex justify-between gap-3 py-2">
+                          <span class="text-ink-dark"
+                            >Professional certificate.pdf</span
+                          ><span class="text-ink-light">10 Oct 2022</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- Off days -->
+                  <div id="p-offday" role="tabpanel" hidden class="mt-3">
+                    <div
+                      class="rounded-xl bg-white border border-gray-200 p-4 sm:p-5"
+                    >
+                      <div class="flex items-center justify-between">
+                        <h3 class="font-semibold text-ink-dark">
+                          Off days · November
+                        </h3>
+                        <p class="flex gap-3 text-xs text-ink">
+                          <span class="flex items-center gap-1"
+                            ><span class="w-3 h-3 rounded bg-[#e3f5f8]"></span
+                            >Rest day</span
+                          >
+                          <span class="flex items-center gap-1"
+                            ><span class="w-3 h-3 rounded bg-[#fdf0e1]"></span
+                            >Off day</span
+                          >
+                        </p>
+                      </div>
+                      <p class="text-xs text-ink-light">
+                        A calendar instead of a long list.
+                      </p>
+                      <div
+                        id="offday-calendar"
+                        class="mt-3 grid grid-cols-7 gap-1 text-center text-xs"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 text-sm text-ink-light">
+            An interactive recreation of the V1 design with fictional data.
+            Buttons that would save or send only show what would happen.
+          </p>
+        </div>
+      </section>
+
+      <!-- Dialogs -->
+      <dialog
+        id="dialog-log"
+        class="rounded-2xl p-0 w-[min(92vw,480px)] backdrop:bg-black/40"
       >
-        <a href="/">
-          <img
-            src="/src/img/jeff-logo.svg"
-            alt="Jeff Logo"
-            class="w-16 h-auto pl-4"
-        /></a>
-        <button
-          id="burger"
-          class="p-4 ml-auto z-50 focus:outline-none group opacity-100 transition-opacity duration-300 flex flex-col"
-        >
-          <div
-            class="line1 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-          ></div>
-          <div
-            class="line2 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-          ></div>
-          <div
-            class="line3 w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
-          ></div>
-        </button>
-      </div>
-      <nav
-        id="mobile-nav"
-        class="fixed inset-0 bg-black bg-opacity-90 hidden flex flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300"
+        <div class="p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold text-ink-dark">Activity log</h3>
+            <button
+              type="button"
+              data-close
+              class="rounded-md px-2 py-1 text-ink hover:bg-cloud-light"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <p class="text-sm text-ink-light">
+            Every change made on this profile.
+          </p>
+          <ul class="mt-4 flex flex-col gap-3 text-sm">
+            <li class="rounded-lg bg-[#f6f8fa] p-3">
+              <p class="text-ink-dark">
+                <strong>Job title</strong> changed from Accountant to Senior
+                Accountant
+              </p>
+              <p class="text-ink-light">By Lim Wei Jie · 1 Jan 2025</p>
+            </li>
+            <li class="rounded-lg bg-[#f6f8fa] p-3">
+              <p class="text-ink-dark"><strong>Address</strong> updated</p>
+              <p class="text-ink-light">By Nurul Aisyah · 14 Jun 2024</p>
+            </li>
+            <li class="rounded-lg bg-[#f6f8fa] p-3">
+              <p class="text-ink-dark">
+                <strong>Marital status</strong> changed from Single to Married
+              </p>
+              <p class="text-ink-light">By HR · 2 Mar 2024</p>
+            </li>
+          </ul>
+        </div>
+      </dialog>
+
+      <dialog
+        id="dialog-notes"
+        class="rounded-2xl p-0 w-[min(92vw,480px)] backdrop:bg-black/40"
       >
-        <a href="/" class="opacity-0 transition-all duration-500">Home</a>
-        <a href="#projects" class="opacity-0 transition-all duration-500"
-          >View My Works</a
-        >
-        <a href="/contact" class="opacity-0 transition-all duration-500"
-          >Contact Me</a
-        >
+        <div class="p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold text-ink-dark">Notes</h3>
+            <button
+              type="button"
+              data-close
+              class="rounded-md px-2 py-1 text-ink hover:bg-cloud-light"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <form id="note-form" class="mt-3 flex flex-col gap-2">
+            <label for="note-text" class="text-sm text-ink">Add a note</label>
+            <textarea
+              id="note-text"
+              rows="2"
+              required
+              class="form-input mt-0"
+              placeholder="For example: prefers payslips by email"
+            ></textarea>
+            <button type="submit" class="btn text-sm">Add note</button>
+          </form>
+          <ul id="note-list" class="mt-4 flex flex-col gap-3 text-sm">
+            <li class="rounded-lg bg-[#f6f8fa] p-3">
+              <p class="text-ink-dark">
+                Completed probation review. Confirmed as permanent.
+              </p>
+              <p class="text-ink-light">Lim Wei Jie · 3 Jan 2023</p>
+            </li>
+          </ul>
+        </div>
+      </dialog>
+
+      <dialog
+        id="dialog-edit"
+        class="rounded-2xl p-0 w-[min(92vw,480px)] backdrop:bg-black/40"
+      >
+        <div class="p-5">
+          <div class="flex items-center justify-between">
+            <h3 class="font-semibold text-ink-dark">Edit</h3>
+            <button
+              type="button"
+              data-close
+              class="rounded-md px-2 py-1 text-ink hover:bg-cloud-light"
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+          <p class="mt-2 text-sm text-ink">
+            Each section has its own Edit button, which opens a pop-up with just
+            that section's fields. People update one thing without scrolling
+            through a long form.
+          </p>
+          <button type="button" data-close class="btn mt-4 text-sm">
+            Got it
+          </button>
+        </div>
+      </dialog>
+
+      <!-- What changed -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Design decisions
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            What changed, and why
+          </h2>
+          <ul class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">
+                The essentials stay in view
+              </p>
+              <p class="mt-2 text-sm text-ink">
+                Name, role, status, contact details and actions sit in a side
+                card that stays on screen whichever section you open.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">
+                Numbers people understand
+              </p>
+              <p class="mt-2 text-sm text-ink">
+                Length of service shows in years and months, not a count of
+                days.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">Contact in one click</p>
+              <p class="mt-2 text-sm text-ink">
+                Email and phone open the mail or phone app, and can be copied
+                straight to the clipboard.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">Related things together</p>
+              <p class="mt-2 text-sm text-ink">
+                Employment history joined Employment, next of kin joined Family,
+                and every leave type sits in one view.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">A calendar for off days</p>
+              <p class="mt-2 text-sm text-ink">
+                Off days switched from a long list to a calendar, so patterns
+                are easy to see.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">A history you can trust</p>
+              <p class="mt-2 text-sm text-ink">
+                The activity log shows what changed and who changed it. Notes
+                keep context about the person in one place.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Roles -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Permissions
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              One page, different views
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              The same profile looks different to HR, payroll, claims and
+              attendance admins, managers and employees. For example, an HR
+              admin without payroll access never sees the Compensation tab. Try
+              it with the "Viewer can see payroll" switch above.
+            </p>
+          </div>
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Account status
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              Actions that fit the situation
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              If an employee hasn't activated their account yet, the Actions
+              menu offers to resend the invite email, so HR doesn't have to go
+              looking for it elsewhere.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Handoff -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Working with engineering
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Designed for the details that break things
+          </h2>
+          <ul class="mt-8 grid sm:grid-cols-3 gap-4 text-ink">
+            <li class="rounded-2xl bg-cloud p-6">
+              Some companies have a lot of custom leave types, so the Leaves
+              view had to work with many, not just the usual few.
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              Every field kept its original input type (drop-down, date picker
+              or free text), so the redesign didn't break existing data.
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              The engineering team rebuilt the page section by section, with API
+              docs and tests for each one.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 py-16">
         <a
-          href="https://www.notion.so/Jeffery-Tan-23b961c512fe80978ad6ea17c8b404fa?source=copy_link"
-          target="_blank"
-          class="opacity-0 transition-all duration-500"
-          >CV
+          href="/works/redesigndashboard.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              Redesigning the home dashboard for employees, managers and HR
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
         </a>
-      </nav>
+      </section>
     </main>
-    <script type="module" src="../src/js/main.js"></script>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
+    <script type="module" src="/src/js/profile-demo.js"></script>
   </body>
 </html>

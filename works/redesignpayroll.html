@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- @include head.html -->
+    <title>Revamping Kakitangan.com Payroll – Jeffery Tan</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
+          >
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-warning"
+                aria-hidden="true"
+              ></span>
+              In progress · being built
+            </span>
+          </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            Making payroll clearer, one step at a time
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            Payroll is where a small mistake costs the most: wrong salaries,
+            late statutory payments, upset staff. I led the revamp of
+            Kakitangan.com's payroll, from research with the support team to a
+            new step-by-step flow, a spec for engineering, and a design system
+            applied to the rebuilt pages.
+          </p>
+
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">Product Designer + PM</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Timeline</dt>
+              <dd class="font-semibold text-ink-dark">2025 – 2026</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Users</dt>
+              <dd class="font-semibold text-ink-dark">
+                HR and payroll admins, employees
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Tools</dt>
+              <dd class="font-semibold text-ink-dark">
+                Figma, HTML prototypes, Claude Code
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Hero image with desktop / phone switch -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex gap-1 w-fit rounded-full bg-cloud-light p-1 text-sm"
+            role="tablist"
+            aria-label="Screen size"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="shot-desktop"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Desktop
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="shot-mobile"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Phone
+            </button>
+          </div>
+          <div class="mt-4 rounded-3xl bg-cloud-light p-3 sm:p-8">
+            <img
+              id="shot-desktop"
+              role="tabpanel"
+              src="/src/img/payroll/payroll-months.jpg"
+              alt="The revamped payroll page: payroll sections as tabs, a month-by-month list with status and grand totals, and a payroll to-do card"
+              width="2160"
+              height="1350"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="shot-mobile"
+              role="tabpanel"
+              hidden
+              src="/src/img/payroll/payroll-mobile.jpg"
+              alt="The revamped payroll page on a phone, with the payroll to-do card first"
+              width="375"
+              height="812"
+              class="w-full max-w-[320px] mx-auto rounded-[2rem] shadow-xl border-8 border-brand"
+            />
+          </div>
+          <p class="mt-3 text-sm text-ink-light">
+            Local build with sample data. Names, companies and amounts are
+            fictional.
+          </p>
+        </div>
+      </section>
+
+      <!-- Before / after (shown once the "before" screenshot loads) -->
+      <section id="before-after" hidden class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            Before and after
+          </h2>
+          <p class="mt-2 text-ink">
+            Drag the handle to compare the old payroll calculator with the new
+            employee pay screen.
+          </p>
+
+          <div
+            data-compare
+            class="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl shadow-xl bg-cloud-light select-none touch-pan-y cursor-ew-resize"
+          >
+            <img
+              src="/src/img/payroll/payroll-employee.jpg"
+              alt="After: one employee's pay in the revamped payroll"
+              draggable="false"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div
+              data-compare-before
+              class="absolute inset-0"
+              style="clip-path: inset(0 50% 0 0)"
+            >
+              <img
+                data-before-img
+                src="/src/img/payroll/payroll-before.jpg"
+                alt="Before: the old payroll calculator, with five crowded columns for one employee"
+                draggable="false"
+                class="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+
+            <span
+              class="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >Before</span
+            >
+            <span
+              class="absolute right-3 top-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >After</span
+            >
+            <div
+              data-compare-line
+              class="absolute inset-y-0 left-1/2 w-0.5 -ml-px bg-white shadow pointer-events-none"
+            ></div>
+            <div
+              data-compare-handle
+              role="slider"
+              tabindex="0"
+              aria-label="Compare the old and new payroll calculator"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-valuetext="Half before, half after"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-ink-dark touch-none focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true">⇆</span>
+            </div>
+          </div>
+
+          <div
+            class="mt-4 mx-auto w-fit flex gap-1 rounded-full bg-cloud-light p-1 text-sm"
+          >
+            <button
+              type="button"
+              data-compare-to="100"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Before
+            </button>
+            <button
+              type="button"
+              data-compare-to="50"
+              aria-pressed="true"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Compare
+            </button>
+            <button
+              type="button"
+              data-compare-to="0"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              After
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Goals -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-20">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            The goal
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Same payroll engine, much easier to use
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            The calculations already worked. The problem was everything around
+            them, so the revamp focused on three things.
+          </p>
+          <div class="mt-8 grid sm:grid-cols-3 gap-4">
+            <div class="rounded-2xl bg-cloud p-6">
+              <p class="font-heading text-3xl text-ink-dark">01</p>
+              <h3 class="mt-2 font-semibold text-ink-dark">Clarity</h3>
+              <p class="mt-1 text-ink">
+                Users can see what to do next at a glance.
+              </p>
+            </div>
+            <div class="rounded-2xl bg-cloud p-6">
+              <p class="font-heading text-3xl text-ink-dark">02</p>
+              <h3 class="mt-2 font-semibold text-ink-dark">A simpler flow</h3>
+              <p class="mt-1 text-ink">
+                Payroll runs as clear steps, not a maze of pages.
+              </p>
+            </div>
+            <div class="rounded-2xl bg-brand text-white p-6">
+              <p class="font-heading text-3xl">03</p>
+              <h3 class="mt-2 font-semibold">Less mental load</h3>
+              <p class="mt-1 text-white/80">
+                Fewer things on screen, and no silent surprises.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research -->
+      <section class="bg-white px-4 sm:px-8 pb-16 md:pb-24">
+        <div
+          class="max-w-6xl mx-auto grid md:grid-cols-[1fr_1.2fr] gap-10 md:gap-16"
+        >
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Research
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              Listening to the people who take the support calls
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              The support and customer success team hear every payroll problem
+              first. We ran two discovery sessions with them, compared what they
+              said with the list of high-priority tickets, and mapped every
+              payroll page into one sitemap.
+            </p>
+          </div>
+          <div>
+            <h3 class="font-semibold text-lg text-ink-dark">
+              What kept coming up
+            </h3>
+            <ul class="mt-4 flex flex-col gap-3">
+              <li class="rounded-xl bg-cloud p-4 text-ink">
+                Users didn't know
+                <strong class="text-ink-dark"
+                  >when or why to recalculate</strong
+                >
+                payroll.
+              </li>
+              <li class="rounded-xl bg-cloud p-4 text-ink">
+                Payroll's own menus were
+                <strong class="text-ink-dark">hidden inside the page</strong>,
+                so even support struggled to guide people to EA forms.
+              </li>
+              <li class="rounded-xl bg-cloud p-4 text-ink">
+                Unticking "Include in payroll"
+                <strong class="text-ink-dark">quietly changed a salary</strong>,
+                and users missed it.
+              </li>
+              <li class="rounded-xl bg-cloud p-4 text-ink">
+                Employer contributions
+                <strong class="text-ink-dark">couldn't be edited</strong>, and
+                long employee lists couldn't be filtered.
+              </li>
+              <li class="rounded-xl bg-cloud p-4 text-ink">
+                The text was <strong class="text-ink-dark">too small</strong>
+                to read comfortably, including for users with reading
+                difficulties.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Design decisions -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Design decisions
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            What changed
+          </h2>
+
+          <div class="mt-10 flex flex-col gap-16 md:gap-24">
+            <!-- 1 -->
+            <div class="grid lg:grid-cols-[1fr_1.4fr] gap-8 items-center">
+              <div>
+                <p class="text-sm text-ink-light">
+                  "I can't find the payroll menus"
+                </p>
+                <h3 class="mt-1 font-heading text-xl sm:text-2xl text-ink-dark">
+                  A clear step-by-step flow
+                </h3>
+                <p class="mt-3 text-ink">
+                  Payroll's sections are now tabs: Payroll, Yearly report,
+                  Contributions and Statutory forms. Each month runs the same
+                  way: adjust each person's pay, calculate and generate the
+                  report, then confirm. "View report" only appears once a month
+                  is complete.
+                </p>
+              </div>
+              <img
+                src="/src/img/payroll/payroll-calculator.jpg"
+                alt="The October payroll page: month and year pickers, a Calculate and generate report button, filters, and each employee's earnings, deductions, net salary and status"
+                width="2160"
+                height="1350"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl"
+              />
+            </div>
+
+            <!-- 2 -->
+            <div class="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <img
+                src="/src/img/payroll/payroll-report.jpg"
+                alt="The payroll report with a warning that 2 employees changed after the report was made, a Recalculate button, and a Needs recalculating tag on each affected person"
+                width="2160"
+                height="1215"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl lg:order-1 order-2"
+              />
+              <div class="lg:order-2 order-1">
+                <p class="text-sm text-ink-light">
+                  "Why do I need to recalculate?"
+                </p>
+                <h3 class="mt-1 font-heading text-xl sm:text-2xl text-ink-dark">
+                  The report tells you when it's out of date
+                </h3>
+                <p class="mt-3 text-ink">
+                  When leave is approved or a salary changes after the report
+                  was made, a banner explains what happened and offers one
+                  Recalculate button. Each affected person is tagged, so admins
+                  never confirm an old amount by mistake.
+                </p>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="grid lg:grid-cols-[1fr_1.4fr] gap-8 items-center">
+              <div>
+                <p class="text-sm text-ink-light">
+                  "Everything for one person is spread out"
+                </p>
+                <h3 class="mt-1 font-heading text-xl sm:text-2xl text-ink-dark">
+                  One place for each employee's pay
+                </h3>
+                <ul class="mt-3 flex flex-col gap-2 text-ink list-disc pl-5">
+                  <li>
+                    Earnings, deductions and contributions sit side by side.
+                  </li>
+                  <li>
+                    Employer contributions can be edited. Edited amounts are
+                    marked "Customised", with one click back to the calculated
+                    amount.
+                  </li>
+                  <li>
+                    Excluding someone from payroll keeps their salary as it is.
+                  </li>
+                </ul>
+              </div>
+              <img
+                src="/src/img/payroll/payroll-employee.jpg"
+                alt="One employee's pay: basic earnings, additional earnings and overtime on the left, deductions and employee contributions on the right"
+                width="2160"
+                height="1350"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl"
+              />
+            </div>
+          </div>
+
+          <!-- Smaller decisions -->
+          <ul class="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">Risky actions ask first</p>
+              <p class="mt-2 text-sm text-ink">
+                Confirming an amount shows the net pay and payment date.
+                Switching pay cycles warns before anything changes.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">
+                Easier to read, on any screen
+              </p>
+              <p class="mt-2 text-sm text-ink">
+                Larger text and accessible colours from the design system. Wide
+                tables stack into cards on phones.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-6">
+              <p class="font-semibold text-ink-dark">Find people fast</p>
+              <p class="mt-2 text-sm text-ink">
+                Filters by employee, department and status, for companies with
+                long staff lists.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Working with engineering -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Working with engineering
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Designing with the build in mind
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            Six months of engineering time meant the scope had to stay tight.
+            Before handoff I checked the code to see which changes were only
+            front-end work, and flagged everything that needed backend work.
+          </p>
+          <div class="mt-8 grid md:grid-cols-2 gap-4">
+            <div class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">
+                ✅ Already supported, mostly front-end work
+              </p>
+              <ul class="mt-3 flex flex-col gap-2 text-ink list-disc pl-5">
+                <li>Confirming and unconfirming amounts</li>
+                <li>Excluding employees and pay cycles</li>
+                <li>Reports, statutory forms and accounting exports</li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-cloud p-6">
+              <p class="font-semibold text-ink-dark">🛠️ Needs backend work</p>
+              <ul class="mt-3 flex flex-col gap-2 text-ink list-disc pl-5">
+                <li>Choosing single or multiple cycles per month</li>
+                <li>A payroll-level Completed / Pending status</li>
+                <li>
+                  Splitting large reports into pages, so they stop timing out
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="mt-4 rounded-2xl border border-gray-200 p-6">
+            <p class="font-semibold text-ink-dark">
+              Where the spec was silent, I made a call and flagged it
+            </p>
+            <ul class="mt-3 grid md:grid-cols-3 gap-4 text-sm text-ink">
+              <li>
+                Page actions moved to the header, because the chat bubble
+                covered the main button in a bottom bar.
+              </li>
+              <li>
+                Status labels say what to do: "Needs calculating" instead of
+                "Pending".
+              </li>
+              <li>
+                Completing payroll with unconfirmed amounts asks you to confirm
+                them first.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Learnings -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16">
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What I learned
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>
+                Support teams are the fastest research shortcut: they already
+                know where users get stuck.
+              </li>
+              <li>
+                In payroll, "no surprises" matters more than "fewer clicks".
+                Every silent change was a support ticket waiting to happen.
+              </li>
+              <li>
+                Checking feasibility before handoff kept a six-month build
+                focused, and made the backend work visible early.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+              What's next
+            </h2>
+            <ul class="mt-4 flex flex-col gap-3 text-ink list-disc pl-5">
+              <li>Finish the build and test it with real payroll admins.</li>
+              <li>
+                Later releases: payslip customisation and deductions with an end
+                date, both highly requested.
+              </li>
+              <li>Measure support tickets about payroll before and after.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 pb-16">
+        <a
+          href="/works/redesignleave.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              Leave that explains itself
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </section>
+    </main>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
+  </body>
+</html>

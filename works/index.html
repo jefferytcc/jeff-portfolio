@@ -1,65 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- @include head.html -->
     <title>Works</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Alata&display=swap"
-      rel="stylesheet"
-    />
   </head>
   <body class="min-h-screen flex flex-col">
-    <div
-      id="nav-wrapper"
-      class="w-full flex fixed z-50 bg-white shadow-md opacity-100 transition-all duration-500 ease-in-out items-center"
-    >
-      <a href="/">
-        <img
-          src="/src/img/jeff-logo.svg"
-          alt="Jeff Logo"
-          class="w-16 h-auto pl-4"
-      /></a>
-      <button
-        id="burger"
-        class="p-4 ml-auto z-50 focus:outline-none group opacity-100 transition-opacity duration-300 flex flex-col"
-      >
-        <div
-          class="line1 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-        ></div>
-        <div
-          class="line2 w-6 h-0.5 bg-black mb-1 transition-all duration-300 ease-in-out"
-        ></div>
-        <div
-          class="line3 w-6 h-0.5 bg-black transition-all duration-300 ease-in-out"
-        ></div>
-      </button>
-    </div>
-    <nav
-      id="mobile-nav"
-      class="fixed inset-0 bg-black bg-opacity-90 hidden flex flex-col justify-center items-center space-y-6 z-40 text-white text-2xl transition-opacity duration-300"
-    >
-      <a href="/" class="opacity-0 transition-all duration-500">Home</a>
-      <a href="#projects" class="opacity-0 transition-all duration-500"
-        >View My Works</a
-      >
-      <a href="/contact" class="opacity-0 transition-all duration-500"
-        >Contact Me</a
-      >
-      <a
-        href="https://www.notion.so/Jeffery-Tan-23b961c512fe80978ad6ea17c8b404fa?source=copy_link"
-        target="_blank"
-        class="opacity-0 transition-all duration-500"
-        >CV
-      </a>
-    </nav>
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
 
-    <main>
-      <div class="relative top-[46px]">
+    <main class="flex-1">
+      <div class="mt-[46px]">
         <section
           class="bg-brand w-full h-48 text-white flex flex-col justify-center items-center"
         >
@@ -69,41 +19,45 @@
           </div>
         </section>
         <section class="mt-8 p-8">
-          <div class="grid md:grid-cols-3 gap-6 items-center relative">
-            <div class="flex flex-col items-center justify-center gap-4">
-              <a href="/works/redesignuserprofile">
+          <div
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-start relative"
+          >
+            <!-- @include project-card-items.html -->
+
+            <a href="/works/redesignleave.html" class="project-card group">
+              <div
+                class="project-card-img relative aspect-[938/470] overflow-hidden bg-[#dfe6ec] group-hover:scale-105 group-hover:shadow-sm"
+              >
                 <img
-                  src="/src/img/rd-profile.png"
-                  class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
-                  alt="DTC logo"
+                  src="/src/img/leave/leave-calendar.jpg"
+                  alt="Kakitangan.com leave revamp"
+                  class="absolute left-[14%] top-[16%] w-[92%] rounded-lg shadow-2xl -rotate-[8deg] origin-top-left"
                 />
-              </a>
+                <span class="coming-soon-badge">New</span>
+              </div>
+              <p class="text-ink-light">Redesign Leave</p>
+            </a>
+
+            <a
+              href="/works/redesignuserprofile.html"
+              class="project-card group"
+            >
+              <div
+                class="project-card-img relative aspect-[938/470] overflow-hidden bg-[#dfe6ec] group-hover:scale-105 group-hover:shadow-sm"
+              >
+                <img
+                  src="/src/img/profile/profile-demo.jpg"
+                  alt="Kakitangan.com employee profile redesign"
+                  class="absolute left-[14%] top-[16%] w-[92%] rounded-lg shadow-2xl -rotate-[8deg] origin-top-left"
+                />
+              </div>
               <p class="text-ink-light">Redesign User Profile Page</p>
-            </div>
-            <div class="flex flex-col items-center justify-center gap-4">
-              <a href="#myworks">
-                <img
-                  src="/src/img/rd-payroll.png"
-                  class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
-                  alt="DTC logo"
-                />
-              </a>
-              <p class="text-ink-light">Redesign Payroll</p>
-            </div>
-            <div class="flex flex-col items-center justify-center gap-4">
-              <a href="/works/redesignlanding.html">
-                <img
-                  src="/src/img/rd-landing.png"
-                  class="w-full hover:scale-105 hover:shadow-sm transition-all ease-in-out duration-[400ms]"
-                  alt="DTC logo"
-                />
-              </a>
-              <p class="text-ink-light">Redesign Landing Page</p>
-            </div>
+            </a>
           </div>
         </section>
       </div>
     </main>
-    <script type="module" src="../src/js/main.js"></script>
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>

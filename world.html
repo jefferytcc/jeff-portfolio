@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- @include head.html -->
+    <title>Jeff's World – Explore in 3D</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <section
+        id="world"
+        class="relative w-full h-[calc(100svh-46px)] overflow-hidden select-none bg-gradient-to-b from-[#d5e4f2] to-[#f3f6f9]"
+        aria-label="Interactive 3D world about Jeffery Tan"
+      >
+        <canvas
+          id="world-canvas"
+          class="absolute inset-0 w-full h-full block touch-none"
+        ></canvas>
+
+        <p
+          id="world-loading"
+          class="absolute inset-0 flex items-center justify-center text-ink-light"
+        >
+          Loading world…
+        </p>
+
+        <!-- Top bar: progress + classic version -->
+        <div
+          class="absolute top-4 inset-x-4 flex items-start justify-between gap-2 z-10"
+        >
+          <div
+            id="world-progress"
+            class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark flex items-center gap-3"
+          >
+            <span id="world-progress-text" class="whitespace-nowrap"
+              >Explored 0 / 7</span
+            >
+            <span
+              id="world-progress-dots"
+              class="hidden sm:flex gap-1"
+              aria-hidden="true"
+            ></span>
+          </div>
+          <a
+            href="/about"
+            class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-brand underline whitespace-nowrap"
+            >Classic version</a
+          >
+        </div>
+
+        <!-- Info card for the nearest place -->
+        <div
+          id="world-card"
+          class="absolute z-10 inset-x-4 top-20 sm:inset-x-auto sm:top-auto sm:bottom-6 sm:right-6 sm:w-[360px] max-h-[45%] sm:max-h-[60%] overflow-y-auto rounded-2xl bg-white shadow-xl p-5 transition-all duration-300 opacity-0 translate-y-2 pointer-events-none"
+          aria-live="polite"
+        ></div>
+
+        <!-- Desktop controls hint -->
+        <p
+          id="world-keys-hint"
+          class="hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-10 rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark whitespace-nowrap"
+        >
+          Walk with <kbd class="font-semibold">W A S D</kbd> or
+          <kbd class="font-semibold">arrow keys</kbd>
+        </p>
+
+        <!-- Mobile joystick -->
+        <div
+          id="joystick"
+          class="hidden absolute bottom-8 left-8 z-10 w-32 h-32 rounded-full bg-white/50 border-2 border-white shadow-md touch-none"
+          aria-hidden="true"
+        >
+          <div
+            id="joystick-knob"
+            class="absolute left-1/2 top-1/2 -ml-7 -mt-7 w-14 h-14 rounded-full bg-brand shadow-lg"
+          ></div>
+        </div>
+
+        <!-- Intro -->
+        <div
+          id="world-intro"
+          class="absolute inset-0 z-20 flex items-center justify-center bg-brand/40 backdrop-blur-sm p-4"
+        >
+          <div
+            class="max-w-sm w-full rounded-2xl bg-white shadow-xl p-6 text-center"
+          >
+            <p
+              class="text-xs font-semibold uppercase tracking-wider text-ink-light"
+            >
+              About me
+            </p>
+            <h1 class="mt-1 text-2xl font-bold text-ink-dark">
+              Welcome to my little world
+            </h1>
+            <p class="mt-2 text-ink">
+              Walk around the planet and visit all 7 places to get to know me.
+            </p>
+            <p
+              id="world-intro-controls"
+              class="mt-4 text-sm text-ink-light"
+            ></p>
+            <button id="world-start" type="button" class="btn mt-6 mx-auto">
+              Start exploring
+            </button>
+            <a href="/about" class="block mt-4 text-sm text-brand underline"
+              >Prefer reading? See the classic version</a
+            >
+          </div>
+        </div>
+
+        <!-- No WebGL -->
+        <div
+          id="world-fallback"
+          hidden
+          class="absolute inset-0 z-30 flex items-center justify-center bg-cloud p-4"
+        >
+          <div class="max-w-sm text-center">
+            <p class="font-bold text-ink-dark">
+              Your browser can't show the 3D world.
+            </p>
+            <a href="/about" class="btn mt-4 mx-auto block"
+              >Read the About page</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/about-world.js"></script>
+  </body>
+</html>

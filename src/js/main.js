@@ -1,76 +1,94 @@
-import "../style.css";
 import Lenis from "@studio-freight/lenis";
-import React from "react";
-import ReactDOM from "react-dom/client";
 
-// ----------------------------
-// Animate signature (optional)
-// ----------------------------
-const signature = document.getElementById("signature");
-if (signature) {
+// This file loads as a module script, so the page HTML is already parsed
+// when it runs — no need to wait for DOMContentLoaded.
+
+const CONTACT_ENDPOINT =
+  "https://contact-form-server-el4v.onrender.com/contact";
+const CONTACT_EMAIL = "jefferytan.design@gmail.com";
+
+// Swap animation classes after a delay
+function revealAfter(el, delay, from, to) {
+  if (!el) return;
   setTimeout(() => {
-    signature.classList.remove("opacity-0", "translate-y-2");
-    signature.classList.add("opacity-100", "translate-y-0");
-  }, 500);
+    el.classList.remove(...from);
+    el.classList.add(...to);
+  }, delay);
 }
 
 // ----------------------------
-// Animate nav fade-in
+// Home page intro animations
 // ----------------------------
+revealAfter(
+  document.getElementById("signature"),
+  500,
+  ["opacity-0", "translate-y-2"],
+  ["opacity-100", "translate-y-0"],
+);
+
 const nav = document.getElementById("nav-links");
 if (nav) {
-  const links = nav.querySelectorAll("a");
+  const from = ["opacity-0", "translate-y-4"];
+  const to = ["opacity-100", "translate-y-0"];
 
-  setTimeout(() => {
-    nav.classList.remove("opacity-0", "translate-y-4");
-    nav.classList.add("opacity-100", "translate-y-0");
-
-    links.forEach((link, i) => {
-      setTimeout(() => {
-        link.classList.remove("opacity-0", "translate-y-4");
-        link.classList.add("opacity-100", "translate-y-0");
-      }, i * 300);
-    });
-  }, 1200);
+  revealAfter(nav, 1200, from, to);
+  nav.querySelectorAll("a").forEach((link, i) => {
+    revealAfter(link, 1200 + i * 300, from, to);
+  });
 }
 
+revealAfter(
+  document.getElementById("profile-image"),
+  1000,
+  ["opacity-0", "translate-x-4"],
+  ["opacity-100", "translate-x-0"],
+);
+
+revealAfter(
+  document.querySelector("#title h4"),
+  1000,
+  ["opacity-0", "translate-y-0"],
+  ["opacity-100", "translate-y-4"],
+);
+revealAfter(
+  document.querySelector("#title p"),
+  1200,
+  ["opacity-0", "translate-y-0"],
+  ["opacity-100", "translate-y-4"],
+);
+
 // ----------------------------
-// Animate profile image
+// Smooth scroll using Lenis
 // ----------------------------
-window.addEventListener("DOMContentLoaded", () => {
-  const profileImg = document.getElementById("profile-image");
-  if (profileImg) {
-    setTimeout(() => {
-      profileImg.classList.remove("opacity-0", "translate-x-4");
-      profileImg.classList.add("opacity-100", "translate-x-0");
-    }, 1000);
-  }
+const lenis = new Lenis({
+  duration: 1.0,
+  easing: (t) => 1 - Math.pow(1 - t, 4),
+});
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  const targetId = anchor.getAttribute("href");
+  if (targetId === "#") return;
+
+  anchor.addEventListener("click", (e) => {
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    e.preventDefault();
+    lenis.scrollTo(target, {
+      duration: 2.0,
+      easing: (t) => 1 - Math.pow(1 - t, 3),
+    });
+  });
 });
 
 // ----------------------------
-// Animate hero title & paragraph
-// ----------------------------
-window.addEventListener("DOMContentLoaded", () => {
-  const heading = document.querySelector("#title h4");
-  const paragraph = document.querySelector("#title p");
-
-  if (heading) {
-    setTimeout(() => {
-      heading.classList.remove("opacity-0", "translate-y-0");
-      heading.classList.add("opacity-100", "translate-y-4");
-    }, 1000);
-  }
-
-  if (paragraph) {
-    setTimeout(() => {
-      paragraph.classList.remove("opacity-0", "translate-y-0");
-      paragraph.classList.add("opacity-100", "translate-y-4");
-    }, 1200);
-  }
-});
-
-// ----------------------------
-// Mobile nav burger logic
+// Mobile nav burger
 // ----------------------------
 const burger = document.getElementById("burger");
 const mobileNav = document.getElementById("mobile-nav");
@@ -86,123 +104,77 @@ if (burger && mobileNav) {
   burger.addEventListener("click", () => {
     isOpen = !isOpen;
 
-    if (isOpen) {
-      // Show mobile nav
-      mobileNav.classList.remove("hidden");
+    mobileNav.classList.toggle("hidden", !isOpen);
+    document.body.classList.toggle("overflow-hidden", isOpen);
+    document.documentElement.classList.toggle("overflow-hidden", isOpen);
+    isOpen ? lenis.stop() : lenis.start();
 
-      // Disable scroll
-      document.body.classList.add("overflow-hidden");
-      document.documentElement.classList.add("overflow-hidden");
+    burger.setAttribute("aria-expanded", String(isOpen));
+    burger.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
 
-      // Stop Lenis scroll if present
-      if (window.lenis) window.lenis.stop();
+    // Burger icon <-> X
+    line1.classList.toggle("rotate-45", isOpen);
+    line1.classList.toggle("translate-y-[6px]", isOpen);
+    line2.classList.toggle("opacity-0", isOpen);
+    line3.classList.toggle("-rotate-45", isOpen);
+    line3.classList.toggle("-translate-y-[6px]", isOpen);
 
-      // Animate nav links in
-      mobileLinks.forEach((link, i) => {
-        setTimeout(() => {
-          link.classList.remove("opacity-0");
-          link.classList.add("opacity-100");
-        }, i * 200);
-      });
-
-      // Burger icon to X
-      line1.classList.add("rotate-45", "translate-y-[6px]");
-      line2.classList.add("opacity-0");
-      line3.classList.add("-rotate-45", "-translate-y-[6px]");
-    } else {
-      // Hide mobile nav
-      mobileNav.classList.add("hidden");
-
-      // Enable scroll
-      document.body.classList.remove("overflow-hidden");
-      document.documentElement.classList.remove("overflow-hidden");
-
-      // Resume Lenis scroll if present
-      if (window.lenis) window.lenis.start();
-
-      // Animate nav links out
-      mobileLinks.forEach((link) => {
+    // Stagger links in; hide them instantly on close
+    mobileLinks.forEach((link, i) => {
+      if (isOpen) {
+        revealAfter(link, i * 200, ["opacity-0"], ["opacity-100"]);
+      } else {
         link.classList.remove("opacity-100");
         link.classList.add("opacity-0");
-      });
-
-      // Reset burger icon
-      line1.classList.remove("rotate-45", "translate-y-[6px]");
-      line2.classList.remove("opacity-0");
-      line3.classList.remove("-rotate-45", "-translate-y-[6px]");
-    }
+      }
+    });
   });
 }
 
 // ----------------------------
-// Desktop burger show on scroll
+// Home page: show burger bar on scroll (desktop), always on mobile
 // ----------------------------
-function toggleBurgerVisibility() {
-  const wrapper = document.getElementById("burger-wrapper");
-  if (!wrapper) return;
+const burgerWrapper = document.getElementById("burger-wrapper");
 
+function toggleBurgerVisibility() {
   const isDesktop = window.innerWidth >= 768;
   const scrolled = window.scrollY > 624;
 
   if (isDesktop) {
     if (scrolled) {
-      wrapper.classList.remove("opacity-0", "top-[-100px]", "absolute");
-      wrapper.classList.add("opacity-100", "fixed", "top-0", "left-0", "z-50");
+      burgerWrapper.classList.remove("opacity-0", "top-[-100px]", "absolute");
+      burgerWrapper.classList.add(
+        "opacity-100",
+        "fixed",
+        "top-0",
+        "left-0",
+        "z-50",
+      );
     } else {
-      wrapper.classList.add("opacity-0", "top-[-100px]");
-      wrapper.classList.remove("opacity-100");
+      burgerWrapper.classList.add("opacity-0", "top-[-100px]");
+      burgerWrapper.classList.remove("opacity-100");
       setTimeout(() => {
-        wrapper.classList.remove("fixed", "top-0", "left-0", "z-50");
-        wrapper.classList.add("absolute");
+        burgerWrapper.classList.remove("fixed", "top-0", "left-0", "z-50");
+        burgerWrapper.classList.add("absolute");
       }, 300);
     }
   } else {
-    wrapper.classList.remove("opacity-0");
-    wrapper.classList.add("opacity-100", "fixed", "top-0", "left-0", "z-50");
+    burgerWrapper.classList.remove("opacity-0");
+    burgerWrapper.classList.add(
+      "opacity-100",
+      "fixed",
+      "top-0",
+      "left-0",
+      "z-50",
+    );
   }
 }
 
-document.addEventListener("DOMContentLoaded", toggleBurgerVisibility);
-window.addEventListener("scroll", toggleBurgerVisibility);
-window.addEventListener("resize", toggleBurgerVisibility);
-
-// ----------------------------
-// Smooth scroll using Lenis
-// ----------------------------
-window.lenis = new Lenis({
-  duration: 1.0,
-  easing: (t) => 1 - Math.pow(1 - t, 4),
-  smooth: true,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
+if (burgerWrapper) {
+  toggleBurgerVisibility();
+  window.addEventListener("scroll", toggleBurgerVisibility);
+  window.addEventListener("resize", toggleBurgerVisibility);
 }
-requestAnimationFrame(raf);
-
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute("href");
-      const target = document.querySelector(targetId);
-
-      if (target) {
-        if (window.lenis) {
-          window.lenis.scrollTo(target, {
-            duration: 2.0,
-            easing: (t) => 1 - Math.pow(1 - t, 3),
-          });
-        } else {
-          // fallback to native scroll
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      }
-    });
-  });
-});
 
 // ----------------------------
 // Footer: auto update year
@@ -218,107 +190,48 @@ if (year) {
 const contactForm = document.getElementById("contact-form");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", async function (e) {
+  const status = document.getElementById("contact-status");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+  const showStatus = (message, colorClass) => {
+    status.textContent = message;
+    status.className = `text-sm text-right ${colorClass}`;
+  };
+
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const data = {
-      name: this.name.value,
-      email: this.email.value,
-      phone: this.phone.value,
-      message: this.message.value,
+      name: contactForm.name.value,
+      email: contactForm.email.value,
+      phone: contactForm.phone.value,
+      message: contactForm.message.value,
     };
 
-    try {
-      const res = await fetch(
-        "https://contact-form-server-el4v.onrender.com/contact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+    submitBtn.disabled = true;
+    showStatus("Sending…", "text-ink-light");
 
-      const result = await res.json();
-      alert(result.message || "Message sent!");
-      this.reset();
+    try {
+      const res = await fetch(CONTACT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(`Contact form failed: ${res.status}`);
+
+      contactForm.reset();
+      showStatus(
+        "Thanks! Your message has been sent. I'll get back to you soon.",
+        "text-green-700",
+      );
     } catch (err) {
-      alert("Something went wrong. Please try again.");
+      console.error(err);
+      showStatus(
+        `Sorry, your message couldn't be sent. Please email me at ${CONTACT_EMAIL}.`,
+        "text-red-700",
+      );
+    } finally {
+      submitBtn.disabled = false;
     }
   });
 }
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("compareContainer");
-  const wrapper = document.getElementById("newImageWrapper");
-  const handle = document.getElementById("sliderHandle");
-  const line = document.getElementById("sliderLine");
-
-  if (!container || !wrapper || !handle || !line) return;
-
-  let dragging = false;
-
-  const setByClientX = (clientX) => {
-    const rect = container.getBoundingClientRect();
-    let x = clientX - rect.left;
-    if (x < 0) x = 0;
-    if (x > rect.width) x = rect.width;
-
-    const percent = (x / rect.width) * 100;
-
-    // reveal new image by changing mask width; move line + handle
-    wrapper.style.width = `${percent}%`;
-    line.style.left = `${percent}%`;
-    handle.style.left = `${percent}%`;
-  };
-
-  const onPointerMove = (e) => {
-    if (!dragging) return;
-    e.preventDefault(); // stop page scroll while dragging
-    setByClientX(e.clientX);
-  };
-
-  const onPointerDown = (e) => {
-    dragging = true;
-    e.preventDefault();
-    // capture pointer so we keep receiving move events even off the handle
-    if (e.target.setPointerCapture) e.target.setPointerCapture(e.pointerId);
-    setByClientX(e.clientX);
-  };
-
-  const onPointerUp = (e) => {
-    dragging = false;
-    if (e.target.releasePointerCapture)
-      e.target.releasePointerCapture(e.pointerId);
-  };
-
-  // Allow dragging from the handle **and** anywhere in the container
-  [handle, container].forEach((el) => {
-    el.addEventListener("pointerdown", onPointerDown, { passive: false });
-  });
-
-  window.addEventListener("pointermove", onPointerMove, { passive: false });
-  window.addEventListener("pointerup", onPointerUp);
-  window.addEventListener("pointercancel", onPointerUp);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const readMoreBtn = document.getElementById("read-more");
-  const extraText = document.getElementById("extra-text");
-
-  if (readMoreBtn && extraText) {
-    let expanded = false;
-
-    readMoreBtn.addEventListener("click", () => {
-      expanded = !expanded;
-
-      if (expanded) {
-        extraText.classList.remove("hidden");
-        readMoreBtn.textContent = "Read less";
-      } else {
-        extraText.classList.add("hidden");
-        readMoreBtn.textContent = "Read more";
-      }
-    });
-  }
-});
