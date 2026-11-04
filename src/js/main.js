@@ -56,6 +56,12 @@ revealAfter(
   ["opacity-0", "translate-y-0"],
   ["opacity-100", "translate-y-4"],
 );
+revealAfter(
+  document.getElementById("hero-world"),
+  1600,
+  ["opacity-0", "translate-y-0"],
+  ["opacity-100", "translate-y-4"],
+);
 
 // ----------------------------
 // Smooth scroll using Lenis

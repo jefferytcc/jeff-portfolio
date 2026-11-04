@@ -63,6 +63,12 @@
                 <span data-label aria-live="polite">Copy my email</span>
               </button>
             </div>
+            <a
+              href="/world.html"
+              class="w-fit inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-4 py-2 text-sm font-medium text-ink-dark hover:shadow-md transition-shadow"
+              ><span aria-hidden="true">🪐</span> Explore my world in 3D
+              <span aria-hidden="true">→</span></a
+            >
           </div>
 
           <div class="order-1 md:order-2 relative w-fit mx-auto md:mx-0">
@@ -511,64 +517,7 @@
 
       <!-- 3D world -->
       <section class="bg-white px-4 sm:px-8 pb-16 md:pb-24">
-        <a
-          href="/world.html"
-          class="group max-w-6xl mx-auto flex flex-col sm:flex-row items-center gap-6 sm:gap-10 rounded-3xl bg-gradient-to-br from-[#d5e4f2] to-[#eef3f8] p-6 sm:p-10 overflow-hidden"
-        >
-          <!-- Mini planet -->
-          <div
-            class="relative w-32 h-32 sm:w-40 sm:h-40 shrink-0 transition-transform duration-500 group-hover:rotate-12"
-            aria-hidden="true"
-          >
-            <div
-              class="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_35%_30%,#a7d58a,#5f9e4e_60%,#3f7a3a)] shadow-xl"
-            ></div>
-            <div
-              class="absolute top-[18%] left-[42%] w-6 h-5 bg-[#e8d9b5] rounded-sm"
-            ></div>
-            <div
-              class="absolute top-[14%] left-[40%] w-7 h-3 bg-[#c0574b] [clip-path:polygon(50%_0,100%_100%,0_100%)]"
-            ></div>
-            <div
-              class="absolute top-[30%] left-[16%] w-3 h-5 rounded-full bg-[#2f6b35]"
-            ></div>
-            <div
-              class="absolute top-[38%] left-[24%] w-2.5 h-4 rounded-full bg-[#2f6b35]"
-            ></div>
-            <div
-              class="absolute top-[62%] left-[58%] w-4 h-6 rounded-full bg-[#2f6b35]"
-            ></div>
-            <div
-              class="absolute top-[70%] left-[30%] w-5 h-3 rounded-full bg-[#9aa3a8]"
-            ></div>
-            <div
-              class="absolute top-[44%] left-[72%] w-4 h-5 bg-[#c94f4f] rounded-t-full"
-            ></div>
-          </div>
-          <div class="text-center sm:text-left">
-            <p
-              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
-            >
-              Prefer to explore?
-            </p>
-            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
-              Walk around my little planet
-            </h2>
-            <p class="mt-2 text-ink">
-              Visit 7 places to discover my story, work and tools. Works on
-              desktop and mobile.
-            </p>
-            <span
-              class="btn mt-4 inline-flex items-center gap-2 mx-auto sm:mx-0"
-              >Explore my world in 3D
-              <span
-                class="transition-transform group-hover:translate-x-1"
-                aria-hidden="true"
-                >→</span
-              ></span
-            >
-          </div>
-        </a>
+        <!-- @include world-card.html -->
       </section>
 
       <!-- Beyond work -->
