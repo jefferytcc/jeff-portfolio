@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
+    "lottie-web": "^5.12.2",
     "three": "^0.170.0"
   }
 }

@@ -574,7 +574,56 @@
               <li class="tool-chip bg-white shadow-sm px-3">
                 🛠️ Side projects
               </li>
+              <li class="tool-chip bg-white shadow-sm px-3">🏍️ Motorbikes</li>
+              <li class="tool-chip bg-white shadow-sm px-3">📺 Anime</li>
             </ul>
+          </div>
+        </div>
+        <div
+          class="max-w-6xl mx-auto mt-12 rounded-3xl bg-white shadow-sm p-6 sm:p-10 grid md:grid-cols-[1.3fr_1fr] gap-8 items-center"
+        >
+          <div
+            class="relative"
+            role="img"
+            aria-label="Animated drawing of Jeff riding a motorbike, drawn and animated by Jeff"
+          >
+            <div
+              data-lottie="/animations/biker-jeff.json"
+              data-lottie-segment="0,20"
+              data-lottie-speed="1"
+              class="aspect-[899/614] w-full"
+            ></div>
+          </div>
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Illustration &amp; motion
+            </p>
+            <h3 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              I draw, too
+            </h3>
+            <p class="mt-3 text-ink">
+              I drew and animated this for my first portfolio. Illustration and
+              motion are still part of how I design: they make products feel
+              friendly and human.
+            </p>
+            <div class="mt-5 flex flex-wrap gap-2">
+              <a
+                href="https://dribbble.com/jefferytcc"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary inline-flex items-center gap-2"
+                >Dribbble <span aria-hidden="true">↗</span></a
+              >
+              <a
+                href="https://www.behance.net/jefferytan"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-secondary inline-flex items-center gap-2"
+                >Behance <span aria-hidden="true">↗</span></a
+              >
+            </div>
           </div>
         </div>
       </section>
@@ -592,17 +641,20 @@
               I'd love to hear what you're building.
             </p>
           </div>
-          <div class="flex flex-wrap gap-2 shrink-0">
-            <a
-              href="/contact"
-              class="bg-white text-brand py-2 px-4 rounded-lg font-medium"
-              >Get in touch</a
-            >
-            <a
-              href="/works/index.html"
-              class="border border-white/40 py-2 px-4 rounded-lg"
-              >View my work</a
-            >
+          <div class="flex flex-col gap-4 shrink-0">
+            <div class="flex flex-wrap gap-2">
+              <a
+                href="/contact"
+                class="bg-white text-brand py-2 px-4 rounded-lg font-medium"
+                >Get in touch</a
+              >
+              <a
+                href="/works/index.html"
+                class="border border-white/40 py-2 px-4 rounded-lg"
+                >View my work</a
+              >
+            </div>
+            <!-- @include social-links.html -->
           </div>
         </div>
       </section>
@@ -611,5 +663,6 @@
     <!-- @include footer.html -->
     <script type="module" src="/src/js/main.js"></script>
     <script type="module" src="/src/js/about.js"></script>
+    <script type="module" src="/src/js/lottie-figures.js"></script>
   </body>
 </html>
