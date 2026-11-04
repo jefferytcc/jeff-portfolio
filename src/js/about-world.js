@@ -70,6 +70,7 @@ const PLACES = [
       <a href="/works/redesigndashboard.html" class="block text-brand underline">See the dashboard redesign</a>
       <a href="/works/redesignpayroll.html" class="block text-brand underline">See the payroll revamp</a>
       <a href="/works/redesignleave.html" class="block text-brand underline">See the leave revamp</a>
+      <a href="/works/redesignclaims.html" class="block text-brand underline">See the claims revamp</a>
       <a href="/works/designsystem.html" class="block text-brand underline">See the design system</a>
       <a href="/works/redesignlanding.html" class="block text-brand underline">See the landing page redesign</a>`,
   },
@@ -109,9 +110,7 @@ const PLACES = [
       <p class="font-semibold">Product & Workflow</p>
       ${chips(["ClickUp", "Notion"])}
       <p class="font-semibold">Front End Dev Tools</p>
-      ${chips(["TailwindCSS", "Cloudflare", "VS Code", "HTML, CSS, JavaScript", "GitHub"])}
-      <p class="font-semibold">AI & Prototyping</p>
-      ${chips(["Claude Code"])}`,
+      ${chips(["TailwindCSS", "Cloudflare", "VS Code", "HTML, CSS, JavaScript", "GitHub"])}`,
   },
   {
     id: "gallery",

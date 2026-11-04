@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- @include head.html -->
+    <title>Revamping Kakitangan.com Claims – Jeffery Tan</title>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- @include topbar.html -->
+    <!-- @include mobile-nav.html -->
+
+    <main class="flex-1 pt-[46px]">
+      <!-- Intro -->
+      <section class="px-4 sm:px-8 pt-10 md:pt-16 pb-10">
+        <div class="max-w-6xl mx-auto">
+          <a href="/works/index.html" class="text-sm text-ink-light underline"
+            >← All case studies</a
+          >
+          <div class="mt-6 flex flex-wrap items-center gap-2">
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Case study · Kakitangan.com
+            </p>
+            <span
+              class="inline-flex items-center gap-2 rounded-full bg-white shadow-sm px-3 py-1 text-xs font-medium text-ink-dark"
+            >
+              <span
+                class="w-2 h-2 rounded-full bg-warning"
+                aria-hidden="true"
+              ></span>
+              In design · clickable prototype
+            </span>
+          </div>
+          <h1
+            class="mt-3 font-heading text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink-dark max-w-4xl"
+          >
+            Claims, from receipt to payment
+          </h1>
+          <p class="mt-5 text-lg text-ink max-w-3xl">
+            Expense claims pass through three people: the employee who pays, the
+            manager who approves, and the admin who pays them back. I redesigned
+            the claims module so each of them can see where every ringgit is,
+            and what to do next.
+          </p>
+
+          <dl
+            class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 border-y border-gray-300 py-6"
+          >
+            <div>
+              <dt class="text-sm text-ink-light">My role</dt>
+              <dd class="font-semibold text-ink-dark">Product Designer + PM</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Year</dt>
+              <dd class="font-semibold text-ink-dark">2026</dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Users</dt>
+              <dd class="font-semibold text-ink-dark">
+                Employees, managers, HR admins
+              </dd>
+            </div>
+            <div>
+              <dt class="text-sm text-ink-light">Tools</dt>
+              <dd class="font-semibold text-ink-dark">
+                Figma, HTML prototypes
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- Hero image with desktop / phone switch -->
+      <section class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <div
+            class="flex gap-1 w-fit rounded-full bg-cloud-light p-1 text-sm"
+            role="tablist"
+            aria-label="Screen size"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="shot-desktop"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Desktop
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="shot-mobile"
+              data-tab
+              class="rounded-full px-4 py-1.5 aria-selected:bg-white aria-selected:shadow-sm aria-selected:text-ink-dark text-ink"
+            >
+              Phone
+            </button>
+          </div>
+          <div class="mt-4 rounded-3xl bg-cloud-light p-3 sm:p-8">
+            <img
+              id="shot-desktop"
+              role="tabpanel"
+              src="/src/img/claims/claims-my.jpg"
+              alt="My claims: a summary of pending, approved, paid and rejected amounts for the year, and a table of claims with their status"
+              width="2160"
+              height="1350"
+              class="w-full rounded-xl shadow-xl"
+            />
+            <img
+              id="shot-mobile"
+              role="tabpanel"
+              hidden
+              src="/src/img/claims/claims-phone.jpg"
+              alt="My claims on a phone, with a full-width New claims button and the four summary tiles in two columns"
+              width="375"
+              height="812"
+              class="w-full max-w-[320px] mx-auto rounded-[2rem] shadow-xl border-8 border-brand"
+            />
+          </div>
+          <p class="mt-3 text-sm text-ink-light">
+            Clickable prototype with sample data. Names and amounts are
+            fictional.
+          </p>
+        </div>
+      </section>
+
+      <!-- Before / after (shown once the "before" screenshot loads) -->
+      <section id="before-after" hidden class="px-4 sm:px-8 pb-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="font-heading text-2xl sm:text-3xl text-ink-dark">
+            Before and after
+          </h2>
+          <p class="mt-2 text-ink">
+            The old claims page was one long list that mixed your own claims,
+            approvals and payments. The redesign splits it into My claims,
+            Pending approval and Pending payment, so each person sees only their
+            job. Drag to compare the old list with the new approvals page.
+          </p>
+          <div
+            data-compare
+            class="relative mt-6 aspect-[16/10] overflow-hidden rounded-2xl shadow-xl bg-cloud-light select-none touch-pan-y cursor-ew-resize"
+          >
+            <img
+              src="/src/img/claims/claims-approval.jpg"
+              alt="After: the new Pending approval page, with bulk approve and a filter for people who report to you"
+              draggable="false"
+              class="absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div
+              data-compare-before
+              class="absolute inset-0"
+              style="clip-path: inset(0 50% 0 0)"
+            >
+              <img
+                data-before-img
+                src="/src/img/claims/claims-before.jpg"
+                alt="Before: the old All claims list, with six totals and approvals, payments and your own claims mixed together"
+                draggable="false"
+                class="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            </div>
+            <span
+              class="absolute left-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >Before</span
+            >
+            <span
+              class="absolute right-3 bottom-3 rounded-full bg-black/60 px-3 py-1 text-sm text-white pointer-events-none"
+              >After</span
+            >
+            <div
+              data-compare-line
+              class="absolute inset-y-0 left-1/2 w-0.5 -ml-px bg-white shadow pointer-events-none"
+            ></div>
+            <div
+              data-compare-handle
+              role="slider"
+              tabindex="0"
+              aria-label="Compare the old and new claims page"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="50"
+              aria-valuetext="Half before, half after"
+              class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-ink-dark touch-none focus:outline-none focus-visible:ring-4 focus-visible:ring-brand/40"
+            >
+              <span aria-hidden="true">⇆</span>
+            </div>
+          </div>
+          <div
+            class="mt-4 mx-auto w-fit flex gap-1 rounded-full bg-cloud-light p-1 text-sm"
+          >
+            <button
+              type="button"
+              data-compare-to="100"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Before
+            </button>
+            <button
+              type="button"
+              data-compare-to="50"
+              aria-pressed="true"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              Compare
+            </button>
+            <button
+              type="button"
+              data-compare-to="0"
+              aria-pressed="false"
+              class="rounded-full px-4 py-1.5 text-ink aria-pressed:bg-white aria-pressed:shadow-sm aria-pressed:text-ink-dark"
+            >
+              After
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Roles -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            The module
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            One module, three roles
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            Everyone starts on the same page. Extra tabs only appear for the
+            people who need them.
+          </p>
+          <ol class="mt-8 grid md:grid-cols-3 gap-4">
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="text-sm text-ink-light">Employee</p>
+              <p class="mt-1 font-semibold text-ink-dark">My claims</p>
+              <p class="mt-2 text-sm text-ink">
+                Submit claims, see their status and check claim limits.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-cloud p-6">
+              <p class="text-sm text-ink-light">Manager</p>
+              <p class="mt-1 font-semibold text-ink-dark">+ Pending approval</p>
+              <p class="mt-2 text-sm text-ink">
+                Approve or reject their team's claims, one by one or together.
+              </p>
+            </li>
+            <li class="rounded-2xl bg-brand text-white p-6">
+              <p class="text-sm text-white/60">HR admin</p>
+              <p class="mt-1 font-semibold">+ Pending payment and Reports</p>
+              <p class="mt-2 text-sm text-white/80">
+                Pay out approved claims and report on spending.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- Design decisions -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Design decisions
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            What each page does
+          </h2>
+
+          <div class="mt-10 flex flex-col gap-16 md:gap-24">
+            <div class="grid lg:grid-cols-[1fr_1.2fr] gap-8 items-center">
+              <div>
+                <h3 class="font-heading text-xl sm:text-2xl text-ink-dark">
+                  A form that knows Malaysian rules
+                </h3>
+                <ul class="mt-3 flex flex-col gap-2 text-ink list-disc pl-5">
+                  <li>
+                    The 90-day claim window is shown up front, with the earliest
+                    date you can still claim.
+                  </li>
+                  <li>
+                    A checkbox for amounts that include SST, and fields for the
+                    LHDN MyInvois e-Invoice number.
+                  </li>
+                  <li>
+                    The notes field shows an example, so people know what to
+                    write.
+                  </li>
+                </ul>
+              </div>
+              <img
+                src="/src/img/claims/claims-new.jpg"
+                alt="New claim form: category, date of transaction with a note that claims can be made up to 90 days back, total amount, an SST checkbox, tax invoice and e-Invoice fields, and notes"
+                width="1230"
+                height="1260"
+                loading="lazy"
+                class="w-full max-w-xl mx-auto rounded-2xl shadow-xl"
+              />
+            </div>
+
+            <div class="grid lg:grid-cols-[1.4fr_1fr] gap-8 items-center">
+              <img
+                src="/src/img/claims/claims-approval.jpg"
+                alt="Pending approval: 25 pending claims, a switch to show only people who report to you, bulk approve, reject and download attachments, and approve or reject buttons on each claim"
+                width="2160"
+                height="1350"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl lg:order-1 order-2"
+              />
+              <div class="lg:order-2 order-1">
+                <h3 class="font-heading text-xl sm:text-2xl text-ink-dark">
+                  Approvals with checks and balances
+                </h3>
+                <p class="mt-3 text-ink">
+                  Admins can approve anyone's claim, except their own: those
+                  always go to someone else. A switch narrows the list to the
+                  people who report to you, and claims can be approved, rejected
+                  or downloaded together.
+                </p>
+              </div>
+            </div>
+
+            <div class="grid lg:grid-cols-[1fr_1.4fr] gap-8 items-center">
+              <div>
+                <h3 class="font-heading text-xl sm:text-2xl text-ink-dark">
+                  From approved to paid
+                </h3>
+                <p class="mt-3 text-ink">
+                  Approved isn't the end. Pending payment shows how much is
+                  owed, to how many people, and how long the oldest claim has
+                  waited. Admins can settle claims together, for example with
+                  one bank pay file.
+                </p>
+              </div>
+              <img
+                src="/src/img/claims/claims-payment.jpg"
+                alt="Pending payment: MYR 4,120.45 to pay across 21 approved claims for 15 employees, waiting since 3 Oct 2026, with Settle claim buttons"
+                width="2160"
+                height="1350"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- When things go wrong -->
+      <section class="bg-white px-4 sm:px-8 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto">
+          <p
+            class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+          >
+            Edge cases
+          </p>
+          <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+            Designing for when things go wrong
+          </h2>
+          <p class="mt-3 text-lg text-ink max-w-3xl">
+            Withdrawing several claims at once sounds simple, until a manager
+            approves one of them a second before you click. I prototyped that
+            case, and a dropped connection, before any code was written.
+          </p>
+          <div class="mt-8 grid md:grid-cols-2 gap-6 items-start">
+            <figure>
+              <img
+                src="/src/img/claims/withdraw-confirm.jpg"
+                alt="Confirm dialog: Withdraw 4 claims? It lists each claim with its date and amount, and the total of MYR 1,612.25"
+                width="1080"
+                height="912"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl"
+              />
+              <figcaption class="mt-3 text-sm text-ink">
+                <strong class="text-ink-dark">Before:</strong> the confirmation
+                lists every claim and the total, so nothing is withdrawn by
+                surprise.
+              </figcaption>
+            </figure>
+            <figure>
+              <img
+                src="/src/img/claims/withdraw-result.jpg"
+                alt="Result: 3 of 4 claims withdrawn. One claim could not be withdrawn because it was approved just before, and the three that worked are listed"
+                width="1080"
+                height="1176"
+                loading="lazy"
+                class="w-full rounded-2xl shadow-xl"
+              />
+              <figcaption class="mt-3 text-sm text-ink">
+                <strong class="text-ink-dark">After:</strong> if one fails, the
+                result says which, and why, in plain words.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- Prototype -->
+      <section class="px-4 sm:px-8 py-16 md:py-24">
+        <div
+          class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+        >
+          <div>
+            <p
+              class="text-sm font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Prototype first
+            </p>
+            <h2 class="mt-1 font-heading text-2xl sm:text-3xl text-ink-dark">
+              One prototype, every situation
+            </h2>
+            <p class="mt-4 text-lg text-ink">
+              Reviewers can switch roles and company setups in the prototype, so
+              the design is judged on real situations, not just the happy path.
+            </p>
+          </div>
+          <ul class="grid grid-cols-2 gap-3 text-sm">
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-heading text-3xl text-ink-dark">3</p>
+              <p class="mt-1 text-ink">roles: employee, manager, HR admin</p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-heading text-3xl text-ink-dark">2</p>
+              <p class="mt-1 text-ink">
+                companies: 14 months of claims, or brand new with none
+              </p>
+            </li>
+            <li class="rounded-2xl bg-white shadow-sm p-5">
+              <p class="font-heading text-3xl text-ink-dark">68</p>
+              <p class="mt-1 text-ink">
+                claims in one list, to test long tables
+              </p>
+            </li>
+            <li class="rounded-2xl bg-brand text-white p-5">
+              <p class="font-heading text-3xl">3</p>
+              <p class="mt-1 text-white/80">
+                failure states: slow pages, failed loads or saves, dropped
+                connections
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Next -->
+      <section class="px-4 sm:px-8 pb-16">
+        <a
+          href="/works/designsystem.html"
+          class="group max-w-6xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-3xl bg-brand text-white p-8 sm:p-12"
+        >
+          <div>
+            <p class="text-sm text-white/60">Next case study</p>
+            <p class="mt-1 font-heading text-2xl sm:text-3xl">
+              One design system for every Kakitangan screen
+            </p>
+          </div>
+          <span
+            class="text-3xl transition-transform group-hover:translate-x-1"
+            aria-hidden="true"
+            >→</span
+          >
+        </a>
+      </section>
+    </main>
+
+    <!-- @include footer.html -->
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/case-study.js"></script>
+  </body>
+</html>
