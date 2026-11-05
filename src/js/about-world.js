@@ -11,8 +11,20 @@ import galleryImg from "../img/rd-landing.png";
 // height: how tall it stands on the planet (mini-Jeff is 1.6)
 // turn: rotation in radians; use Math.PI if it walks backwards
 const CHARACTERS = [
-  { id: "chibi", name: "Hoodie girl", url: "/models/character.glb", height: 1.6, turn: 0 },
-  { id: "ninja", name: "Ninja girl", url: "/models/ninja.glb", height: 1.6, turn: 0 },
+  {
+    id: "chibi",
+    name: "Hoodie girl",
+    url: "/models/character.glb",
+    height: 1.6,
+    turn: 0,
+  },
+  {
+    id: "ninja",
+    name: "Ninja girl",
+    url: "/models/ninja.glb",
+    height: 1.6,
+    turn: 0,
+  },
   { id: "jeff", name: "Mini-Jeff", url: null },
 ];
 
@@ -1050,10 +1062,11 @@ async function init() {
 
   function updateProgress() {
     const visited = places.filter((p) => p.visited).length;
-    ui.progressText.textContent =
+    // "Explored" is dropped on phones so the top bar fits beside its buttons
+    ui.progressText.innerHTML =
       visited === places.length
-        ? `All ${places.length} explored 🎉`
-        : `Explored ${visited} / ${places.length}`;
+        ? `All ${places.length}<span class="hidden sm:inline"> explored</span> 🎉`
+        : `<span class="hidden sm:inline">Explored </span>${visited} / ${places.length}`;
     [...ui.progressDots.children].forEach((dot, i) => {
       dot.className = `w-2 h-2 rounded-full ${places[i].visited ? "bg-brand" : "bg-gray-300"}`;
     });

@@ -32,10 +32,10 @@
         >
           <div
             id="world-progress"
-            class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark flex items-center gap-3"
+            class="rounded-full bg-white/90 shadow-md px-3 sm:px-4 py-2 text-sm text-ink-dark flex items-center gap-3"
           >
             <span id="world-progress-text" class="whitespace-nowrap"
-              >Explored 0 / 7</span
+              ><span class="hidden sm:inline">Explored </span>0 / 7</span
             >
             <span
               id="world-progress-dots"
@@ -57,14 +57,14 @@
             <button
               id="world-switch"
               type="button"
-              class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark whitespace-nowrap"
+              class="rounded-full bg-white/90 shadow-md px-3 sm:px-4 py-2 text-sm text-ink-dark whitespace-nowrap"
             >
               Character
             </button>
             <a
               href="/about"
-              class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-brand underline whitespace-nowrap"
-              >Classic version</a
+              class="rounded-full bg-white/90 shadow-md px-3 sm:px-4 py-2 text-sm text-brand underline whitespace-nowrap"
+              >Classic<span class="hidden min-[360px]:inline"> version</span></a
             >
           </div>
         </div>
@@ -163,10 +163,35 @@
             >
               Choose your character
             </p>
-            <div class="mt-2 flex justify-center gap-2" role="group" aria-label="Choose your character">
-              <button type="button" data-character="chibi" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Hoodie girl</button>
-              <button type="button" data-character="ninja" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Ninja girl</button>
-              <button type="button" data-character="jeff" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Mini-Jeff</button>
+            <div
+              class="mt-2 flex justify-center gap-2"
+              role="group"
+              aria-label="Choose your character"
+            >
+              <button
+                type="button"
+                data-character="chibi"
+                aria-pressed="false"
+                class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark"
+              >
+                Hoodie girl
+              </button>
+              <button
+                type="button"
+                data-character="ninja"
+                aria-pressed="false"
+                class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark"
+              >
+                Ninja girl
+              </button>
+              <button
+                type="button"
+                data-character="jeff"
+                aria-pressed="false"
+                class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark"
+              >
+                Mini-Jeff
+              </button>
             </div>
             <p
               id="world-intro-controls"
