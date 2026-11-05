@@ -33,6 +33,7 @@ const COLOR = {
   cream: "#f4efe6",
   wood: "#8a6a4f",
   stone: "#b9b6ad",
+  gold: "#f2b705",
 };
 
 const LINKS = {
@@ -53,6 +54,7 @@ const PLACES = [
   {
     id: "home",
     label: "Hello!",
+    guide: "Jeff's house",
     lat: 64,
     lon: 0,
     radius: 1.4,
@@ -626,6 +628,12 @@ async function init() {
     joystick: document.getElementById("joystick"),
     knob: document.getElementById("joystick-knob"),
     fallback: document.getElementById("world-fallback"),
+    coins: document.getElementById("world-coins"),
+    guide: document.getElementById("world-guide"),
+    guideArrow: document.getElementById("world-guide-arrow"),
+    guideText: document.getElementById("world-guide-text"),
+    map: document.getElementById("world-map"),
+    mapNorth: document.getElementById("world-map-north"),
   };
 
   let renderer;
@@ -721,7 +729,7 @@ async function init() {
 
     scene.add(object);
     obstacles.push({ position: object.position, radius: place.radius });
-    return { ...place, object, ring, label, visited: false };
+    return { ...place, name: place.label, object, ring, label, visited: false };
   });
 
   // Trees and rocks, kept clear of places and the starting spot
@@ -850,6 +858,188 @@ async function init() {
   const forward = new THREE.Vector3(0, 0, 1);
   const position = new THREE.Vector3();
   let moving = 0; // 0 = standing, 1 = walking
+
+  // ----------------------------
+  // Coin trail to the next place you haven't visited
+  // ----------------------------
+  const COIN_SPACING = 2.2;
+  const COIN_HEIGHT = 0.75;
+  const coinGeometry = new THREE.CylinderGeometry(0.28, 0.28, 0.07, 24);
+  coinGeometry.rotateX(Math.PI / 2);
+  const coinMaterial = new THREE.MeshStandardMaterial({
+    color: COLOR.gold,
+    emissive: COLOR.gold,
+    emissiveIntensity: 0.25,
+    metalness: 0.4,
+    roughness: 0.35,
+    flatShading: true,
+  });
+  let coins = [];
+  let coinCount = 0;
+  let target = null;
+  const _from = new THREE.Vector3();
+  const _to = new THREE.Vector3();
+  const _dir = new THREE.Vector3();
+
+  function nearestUnvisited() {
+    let best = null;
+    for (const place of places) {
+      if (place.visited) continue;
+      if (
+        !best ||
+        up.angleTo(place.object.position) < up.angleTo(best.object.position)
+      )
+        best = place;
+    }
+    return best;
+  }
+
+  function layTrail(place = nearestUnvisited()) {
+    for (const c of coins) scene.remove(c.pivot);
+    coins = [];
+    target = place;
+    if (ui.guideText && target)
+      ui.guideText.textContent = `Next: ${target.guide ?? target.name}`;
+    if (!target) return;
+
+    _from.copy(up);
+    _to.copy(target.object.position).normalize();
+    const angle = _from.angleTo(_to);
+    const length = angle * PLANET_RADIUS;
+    if (Math.sin(angle) < 1e-3) return;
+
+    // Coins every few steps along the great circle, stopping short of the place
+    for (let d = 2; d < length - (target.radius + 1); d += COIN_SPACING) {
+      const t = d / length;
+      _dir
+        .copy(_from)
+        .multiplyScalar(Math.sin((1 - t) * angle))
+        .addScaledVector(_to, Math.sin(t * angle))
+        .normalize();
+      const ground = _dir.clone().multiplyScalar(PLANET_RADIUS);
+      if (
+        obstacles.some((o) => o.position.distanceTo(ground) < o.radius + 0.35)
+      )
+        continue; // skip coins that would sit inside a tree or rock
+
+      const pivot = new THREE.Group();
+      const coin = new THREE.Mesh(coinGeometry, coinMaterial);
+      coin.castShadow = true;
+      coin.position.y = COIN_HEIGHT;
+      pivot.add(coin);
+      pivot.position.copy(ground);
+      orientOnSphere(pivot, _dir.clone(), northTangent(_dir));
+      scene.add(pivot);
+      coins.push({ pivot, coin, phase: d, collectedAt: null });
+    }
+  }
+
+  function updateCoins(dt) {
+    for (const c of coins) {
+      if (c.collectedAt === null) {
+        if (!reduceMotion) {
+          c.coin.rotation.y += dt * 3;
+          c.coin.position.y =
+            COIN_HEIGHT + Math.sin(elapsed * 3 + c.phase) * 0.08;
+        }
+        if (started && position.distanceTo(c.pivot.position) < 1) {
+          c.collectedAt = elapsed;
+          coinCount++;
+          ui.coins.textContent = coinCount;
+          if (!reduceMotion)
+            ui.coins.parentElement.animate(
+              [{ transform: "scale(1.3)" }, { transform: "scale(1)" }],
+              { duration: 250 },
+            );
+        }
+        continue;
+      }
+      // Collected: pop up, spin and shrink away
+      const t = (elapsed - c.collectedAt) / 0.35;
+      if (reduceMotion || t >= 1) {
+        scene.remove(c.pivot);
+        c.done = true;
+      } else {
+        c.coin.position.y = COIN_HEIGHT + t * 1.2;
+        c.coin.scale.setScalar(1 - t);
+        c.coin.rotation.y += dt * 12;
+      }
+    }
+    coins = coins.filter((c) => !c.done);
+  }
+
+  // ----------------------------
+  // Minimap: you in the middle facing up, every place by direction and distance
+  // ----------------------------
+  const mapDots = places.map((place) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className =
+      "absolute left-0 top-0 w-6 h-6 -ml-3 -mt-3 flex items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand";
+    dot.setAttribute(
+      "aria-label",
+      `Show the way to ${place.guide ?? place.name}`,
+    );
+    dot.title = place.guide ?? place.name;
+    dot.innerHTML = '<span class="block w-3 h-3 rounded-full border-2"></span>';
+    dot.addEventListener("click", () => layTrail(place));
+    ui.map?.append(dot);
+    return { place, dot, mark: dot.firstElementChild, state: "" };
+  });
+
+  const _north = new THREE.Vector3();
+  function bearingTo(dir) {
+    // Angle of `dir` around you: 0 = straight ahead, positive = to your right
+    _dir.copy(dir).addScaledVector(up, -dir.dot(up));
+    _screenRight.crossVectors(forward, up);
+    return Math.atan2(_dir.dot(_screenRight), _dir.dot(forward));
+  }
+
+  function updateMap() {
+    if (!ui.map) return;
+    ui.map.hidden = !started;
+    if (!started) return;
+    const radius = ui.map.clientWidth / 2;
+    const reach = radius - 12;
+    for (const m of mapDots) {
+      _to.copy(m.place.object.position).normalize();
+      const r = (up.angleTo(_to) / Math.PI) * reach;
+      const b = bearingTo(_to);
+      m.dot.style.transform = `translate(${radius + r * Math.sin(b)}px, ${radius - r * Math.cos(b)}px)`;
+
+      const state =
+        m.place === target ? "next" : m.place.visited ? "visited" : "todo";
+      if (state !== m.state) {
+        m.state = state;
+        m.mark.className = `block rounded-full border-2 ${
+          state === "next"
+            ? "w-3.5 h-3.5 bg-[#f2b705] border-[#d99a00] animate-pulse"
+            : state === "visited"
+              ? "w-3 h-3 bg-[#2aa7c9] border-white"
+              : "w-3 h-3 bg-white border-brand"
+        }`;
+      }
+    }
+    // Compass: where the planet's north is
+    const nb = bearingTo(_north.copy(northTangent(up)).add(up));
+    ui.mapNorth.style.transform = `translate(${radius + reach * Math.sin(nb)}px, ${radius - reach * Math.cos(nb)}px) translate(-50%, -50%)`;
+  }
+
+  // The guide arrow points from you to the next place, relative to the camera
+  const _screenRight = new THREE.Vector3();
+  function updateGuide() {
+    if (!ui.guide) return;
+    const show = started && target && !activePlace;
+    ui.guide.hidden = !show;
+    if (!show) return;
+    _dir.subVectors(target.object.position, position);
+    _dir.addScaledVector(up, -_dir.dot(up));
+    _screenRight.crossVectors(forward, up);
+    const degrees = THREE.MathUtils.radToDeg(
+      Math.atan2(_dir.dot(_screenRight), _dir.dot(forward)),
+    );
+    ui.guideArrow.style.transform = `rotate(${degrees}deg)`;
+  }
 
   // ----------------------------
   // UI
@@ -1014,15 +1204,23 @@ async function init() {
       const near =
         position.distanceTo(place.object.position) <
         place.radius + NEAR_PADDING;
-      if (near && !place.visited) {
+      if (near && (!place.visited || place === target)) {
         place.visited = true;
         updateProgress();
+        layTrail();
       }
       if (near) nearest = place;
+      const isNext = place === target && !near;
       place.ring.material.color.set(
-        near || place.visited ? COLOR.teal : COLOR.brand,
+        isNext ? COLOR.gold : near || place.visited ? COLOR.teal : COLOR.brand,
       );
-      place.ring.material.opacity = near ? 0.9 : place.visited ? 0.45 : 0.2;
+      place.ring.material.opacity = isNext
+        ? 0.6 + (reduceMotion ? 0 : Math.sin(elapsed * 4) * 0.3)
+        : near
+          ? 0.9
+          : place.visited
+            ? 0.45
+            : 0.2;
     }
     showCard(nearest);
   }
@@ -1107,6 +1305,9 @@ async function init() {
       movePlayer(dt);
       updateNearbyPlace();
     }
+    updateCoins(dt);
+    updateGuide();
+    updateMap();
     character.update(dt, moving);
     updateCamera(dt);
     updateSun();
@@ -1121,6 +1322,7 @@ async function init() {
   }
 
   movePlayer(0);
+  layTrail();
   updateProgress();
   ui.loading.hidden = true;
   frame();

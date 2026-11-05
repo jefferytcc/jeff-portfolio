@@ -42,6 +42,16 @@
               class="hidden sm:flex gap-1"
               aria-hidden="true"
             ></span>
+            <span
+              class="flex items-center gap-1 whitespace-nowrap font-semibold"
+            >
+              <span
+                class="w-3 h-3 rounded-full bg-[#f2b705] ring-2 ring-[#d99a00]"
+                aria-hidden="true"
+              ></span>
+              <span id="world-coins">0</span>
+              <span class="sr-only">coins collected</span>
+            </span>
           </div>
           <div class="flex gap-2">
             <button
@@ -57,6 +67,48 @@
               >Classic version</a
             >
           </div>
+        </div>
+
+        <!-- Points the way to the next place you haven't visited -->
+        <div
+          id="world-guide"
+          hidden
+          class="absolute top-16 left-4 z-10 rounded-full bg-white/90 shadow-md pl-1.5 pr-4 py-1.5 text-sm text-ink-dark flex items-center gap-2"
+          aria-live="polite"
+        >
+          <span
+            id="world-guide-arrow"
+            class="inline-flex w-7 h-7 items-center justify-center rounded-full bg-brand text-white font-bold"
+            aria-hidden="true"
+            >↑</span
+          >
+          <span id="world-guide-text" class="whitespace-nowrap"
+            >Next place</span
+          >
+        </div>
+
+        <!-- Minimap: you in the middle, every place by direction and distance -->
+        <div
+          id="world-map"
+          hidden
+          role="group"
+          aria-label="Map of the planet. Choose a place to get a coin trail to it."
+          class="absolute z-10 bottom-8 right-4 sm:right-auto sm:left-6 sm:bottom-6 w-28 h-28 sm:w-40 sm:h-40 rounded-full bg-white/85 backdrop-blur-sm shadow-lg ring-1 ring-white"
+        >
+          <span
+            class="absolute inset-3 rounded-full border border-dashed border-gray-300"
+            aria-hidden="true"
+          ></span>
+          <span
+            id="world-map-north"
+            class="absolute left-0 top-0 text-[10px] font-bold text-ink-light"
+            aria-hidden="true"
+            >N</span
+          >
+          <span
+            class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 border-x-[6px] border-x-transparent border-b-[11px] border-b-brand"
+            aria-hidden="true"
+          ></span>
         </div>
 
         <!-- Info card for the nearest place -->
@@ -104,7 +156,7 @@
               Welcome to my little world
             </h1>
             <p class="mt-2 text-ink">
-              Walk around the planet and visit all 7 places to get to know me.
+              Walk around the planet and follow the coins to visit all 7 places.
             </p>
             <p
               class="mt-5 text-xs font-semibold uppercase tracking-wider text-ink-light"
