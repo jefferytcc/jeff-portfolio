@@ -1,16 +1,20 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import galleryImg from "../img/rd-landing.png";
 
 // ----------------------------
 // Your own character: save a .glb file as public/models/character.glb
 // If there's no file, the built-in mini-Jeff is used instead.
 // ----------------------------
-const CHARACTER = {
-  url: "/models/character.glb",
-  height: 1.6, // how tall it stands on the planet (mini-Jeff is 1.6)
-  turn: 0, // rotation in radians; use Math.PI if it walks backwards
-};
+// Characters the visitor can pick from. `url: null` = the built-in mini-Jeff.
+// height: how tall it stands on the planet (mini-Jeff is 1.6)
+// turn: rotation in radians; use Math.PI if it walks backwards
+const CHARACTERS = [
+  { id: "chibi", name: "Hoodie girl", url: "/models/character.glb", height: 1.6, turn: 0 },
+  { id: "ninja", name: "Ninja girl", url: "/models/ninja.glb", height: 1.6, turn: 0 },
+  { id: "jeff", name: "Mini-Jeff", url: null },
+];
 
 // ----------------------------
 // Settings
@@ -515,10 +519,12 @@ function builtInCharacter() {
 
 // Custom .glb character, scaled to size with its feet on the ground.
 // Plays its own "Walk"/"Idle" animations when it has them.
-async function loadCustomCharacter() {
+async function loadCustomCharacter(CHARACTER) {
   let gltf;
   try {
-    gltf = await new GLTFLoader().loadAsync(CHARACTER.url);
+    const loader = new GLTFLoader();
+    loader.setMeshoptDecoder(MeshoptDecoder); // ninja.glb is meshopt-compressed
+    gltf = await loader.loadAsync(CHARACTER.url);
   } catch {
     return null; // no custom character yet
   }
@@ -784,10 +790,61 @@ async function init() {
   }
 
   // Player
-  const character = (await loadCustomCharacter()) ?? builtInCharacter();
+  const cache = new Map(); // id -> loaded character (so switching back is instant)
+  async function getCharacter(def) {
+    if (!cache.has(def.id))
+      cache.set(
+        def.id,
+        (def.url && (await loadCustomCharacter(def))) || builtInCharacter(),
+      );
+    return cache.get(def.id);
+  }
+  let savedId = null;
+  try {
+    savedId = localStorage.getItem("world-character");
+  } catch {}
+  let currentDef = CHARACTERS.find((c) => c.id === savedId) ?? CHARACTERS[0];
+  let character = await getCharacter(currentDef);
   const player = new THREE.Group();
   player.add(character.object);
   scene.add(player);
+
+  // Character picker (intro card + the "Character" button while exploring)
+  const pickButtons = [...document.querySelectorAll("[data-character]")];
+  function markPicked() {
+    for (const b of pickButtons) {
+      const on = b.dataset.character === currentDef.id;
+      b.setAttribute("aria-pressed", String(on));
+      b.classList.toggle("ring-2", on);
+      b.classList.toggle("ring-brand", on);
+    }
+  }
+  let switching = false;
+  async function pickCharacter(id) {
+    const def = CHARACTERS.find((c) => c.id === id);
+    if (!def || def === currentDef || switching) return;
+    switching = true;
+    try {
+      const next = await getCharacter(def);
+      player.remove(character.object);
+      player.add(next.object);
+      character = next;
+      currentDef = def;
+      try {
+        localStorage.setItem("world-character", def.id);
+      } catch {}
+      markPicked();
+    } finally {
+      switching = false;
+    }
+  }
+  for (const b of pickButtons)
+    b.addEventListener("click", () => pickCharacter(b.dataset.character));
+  document.getElementById("world-switch")?.addEventListener("click", () => {
+    const i = CHARACTERS.indexOf(currentDef);
+    pickCharacter(CHARACTERS[(i + 1) % CHARACTERS.length].id);
+  });
+  markPicked();
 
   const up = startUp.clone();
   const forward = new THREE.Vector3(0, 0, 1);

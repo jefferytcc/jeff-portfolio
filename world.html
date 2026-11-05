@@ -43,11 +43,20 @@
               aria-hidden="true"
             ></span>
           </div>
-          <a
-            href="/about"
-            class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-brand underline whitespace-nowrap"
-            >Classic version</a
-          >
+          <div class="flex gap-2">
+            <button
+              id="world-switch"
+              type="button"
+              class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark whitespace-nowrap"
+            >
+              Character
+            </button>
+            <a
+              href="/about"
+              class="rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-brand underline whitespace-nowrap"
+              >Classic version</a
+            >
+          </div>
         </div>
 
         <!-- Info card for the nearest place -->
@@ -97,6 +106,16 @@
             <p class="mt-2 text-ink">
               Walk around the planet and visit all 7 places to get to know me.
             </p>
+            <p
+              class="mt-5 text-xs font-semibold uppercase tracking-wider text-ink-light"
+            >
+              Choose your character
+            </p>
+            <div class="mt-2 flex justify-center gap-2" role="group" aria-label="Choose your character">
+              <button type="button" data-character="chibi" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Hoodie girl</button>
+              <button type="button" data-character="ninja" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Ninja girl</button>
+              <button type="button" data-character="jeff" aria-pressed="false" class="rounded-full bg-cloud px-3 py-1.5 text-sm text-ink-dark">Mini-Jeff</button>
+            </div>
             <p
               id="world-intro-controls"
               class="mt-4 text-sm text-ink-light"
