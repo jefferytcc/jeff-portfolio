@@ -2,6 +2,8 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import galleryImg from "../img/rd-landing.png";
+import { mesh, group, buildLabel, seededRandom } from "./world-kit.js";
+import { createDiorama } from "./world-diorama.js";
 
 // ----------------------------
 // Your own character: save a .glb file as public/models/character.glb
@@ -74,6 +76,8 @@ const PLACES = [
     eyebrow: "About me",
     title: "Hi, I'm Jeffery – call me Jeff",
     body: `<p>A designer who thinks like a PM and ships like an engineer. I design, scope and help ship HR and payroll software at Kakitangan.com.</p>`,
+    action: "enter",
+    actionLabel: "Step inside",
   },
   {
     id: "kakitangan",
@@ -167,15 +171,6 @@ const PLACES = [
 // ----------------------------
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
 
-// Repeatable randomness so trees land in the same spots on every visit
-function seededRandom(seed) {
-  return () => {
-    seed = (seed + 0x6d2b79f5) | 0;
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
 const rand = seededRandom(7);
 
 function dirFromLatLon(lat, lon) {
@@ -201,40 +196,6 @@ function orientOnSphere(obj, up, forward) {
   _right.crossVectors(up, forward);
   _basis.makeBasis(_right, up, forward);
   obj.quaternion.setFromRotationMatrix(_basis);
-}
-
-const materials = new Map();
-function material(color) {
-  if (!materials.has(color)) {
-    materials.set(
-      color,
-      new THREE.MeshStandardMaterial({
-        color,
-        roughness: 0.9,
-        flatShading: true,
-      }),
-    );
-  }
-  return materials.get(color);
-}
-
-function mesh(
-  geometry,
-  color,
-  { x = 0, y = 0, z = 0, rx = 0, ry = 0, rz = 0 } = {},
-) {
-  const m = new THREE.Mesh(geometry, material(color));
-  m.position.set(x, y, z);
-  m.rotation.set(rx, ry, rz);
-  m.castShadow = true;
-  m.receiveShadow = true;
-  return m;
-}
-
-function group(...children) {
-  const g = new THREE.Group();
-  if (children.length) g.add(...children);
-  return g;
 }
 
 // ----------------------------
@@ -591,35 +552,6 @@ async function loadCustomCharacter(CHARACTER) {
   };
 }
 
-// Floating name tag above each place
-function buildLabel(text) {
-  const font = "700 44px Inter, sans-serif";
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.font = font;
-  canvas.width = Math.ceil(ctx.measureText(text).width) + 56;
-  canvas.height = 84;
-
-  ctx.font = font;
-  ctx.fillStyle = COLOR.brand;
-  ctx.beginPath();
-  ctx.roundRect(0, 0, canvas.width, canvas.height, canvas.height / 2);
-  ctx.fill();
-  ctx.fillStyle = "#ffffff";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 2);
-
-  const texture = new THREE.CanvasTexture(canvas);
-  texture.colorSpace = THREE.SRGBColorSpace;
-  const label = new THREE.Sprite(
-    new THREE.SpriteMaterial({ map: texture, depthWrite: false }),
-  );
-  const height = 0.6;
-  label.scale.set((height * canvas.width) / canvas.height, height, 1);
-  return label;
-}
-
 // ----------------------------
 // World
 // ----------------------------
@@ -646,6 +578,8 @@ async function init() {
     guideText: document.getElementById("world-guide-text"),
     map: document.getElementById("world-map"),
     mapNorth: document.getElementById("world-map-north"),
+    fade: document.getElementById("world-fade"),
+    exit: document.getElementById("world-exit"),
   };
 
   let renderer;
@@ -1009,8 +943,8 @@ async function init() {
 
   function updateMap() {
     if (!ui.map) return;
-    ui.map.hidden = !started;
-    if (!started) return;
+    ui.map.hidden = !started || mode !== "planet";
+    if (ui.map.hidden) return;
     const radius = ui.map.clientWidth / 2;
     const reach = radius - 12;
     for (const m of mapDots) {
@@ -1041,7 +975,7 @@ async function init() {
   const _screenRight = new THREE.Vector3();
   function updateGuide() {
     if (!ui.guide) return;
-    const show = started && target && !activePlace;
+    const show = started && mode === "planet" && target && !activePlace;
     ui.guide.hidden = !show;
     if (!show) return;
     _dir.subVectors(target.object.position, position);
@@ -1081,10 +1015,16 @@ async function init() {
       ui.card.classList.add(...hiddenClasses);
       return;
     }
+    const action = place.action
+      ? `<div class="mt-4 flex flex-wrap items-center gap-3">
+          <button type="button" data-action="${place.action}" class="btn text-sm">${place.actionLabel}</button>
+          ${isTouch ? "" : '<span class="text-xs text-ink-light">or press <kbd class="font-semibold">E</kbd></span>'}
+        </div>`
+      : "";
     ui.card.innerHTML = `
       <p class="text-xs font-semibold uppercase tracking-wider text-ink-light">${place.eyebrow}</p>
       <h2 class="mt-1 text-lg font-bold text-ink-dark">${place.title}</h2>
-      <div class="mt-3 text-sm text-ink space-y-3">${place.body}</div>`;
+      <div class="mt-3 text-sm text-ink space-y-3">${place.body}</div>${action}`;
     ui.card.classList.remove(...hiddenClasses);
   }
 
@@ -1096,6 +1036,9 @@ async function init() {
   // Controls
   // ----------------------------
   let started = false;
+  let mode = "planet"; // or "garden" once you step inside the house
+  let transitioning = false;
+  let diorama = null; // built the first time you step inside
   const keys = new Set();
   const joystick = { x: 0, y: 0 };
   const KEY_ACTIONS = {
@@ -1116,6 +1059,13 @@ async function init() {
     keys.add(action);
   });
   window.addEventListener("keyup", (e) => keys.delete(KEY_ACTIONS[e.code]));
+  window.addEventListener("keydown", (e) => {
+    if (e.code !== "KeyE" || e.repeat || !started || !activePlace?.action)
+      return;
+    if (e.target.closest("input, textarea")) return;
+    e.preventDefault();
+    runAction(activePlace.action);
+  });
   window.addEventListener("blur", () => keys.clear());
 
   if (isTouch) {
@@ -1163,7 +1113,8 @@ async function init() {
   const _turn = new THREE.Quaternion();
   const _push = new THREE.Vector3();
 
-  function movePlayer(dt) {
+  function readInput() {
+    if (transitioning) return { forwardInput: 0, turnInput: 0 };
     const deadzone = (v) => (Math.abs(v) < 0.15 ? 0 : v);
     const forwardInput = THREE.MathUtils.clamp(
       (keys.has("forward") ? 1 : 0) -
@@ -1179,7 +1130,11 @@ async function init() {
       -1,
       1,
     );
+    return { forwardInput, turnInput };
+  }
 
+  function movePlayer(dt) {
+    const { forwardInput, turnInput } = readInput();
     if (turnInput) {
       _turn.setFromAxisAngle(up, turnInput * TURN_SPEED * dt);
       forward.applyQuaternion(_turn);
@@ -1247,7 +1202,7 @@ async function init() {
   const lookAt = new THREE.Vector3();
   let introAngle = 0;
 
-  function updateCamera(dt) {
+  function updateCamera(dt, snap = false) {
     if (!started) {
       // Slow orbit behind the intro card
       introAngle += dt * (reduceMotion ? 0 : 0.12);
@@ -1262,21 +1217,23 @@ async function init() {
       camera.lookAt(lookAt);
       return;
     }
-    const distance = isNarrow ? 9 : 7.5;
-    const height = isNarrow ? 6.5 : 4.8;
+    // The garden pulls the camera back a little so it reads as a diorama
+    const inGarden = mode === "garden";
+    const pos = inGarden ? diorama.position : position;
+    const upDir = inGarden ? Y_AXIS : up;
+    const fwd = inGarden ? diorama.forward : forward;
+    const distance = inGarden ? (isNarrow ? 10.5 : 9) : isNarrow ? 9 : 7.5;
+    const height = inGarden ? (isNarrow ? 7.5 : 5.8) : isNarrow ? 6.5 : 4.8;
     cameraGoal
-      .copy(position)
-      .addScaledVector(up, height)
-      .addScaledVector(forward, -distance);
-    lookGoal
-      .copy(position)
-      .addScaledVector(up, 1.2)
-      .addScaledVector(forward, 2.5);
+      .copy(pos)
+      .addScaledVector(upDir, height)
+      .addScaledVector(fwd, -distance);
+    lookGoal.copy(pos).addScaledVector(upDir, 1.2).addScaledVector(fwd, 2.5);
 
-    const k = 1 - Math.exp(-dt * (reduceMotion ? 12 : 5));
+    const k = snap ? 1 : 1 - Math.exp(-dt * (reduceMotion ? 12 : 5));
     camera.position.lerp(cameraGoal, k);
     lookAt.lerp(lookGoal, k);
-    camera.up.lerp(up, k).normalize();
+    camera.up.lerp(upDir, k).normalize();
     camera.lookAt(lookAt);
   }
 
@@ -1290,6 +1247,83 @@ async function init() {
       .addScaledVector(forward, -8);
     sun.target.position.copy(position);
   }
+
+  // ----------------------------
+  // Stepping into the house (the temple garden) and back out
+  // ----------------------------
+  function fade(to) {
+    if (reduceMotion) {
+      ui.fade.style.opacity = to;
+      return Promise.resolve();
+    }
+    return ui.fade.animate([{ opacity: 1 - to }, { opacity: to }], {
+      duration: 350,
+      easing: "ease-in-out",
+      fill: "forwards",
+    }).finished;
+  }
+
+  // Back on the planet just outside the front door, looking back at the house
+  // (facing away would put the house between the camera and you)
+  function stepOutOfHouse() {
+    const home = places.find((p) => p.id === "home");
+    const homeUp = home.object.position.clone().normalize();
+    const angle = (home.radius + 1.3) / PLANET_RADIUS;
+    up.copy(homeUp)
+      .multiplyScalar(Math.cos(angle))
+      .addScaledVector(northTangent(homeUp), Math.sin(angle))
+      .normalize();
+    forward.copy(northTangent(up)).negate();
+    movePlayer(0);
+    layTrail(target ?? undefined);
+  }
+
+  async function switchMode(next) {
+    if (transitioning || next === mode) return;
+    transitioning = true;
+    keys.clear();
+    document.activeElement?.blur();
+    showCard(null);
+    try {
+      await fade(1);
+      if (next === "garden") {
+        diorama ??= createDiorama({
+          walkSpeed: WALK_SPEED,
+          turnSpeed: TURN_SPEED,
+          playerRadius: PLAYER_RADIUS,
+          isTouch,
+        });
+        diorama.reset();
+        diorama.scene.add(player);
+        section.style.background = diorama.background;
+        // Start high above so the camera swoops down onto the garden
+        camera.position.copy(diorama.overview);
+        lookAt.set(0, 0, 0);
+        camera.up.copy(Y_AXIS);
+      } else {
+        scene.add(player);
+        section.style.background = "";
+      }
+      mode = next;
+      if (next === "planet") {
+        stepOutOfHouse();
+        updateCamera(0, true);
+      }
+      await fade(0);
+    } finally {
+      transitioning = false;
+    }
+  }
+
+  function runAction(action) {
+    if (action === "enter") switchMode("garden");
+    if (action === "exit") switchMode("planet");
+  }
+  ui.card.addEventListener("click", (e) => {
+    const button = e.target.closest("[data-action]");
+    if (button) runAction(button.dataset.action);
+  });
+  ui.exit.addEventListener("click", () => switchMode("planet"));
 
   // ----------------------------
   // Resize + loop
@@ -1314,16 +1348,26 @@ async function init() {
     if (document.hidden) return;
     elapsed += dt;
 
-    if (started) {
-      movePlayer(dt);
-      updateNearbyPlace();
+    if (mode === "planet") {
+      if (started) {
+        movePlayer(dt);
+        if (!transitioning) updateNearbyPlace();
+      }
+      updateCoins(dt);
+      updateSun();
+    } else {
+      const { forwardInput, turnInput } = readInput();
+      moving = diorama.move(dt, forwardInput, turnInput);
+      player.position.copy(diorama.position);
+      orientOnSphere(player, Y_AXIS, diorama.forward);
+      if (!transitioning) showCard(diorama.nearestSpot());
+      diorama.update(dt, elapsed, reduceMotion);
     }
-    updateCoins(dt);
     updateGuide();
     updateMap();
+    ui.exit.hidden = mode !== "garden";
     character.update(dt, moving);
     updateCamera(dt);
-    updateSun();
 
     if (!reduceMotion) {
       for (const c of clouds) c.pivot.rotateOnAxis(c.axis, c.speed * dt);
@@ -1331,7 +1375,7 @@ async function init() {
         p.label.position.y =
           p.label.userData.baseY + Math.sin(elapsed * 2 + p.lat) * 0.08;
     }
-    renderer.render(scene, camera);
+    renderer.render(mode === "garden" ? diorama.scene : scene, camera);
   }
 
   movePlayer(0);

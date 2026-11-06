@@ -111,6 +111,16 @@
           ></span>
         </div>
 
+        <!-- Inside the house: quick way back out (sits where the minimap was) -->
+        <button
+          id="world-exit"
+          type="button"
+          hidden
+          class="absolute z-10 bottom-8 right-4 sm:right-auto sm:left-6 sm:bottom-6 rounded-full bg-white/90 shadow-md px-4 py-2 text-sm text-ink-dark whitespace-nowrap"
+        >
+          <span aria-hidden="true">←</span> Back outside
+        </button>
+
         <!-- Info card for the nearest place -->
         <div
           id="world-card"
@@ -138,6 +148,13 @@
             class="absolute left-1/2 top-1/2 -ml-7 -mt-7 w-14 h-14 rounded-full bg-brand shadow-lg"
           ></div>
         </div>
+
+        <!-- Fades in and out when stepping into or out of the house -->
+        <div
+          id="world-fade"
+          class="absolute inset-0 z-[15] bg-[#fdf6ee] opacity-0 pointer-events-none"
+          aria-hidden="true"
+        ></div>
 
         <!-- Intro -->
         <div
