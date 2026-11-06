@@ -94,6 +94,45 @@ function glowMaterial(color, intensity = 0.6) {
   });
 }
 
+// A flat sign with painted characters (vertical = stacked top to bottom)
+function textPlate(text, w, h, { bg, fg, vertical = false }) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = Math.round((256 * h) / w);
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = fg;
+  ctx.lineWidth = 10;
+  ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+  ctx.fillStyle = fg;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const chars = [...text];
+  const size = vertical
+    ? Math.min(canvas.width * 0.62, (canvas.height - 40) / chars.length)
+    : Math.min(
+        canvas.height * 0.55,
+        (canvas.width - 40) / (chars.length * 0.8),
+      );
+  ctx.font = `700 ${size}px "Songti SC", "Noto Serif CJK SC", "Noto Serif JP", serif`;
+  if (vertical)
+    chars.forEach((c, i) =>
+      ctx.fillText(
+        c,
+        canvas.width / 2,
+        canvas.height / 2 + (i - (chars.length - 1) / 2) * size,
+      ),
+    );
+  else ctx.fillText(text, canvas.width / 2, canvas.height / 2 + 4);
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.colorSpace = THREE.SRGBColorSpace;
+  return new THREE.Mesh(
+    new THREE.PlaneGeometry(w, h),
+    new THREE.MeshBasicMaterial({ map: texture }),
+  );
+}
+
 function redLantern() {
   const lantern = group(
     mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.45, 4), C.ridge, {
@@ -144,10 +183,12 @@ function buildChineseTemple() {
     mesh(new THREE.BoxGeometry(2.1, 0.14, 0.14), C.gold, { y: 2.75, z: 1.66 }),
     mesh(new THREE.BoxGeometry(0.06, 2.1, 0.12), C.gold, { y: 1.65, z: 1.67 }),
     mesh(new THREE.BoxGeometry(6.4, 0.3, 0.3), C.gold, { y: 3.05, z: 2.3 }),
-    // Name board over the door
-    mesh(new THREE.BoxGeometry(1.4, 0.5, 0.08), C.ridge, { y: 3.05, z: 2.47 }),
-    mesh(new THREE.BoxGeometry(1.1, 0.25, 0.04), C.gold, { y: 3.05, z: 2.52 }),
+    // Name board over the door: "AI God"
+    mesh(new THREE.BoxGeometry(1.5, 0.6, 0.08), C.ridge, { y: 3.05, z: 2.47 }),
   );
+  const board = textPlate("AI 神", 1.4, 0.5, { bg: "#7d1f19", fg: C.gold });
+  board.position.set(0, 3.05, 2.52);
+  temple.add(board);
   for (const x of [-2.6, -0.9, 0.9, 2.6])
     temple.add(
       mesh(new THREE.CylinderGeometry(0.16, 0.16, 2.6, 10), C.red, {
@@ -228,13 +269,35 @@ function buildIncenseBurner() {
       }),
     );
   }
-  for (const x of [-0.12, 0, 0.12])
-    burner.add(
-      mesh(new THREE.CylinderGeometry(0.015, 0.015, 0.5, 4), C.doorRed, {
-        x,
-        y: 1.25,
-      }),
-    );
+  // Incense planted by visitors: bundles of three, shown as prayers add up
+  const stickGeometry = new THREE.CylinderGeometry(0.015, 0.015, 0.5, 4);
+  const tipGeometry = new THREE.SphereGeometry(0.025, 5, 4);
+  const tipMaterial = glowMaterial("#ff7a2e", 1.2);
+  const sticks = [];
+  const bundles = 10;
+  for (let b = 0; b < bundles; b++) {
+    const a = b * 2.4; // golden-angle-ish spiral so bundles spread out
+    const r = b === 0 ? 0 : 0.12 + (b / bundles) * 0.3;
+    for (const dx of [-0.05, 0, 0.05]) {
+      const stick = group(
+        mesh(stickGeometry, C.doorRed, { y: 0.25 }),
+        new THREE.Mesh(tipGeometry, tipMaterial),
+      );
+      stick.children[1].position.y = 0.5;
+      stick.position.set(
+        Math.sin(a) * r + dx,
+        1.0,
+        Math.cos(a) * r + (rand() - 0.5) * 0.03,
+      );
+      stick.rotation.set((rand() - 0.5) * 0.15, 0, (rand() - 0.5) * 0.15);
+      stick.visible = false;
+      burner.add(stick);
+      sticks.push(stick);
+    }
+  }
+  const setSticks = (count) =>
+    sticks.forEach((stick, i) => (stick.visible = i < count));
+  setSticks(3);
 
   const puffs = [];
   for (let i = 0; i < 5; i++) {
@@ -252,7 +315,7 @@ function buildIncenseBurner() {
     burner.add(puff);
     puffs.push(puff);
   }
-  return { object: burner, puffs };
+  return { object: burner, puffs, setSticks, maxSticks: sticks.length };
 }
 
 function buildJapaneseHall() {
@@ -286,6 +349,31 @@ function buildJapaneseHall() {
       }),
     );
 
+  // Offering box at the top of the steps, and the bell with its rope
+  hall.add(
+    mesh(new THREE.BoxGeometry(1.2, 0.5, 0.55), C.wood, { y: 0.87, z: 2.05 }),
+  );
+  for (let i = 0; i < 5; i++)
+    hall.add(
+      mesh(new THREE.BoxGeometry(1.1, 0.04, 0.06), "#3a261b", {
+        y: 1.13,
+        z: 1.85 + i * 0.1,
+      }),
+    );
+  const bell = group(
+    mesh(new THREE.SphereGeometry(0.2, 10, 8), glowMaterial(C.gold, 0.15), {
+      y: -0.25,
+    }),
+    mesh(new THREE.CylinderGeometry(0.035, 0.035, 1.3, 6), C.vermilion, {
+      y: -1.05,
+    }),
+    mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.25, 6), C.plaster, {
+      y: -1.82,
+    }),
+  );
+  bell.position.set(0, 2.6, 2.25);
+  hall.add(bell);
+
   const roof = curvedRoof(7.4, 6, 2.1, 0.3, C.roofGrey);
   roof.position.y = 2.62;
   hall.add(
@@ -294,7 +382,7 @@ function buildJapaneseHall() {
     mesh(new THREE.BoxGeometry(0.3, 0.45, 0.4), C.ridge, { x: -1, y: 4.85 }),
     mesh(new THREE.BoxGeometry(0.3, 0.45, 0.4), C.ridge, { x: 1, y: 4.85 }),
   );
-  return hall;
+  return { object: hall, bell };
 }
 
 function buildPagoda() {
@@ -334,7 +422,7 @@ function buildPagoda() {
 function buildTorii() {
   const torii = group(
     mesh(new THREE.BoxGeometry(3.9, 0.2, 0.22), C.vermilion, { y: 2.55 }),
-    mesh(new THREE.BoxGeometry(0.22, 0.6, 0.16), C.vermilion, { y: 2.9 }),
+    mesh(new THREE.BoxGeometry(0.5, 0.7, 0.12), C.ridge, { y: 2.88 }),
     mesh(new THREE.BoxGeometry(4.3, 0.22, 0.36), C.vermilion, { y: 3.15 }),
     mesh(new THREE.BoxGeometry(2.6, 0.24, 0.42), C.ridge, { y: 3.37 }),
     mesh(new THREE.BoxGeometry(1.2, 0.24, 0.42), C.ridge, {
@@ -348,6 +436,14 @@ function buildTorii() {
       rz: 0.12,
     }),
   );
+  // Plaque: "Parking shrine"
+  const plaque = textPlate("駐車神社", 0.42, 0.62, {
+    bg: C.ridge,
+    fg: C.gold,
+    vertical: true,
+  });
+  plaque.position.set(0, 2.88, 0.065);
+  torii.add(plaque);
   for (const x of [-1.6, 1.6])
     torii.add(
       mesh(new THREE.CylinderGeometry(0.17, 0.2, 3.2, 10), C.vermilion, {
@@ -684,7 +780,8 @@ export function createDiorama({ walkSpeed, turnSpeed, playerRadius, isTouch }) {
   add(burner.object, -9, -1.4, 0.75);
 
   // Japanese temple, east
-  add(buildJapaneseHall(), 9, -8);
+  const hall = buildJapaneseHall();
+  add(hall.object, 9, -8);
   addBox(9, -8, 6.6, 5.2);
   addBox(9, -5.15, 1.6, 0.5);
   add(buildPagoda(), 14.2, -12);
@@ -797,31 +894,34 @@ export function createDiorama({ walkSpeed, turnSpeed, playerRadius, isTouch }) {
       near: 3.2,
       eyebrow: "Jeff's back garden",
       title: "A little temple garden",
-      body: `<p>Cross the bridge to visit a Chinese temple and a Japanese temple. Come back to this door to head outside.</p>`,
+      body: `<p>Cross the bridge to pray to the AI God at the Chinese temple, or the Parking God at the Japanese shrine. Come back to this door to head outside.</p>`,
       action: "exit",
       actionLabel: "Back to the planet",
     },
     {
       id: "chinese-temple",
-      label: "Chinese temple",
+      label: "AI God temple",
+      god: "ai",
       x: -9,
       z: -2.6,
       near: 3.4,
       labelAt: [-9, 7, -7],
       eyebrow: "Temple garden",
-      title: "Chinese temple",
-      body: `<p>Red pillars, a double roof with curled ridges, lanterns and an incense burner out front.</p>`,
+      title: "Temple of the AI God",
+      body: `<p>Light some incense and ask for prompts that work on the first try.</p>`,
     },
     {
       id: "japanese-temple",
-      label: "Japanese temple",
+      label: "Parking God shrine",
+      god: "parking",
+      // Opens once you've walked through the torii, with the bell in view
       x: 9,
-      z: -3.4,
-      near: 3.6,
+      z: -4.4,
+      near: 2.1,
       labelAt: [9, 6, -8],
       eyebrow: "Temple garden",
-      title: "Japanese temple",
-      body: `<p>Walk through the torii gate to the hall. The five-storey pagoda and the raked gravel garden sit beside it.</p>`,
+      title: "Shrine of the Parking God",
+      body: `<p>Toss a coin, ring the bell and wish for a spot right by the entrance.</p>`,
     },
   ];
   // The back door needs no label: its card and the "Back outside" button cover it
@@ -880,10 +980,22 @@ export function createDiorama({ walkSpeed, turnSpeed, playerRadius, isTouch }) {
     position.z = THREE.MathUtils.clamp(position.z, -HALF_D + r, HALF_D - r);
   }
 
+  // Bell swing after it's rung (radians, fades out)
+  let bellSwing = 0;
+  const offeringBox = new THREE.Vector3(9, 1.15, -8 + 2.05);
+
   return {
     scene,
     position,
     forward,
+    spots,
+    // Hooks for the prayer rituals
+    burner,
+    offeringBox,
+    ringBell() {
+      bellSwing = 0.45;
+    },
+
     background: "linear-gradient(#fbe1e3, #fdf4ea)",
     // Where the camera starts when you walk in, so it swoops down to you
     overview: new THREE.Vector3(0, 26, 36),
@@ -931,6 +1043,10 @@ export function createDiorama({ walkSpeed, turnSpeed, playerRadius, isTouch }) {
         fish.position.z = STREAM.z + lane + Math.sin(t * 1.3 + offset) * 0.25;
         fish.rotation.y = speed > 0 ? 0 : Math.PI;
       }
+      bellSwing *= Math.exp(-dt * 1.6);
+      hall.bell.rotation.x = reduceMotion
+        ? 0
+        : Math.sin(elapsed * 9) * bellSwing;
       if (reduceMotion) return;
 
       for (const [i, lantern] of chinese.lanterns.entries())

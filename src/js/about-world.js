@@ -4,6 +4,7 @@ import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import galleryImg from "../img/rd-landing.png";
 import { mesh, group, buildLabel, seededRandom } from "./world-kit.js";
 import { createDiorama } from "./world-diorama.js";
+import { createRituals } from "./world-rituals.js";
 
 // ----------------------------
 // Your own character: save a .glb file as public/models/character.glb
@@ -760,7 +761,10 @@ async function init() {
   let currentDef = CHARACTERS.find((c) => c.id === savedId) ?? CHARACTERS[0];
   let character = await getCharacter(currentDef);
   const player = new THREE.Group();
-  player.add(character.object);
+  // Bows and hops at the temples tilt this, whichever character is picked
+  const pose = new THREE.Group();
+  pose.add(character.object);
+  player.add(pose);
   scene.add(player);
 
   // Character picker (intro card + the "Character" button while exploring)
@@ -780,8 +784,8 @@ async function init() {
     switching = true;
     try {
       const next = await getCharacter(def);
-      player.remove(character.object);
-      player.add(next.object);
+      pose.remove(character.object);
+      pose.add(next.object);
       character = next;
       currentDef = def;
       try {
@@ -1007,25 +1011,36 @@ async function init() {
   }
 
   let activePlace = null;
-  function showCard(place) {
-    if (place === activePlace) return;
+  const ritualOf = (place) => (place?.god ? rituals?.for(place.god) : null);
+  // `refresh` redraws the same card, e.g. when a prayer ritual moves on a step
+  function showCard(place, refresh = false) {
+    if (place === activePlace && !refresh) return;
+    if (place !== activePlace) ritualOf(activePlace)?.cancel();
     activePlace = place;
     const hiddenClasses = ["opacity-0", "translate-y-2", "pointer-events-none"];
     if (!place) {
       ui.card.classList.add(...hiddenClasses);
       return;
     }
-    const action = place.action
-      ? `<div class="mt-4 flex flex-wrap items-center gap-3">
+    const hadFocus = ui.card.contains(document.activeElement);
+    const ritual = ritualOf(place);
+    const action = ritual
+      ? `<div class="mt-4 space-y-3 text-sm text-ink">${ritual.html()}</div>`
+      : place.action
+        ? `<div class="mt-4 flex flex-wrap items-center gap-3">
           <button type="button" data-action="${place.action}" class="btn text-sm">${place.actionLabel}</button>
           ${isTouch ? "" : '<span class="text-xs text-ink-light">or press <kbd class="font-semibold">E</kbd></span>'}
         </div>`
-      : "";
+        : "";
     ui.card.innerHTML = `
       <p class="text-xs font-semibold uppercase tracking-wider text-ink-light">${place.eyebrow}</p>
       <h2 class="mt-1 text-lg font-bold text-ink-dark">${place.title}</h2>
-      <div class="mt-3 text-sm text-ink space-y-3">${place.body}</div>${action}`;
+      ${ritual && !ritual.showIntro() ? "" : `<div class="mt-3 text-sm text-ink space-y-3">${place.body}</div>`}${action}`;
     ui.card.classList.remove(...hiddenClasses);
+    // Mid-ritual on a short screen, keep the button in view
+    if (ritual) ui.card.scrollTop = ui.card.scrollHeight;
+    // Keep keyboard focus on the card's button as it changes step by step
+    if (hadFocus) ui.card.querySelector("button:not([disabled])")?.focus();
   }
 
   ui.introControls.textContent = isTouch
@@ -1039,6 +1054,7 @@ async function init() {
   let mode = "planet"; // or "garden" once you step inside the house
   let transitioning = false;
   let diorama = null; // built the first time you step inside
+  let rituals = null; // praying at the garden's temples
   const keys = new Set();
   const joystick = { x: 0, y: 0 };
   const KEY_ACTIONS = {
@@ -1060,11 +1076,13 @@ async function init() {
   });
   window.addEventListener("keyup", (e) => keys.delete(KEY_ACTIONS[e.code]));
   window.addEventListener("keydown", (e) => {
-    if (e.code !== "KeyE" || e.repeat || !started || !activePlace?.action)
-      return;
+    if (e.code !== "KeyE" || e.repeat || !started || !activePlace) return;
     if (e.target.closest("input, textarea")) return;
+    const ritualStep = ritualOf(activePlace)?.primary();
+    const action = ritualStep ? `ritual:${ritualStep}` : activePlace.action;
+    if (!action) return;
     e.preventDefault();
-    runAction(activePlace.action);
+    runAction(action);
   });
   window.addEventListener("blur", () => keys.clear());
 
@@ -1293,6 +1311,15 @@ async function init() {
           playerRadius: PLAYER_RADIUS,
           isTouch,
         });
+        if (rituals) rituals.refresh();
+        else
+          rituals = createRituals({
+            diorama,
+            pose,
+            isTouch,
+            reduceMotion,
+            onChange: () => activePlace?.god && showCard(activePlace, true),
+          });
         diorama.reset();
         diorama.scene.add(player);
         section.style.background = diorama.background;
@@ -1316,6 +1343,8 @@ async function init() {
   }
 
   function runAction(action) {
+    if (action.startsWith("ritual:"))
+      ritualOf(activePlace)?.act(action.slice("ritual:".length));
     if (action === "enter") switchMode("garden");
     if (action === "exit") switchMode("planet");
   }
@@ -1362,6 +1391,7 @@ async function init() {
       orientOnSphere(player, Y_AXIS, diorama.forward);
       if (!transitioning) showCard(diorama.nearestSpot());
       diorama.update(dt, elapsed, reduceMotion);
+      rituals.update(dt);
     }
     updateGuide();
     updateMap();
